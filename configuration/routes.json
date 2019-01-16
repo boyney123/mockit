@@ -1,0 +1,25 @@
+{
+    "routes": [
+        {
+            "route": "/persons",
+            "payload": {
+                "firstName": "David"
+            },
+            "statusCode": "201",
+            "httpMethod": "GET",
+            "delay": "5000",
+            "id": "1"
+        },
+        {
+            "route": "/fruit",
+            "payload": {
+                "apples": 1,
+                "pears": 200000
+            },
+            "statusCode": "201",
+            "httpMethod": "GET",
+            "delay": 200,
+            "id": "2"
+        }
+    ]
+}

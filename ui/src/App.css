@@ -1,0 +1,102 @@
+.App {
+  text-align: center;
+}
+
+main {
+  padding: 3rem 5em;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hero .title,
+.route,
+.subtitle {
+  visibility: hidden;
+}
+
+.main-background {
+  background: #0f8a9d;
+  background: linear-gradient(57deg, #00c6a7 0%, #1e4d92 100%);
+}
+
+.card-header-title {
+  background: #00c5a5;
+  color: white !important;
+}
+
+/* Route */
+
+.route {
+  /* background: #1f619517; */
+  border: 1px solid #b0d2e6;
+  padding: 1em;
+}
+
+.route:hover {
+  cursor: pointer;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.01) !important;
+
+  /* box-shadow: 2px 4px 20px 0px #a6a9a9; */
+}
+
+.route .fa-edit {
+  margin-right: 10px;
+}
+
+.route .heading {
+  color: black;
+}
+
+/* HTTP Methods */
+.http-method {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.http-method__get {
+  background: #29c711;
+}
+
+.level {
+  color: white !important;
+  padding: 10px 0;
+}
+
+footer {
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+}
+
+nav {
+  padding: 1em;
+}

@@ -1,0 +1,16 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "payload": { "test": "Update from client s" },
+      "statusCode": "201",
+      "delay": 6000
+    },
+    {
+      "route": "/test",
+      "payload": { "Risk": "Return some dummy data" },
+      "statusCode": "201",
+      "delay": 5000
+    }
+  ]
+}

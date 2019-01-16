@@ -1,0 +1,26 @@
+{
+    "routes": [
+        {
+            "id": "1",
+            "route": "/fruitsLol",
+            "payload": {
+                "apples": 1,
+                "pears": 20
+            },
+            "statusCode": "201",
+            "httpMethod": "GET",
+            "delay": 200
+        },
+        {
+            "route": "fruits",
+            "payload": {
+                "apples": 1,
+                "pears": 20
+            },
+            "statusCode": "201",
+            "httpMethod": "GET",
+            "delay": 200,
+            "id": "2"
+        }
+    ]
+}

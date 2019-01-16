@@ -1,0 +1,42 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "payload": { "test": "Update from client s" },
+      "statusCode": "201",
+      "httpMethod": "GET",
+      "id": "1",
+      "delay": 1000
+    },
+    {
+      "route": "/test",
+      "payload": { "Risk": "Return some dummy data" },
+      "statusCode": "201",
+      "httpMethod": "GET",
+      "id": "2"
+    },
+    {
+      "route": "/test",
+      "payload": { "Risk": "Return some dummy data" },
+      "statusCode": "201",
+      "httpMethod": "GET",
+      "id": "3",
+      "delay": 1000
+    },
+    {
+      "route": "/test",
+      "payload": { "Risk": "Return some dummy data" },
+      "statusCode": "201",
+      "httpMethod": "GET",
+      "id": "4",
+      "delay": 1000
+    },
+    {
+      "route": "/test",
+      "payload": { "Risk": "Return some dummy data" },
+      "statusCode": "201",
+      "httpMethod": "GET",
+      "id": "5"
+    }
+  ]
+}

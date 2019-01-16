@@ -1,0 +1,16 @@
+Basic GET commands
+
+    - Copy JSON into something
+    - with a route
+    - Create
+
+
+- Goes off to create it, (write to disk and returns a 201 when its done...)
+
+Can we use this for GraphQL too?
+
+
+Feature Ideas:
+
+ - Integration with dummy data (json-schema-faker)
+ - .env integartion with node (tokens in here)

@@ -1,0 +1,23 @@
+version: "3"
+services:
+  mockit-mock-server:
+    image: "mockit-mock-server"
+    ports:
+      - 3000:3000
+    volumes:
+      - ./configuration/routes.json:/usr/src/mockit-mock-server/configuration/routes.json
+  mockit-api:
+    image: "mockit-api"
+    ports:
+      - 4000:4000
+    volumes:
+      - ./configuration/routes.json:/usr/src/mockit-api/configuration/routes.json
+  mockit-ui:
+    image: "mockit-ui"
+    ports:
+      - 5000:3000
+    environment:
+      - REACT_APP_MOCKIT_SERVER_URL=http://localhost:3000
+      - REACT_APP_MOCKIT_API_URL=http://localhost:4000
+    volumes:
+      - ./configuration/routes.json:/usr/src/mockit-ui/src/config/routes.json
