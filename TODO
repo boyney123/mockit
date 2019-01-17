@@ -12,5 +12,9 @@ Can we use this for GraphQL too?
 
 Feature Ideas:
 
+- move over to hooks and refactor and test the components
+- add route
+- remove route
+- test expreess
  - Integration with dummy data (json-schema-faker)
  - .env integartion with node (tokens in here)

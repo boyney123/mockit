@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ScrollReveal from "scrollreveal";
 import Routes from "./components/Routes";
 import Modal from "./components/Modal";
-import logo from "./logo.svg";
+import Logo from "./components/Logo";
 import "./App.css";
 import "./bulma.css";
 
@@ -50,7 +50,7 @@ class App extends Component {
         <section className="hero is-info is-medium main-background">
           <nav>
             <div className="is-pulled-left">
-              <strong>MockIt</strong>
+              <h1>MockIt</h1>
             </div>
             <div className="is-pulled-right">
               <a className="button is-primary">
@@ -61,7 +61,7 @@ class App extends Component {
 
           <div className="hero-body">
             <div className="container has-text-centered">
-              <p className="title">MockIt</p>
+              <Logo />
               <p className="subtitle">A tool to quickly mock out end points, setup delays and more...</p>
             </div>
           </div>

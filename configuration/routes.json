@@ -1,13 +1,13 @@
 {
     "routes": [
         {
-            "route": "/persons",
+            "route": "/pe",
             "payload": {
-                "firstName": "David"
+                "firstName": "JIMMY"
             },
             "statusCode": "201",
             "httpMethod": "GET",
-            "delay": "5000",
+            "delay": "500",
             "id": "1"
         },
         {
