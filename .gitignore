@@ -26,4 +26,4 @@ node_modules/
 .env
 .env.test
 
-api
+api/
