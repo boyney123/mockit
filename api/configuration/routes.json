@@ -1,26 +1,22 @@
 {
     "routes": [
         {
-            "id": "1",
-            "route": "/fruitsLol",
-            "payload": {
-                "apples": 1,
-                "pears": 20
-            },
-            "statusCode": "201",
+            "route": "/test",
             "httpMethod": "GET",
-            "delay": 200
+            "statusCode": "200",
+            "delay": "0",
+            "payload": {
+                "test": true
+            }
         },
         {
-            "route": "fruits",
-            "payload": {
-                "apples": 1,
-                "pears": 20
-            },
-            "statusCode": "201",
+            "route": "/test",
             "httpMethod": "GET",
-            "delay": 200,
-            "id": "2"
+            "statusCode": "200",
+            "delay": "0",
+            "payload": {
+                "test": true
+            }
         }
     ]
 }

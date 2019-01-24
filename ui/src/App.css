@@ -57,11 +57,13 @@ main {
   /* background: #1f619517; */
   border: 1px solid #b0d2e6;
   padding: 1em;
+  box-shadow: 0 3px 6px #00000014;
 }
 
 .route:hover {
   cursor: pointer;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px #00000014;
+  /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); */
   transform: scale(1.01) !important;
 
   /* box-shadow: 2px 4px 20px 0px #a6a9a9; */
@@ -99,4 +101,8 @@ footer {
 
 nav {
   padding: 1em;
+}
+
+.random-data {
+  margin-top: 10px;
 }

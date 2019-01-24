@@ -9,6 +9,10 @@ Basic GET commands
 
 Can we use this for GraphQL too?
 
+To Fix:
+
+- When you delete routes, they reset to what they were for some reason (cache somewhere?)
+
 
 Feature Ideas:
 

@@ -7,7 +7,7 @@ export interface RoutesProps {
 }
 
 const buildLink = (route: string): string => {
-  return `${process.env.REACT_APP_SERVER_URL}${route}`;
+  return `${process.env.REACT_APP_MOCKIT_SERVER_URL}${route}`;
 };
 
 const openRoute = (route: string) => {

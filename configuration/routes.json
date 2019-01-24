@@ -1,25 +1,43 @@
 {
     "routes": [
         {
-            "route": "/pe",
-            "payload": {
-                "firstName": "JIMMY"
-            },
-            "statusCode": "201",
+            "route": "/random",
             "httpMethod": "GET",
-            "delay": "500",
-            "id": "1"
+            "statusCode": "200",
+            "delay": "0",
+            "payload": {
+                "name": "David Boyne",
+                "username": "Mckenna_Nader85",
+                "email": "Antonietta.Kertzmann36@hotmail.com",
+                "address": {
+                    "street": "Gabrielle Inlet",
+                    "suite": "Suite 038",
+                    "city": "South Korystad",
+                    "zipcode": "93302",
+                    "geo": {
+                        "lat": "-22.1233",
+                        "lng": "60.1890"
+                    }
+                },
+                "phone": "171.057.7028",
+                "website": "jaclyn.com",
+                "company": {
+                    "name": "Mayert and Sons",
+                    "catchPhrase": "Synergistic systemic internet solution",
+                    "bs": "real-time envisioneer vortals"
+                }
+            },
+            "id": "c41ba5df-9dea-4bb8-8e9a-73dc7a0bf86e"
         },
         {
             "route": "/fruit",
-            "payload": {
-                "apples": 1,
-                "pears": 200000
-            },
-            "statusCode": "201",
             "httpMethod": "GET",
-            "delay": 200,
-            "id": "2"
+            "statusCode": "200",
+            "delay": "5000",
+            "payload": {
+                "test": true
+            },
+            "id": "7223c88e-bf3d-40c1-9d57-f5405a26c98a"
         }
     ]
 }

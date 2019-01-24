@@ -1,18 +1,11 @@
 import React, { Component } from "react";
 import ScrollReveal from "scrollreveal";
 import Routes from "./components/Routes";
-import Modal from "./components/Modal";
+// import Modal from "./components/Modal";
+import Modal from "./components/Modal/hooks-modal";
 import Logo from "./components/Logo";
 import "./App.css";
 import "./bulma.css";
-
-// sr.reveal(".title", {
-//   duration: 800,
-//   distance: "40px",
-//   easing: "cubic-bezier(0.5, -0.01, 0, 1.005)",
-//   origin: "bottom",
-//   interval: 80
-// });
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +15,7 @@ class App extends Component {
     };
 
     this.setSelectedRoute = this.setSelectedRoute.bind(this);
+    this.addRoute = this.addRoute.bind(this);
   }
 
   componentDidMount() {
@@ -38,10 +32,16 @@ class App extends Component {
     });
   }
 
-  setSelectedRoute(item) {
+  setSelectedRoute(item, action = "edit") {
     this.setState({
-      selectedRoute: item
+      selectedRoute: item,
+      modalAction: action
     });
+  }
+
+  // Change this, is doesnt really make sense
+  addRoute() {
+    this.setSelectedRoute({}, "new");
   }
 
   render() {
@@ -53,7 +53,7 @@ class App extends Component {
               <h1>MockIt</h1>
             </div>
             <div className="is-pulled-right">
-              <a className="button is-primary">
+              <a className="button is-primary" onClick={this.addRoute}>
                 <strong>Add Route</strong>
               </a>
             </div>
@@ -67,7 +67,7 @@ class App extends Component {
           </div>
         </section>
 
-        {this.state.selectedRoute && <Modal route={this.state.selectedRoute} onClose={() => this.setSelectedRoute(null)} />}
+        {this.state.selectedRoute && <Modal route={this.state.selectedRoute} action={this.state.modalAction} onClose={() => this.setSelectedRoute(null)} />}
 
         <main>
           <Routes onEdit={this.setSelectedRoute} />

@@ -1,42 +1,16 @@
 {
   "routes": [
     {
-      "route": "/",
-      "payload": { "test": "Update from client s" },
+      "id": "1f4dfdf3-5712-48b7-9310-6314f8ee2adc",
+      "route": "/RandomOne",
+      "payload": {
+        "httpMethod": "get",
+        "newRoute": true,
+        "Money": 100
+      },
+      "httpMethod": "POST",
       "statusCode": "201",
-      "httpMethod": "GET",
-      "id": "1",
-      "delay": 1000
-    },
-    {
-      "route": "/test",
-      "payload": { "Risk": "Return some dummy data" },
-      "statusCode": "201",
-      "httpMethod": "GET",
-      "id": "2"
-    },
-    {
-      "route": "/test",
-      "payload": { "Risk": "Return some dummy data" },
-      "statusCode": "201",
-      "httpMethod": "GET",
-      "id": "3",
-      "delay": 1000
-    },
-    {
-      "route": "/test",
-      "payload": { "Risk": "Return some dummy data" },
-      "statusCode": "201",
-      "httpMethod": "GET",
-      "id": "4",
-      "delay": 1000
-    },
-    {
-      "route": "/test",
-      "payload": { "Risk": "Return some dummy data" },
-      "statusCode": "201",
-      "httpMethod": "GET",
-      "id": "5"
+      "delay": "500"
     }
   ]
 }

@@ -4,15 +4,31 @@ import JSONInput from "react-json-editor-ajrm";
 
 import { Route } from "../../types";
 
+enum HttpMethods {
+  GET = "GET",
+  PUT = "PUT",
+  POST = "POST"
+}
+
+enum StatusCodes {
+  OK = "200",
+  CREATED = "201",
+  NO_CONTENT = "204",
+  BAD_REQUEST = "400",
+  FORBIDDEN = "403",
+  INTERNAL_SERVER_ERROR = "500"
+}
+
+const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT];
+const STATUS_CODES = [StatusCodes.OK, StatusCodes.CREATED, StatusCodes.NO_CONTENT, StatusCodes.BAD_REQUEST, StatusCodes.FORBIDDEN, StatusCodes.INTERNAL_SERVER_ERROR];
+
 const server = `${process.env.REACT_APP_MOCKIT_API_URL}/routes`;
 
-const buildLink = (route: string): string => {
-  return `${process.env.REACT_APP_MOCKIT_SERVER_URL}${route}`;
-};
 
 export interface ModalProps {
   route: Route;
   onClose: any;
+  action: string;
 }
 
 interface JSONInputEvent {
@@ -35,9 +51,13 @@ export default class extends React.Component<ModalProps, ModalState> {
       route: props.route
     };
 
+    this.action = props.action || "new";
+
     this.updateRoute = this.updateRoute.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
   }
+
+  action = "new";
 
   updateRoute(prop: string) {
     return (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement> | JSONInputEvent) => {
@@ -66,13 +86,18 @@ export default class extends React.Component<ModalProps, ModalState> {
     try {
       const payload = JSON.stringify(this.state.route);
 
+      console.log(payload);
+
+      const method = this.action === "new" ? "POST" : "PUT";
+
       const response = await fetch(server, {
-        method: "PUT",
+        method,
         headers: {
           "Content-Type": "application/json"
         },
         body: payload
       });
+
       console.log("Done", response);
     } catch (error) {
       console.log("Error", error);
@@ -85,6 +110,10 @@ export default class extends React.Component<ModalProps, ModalState> {
 
     let cleanedRoute = route;
 
+    const modalTitle = this.action === "new" ? "Add Route" : "Edit Route";
+
+    console.log(this.action);
+
     if (route.charAt(0) == "/") {
       cleanedRoute = route.substr(1, route.length);
     }
@@ -94,7 +123,7 @@ export default class extends React.Component<ModalProps, ModalState> {
         <div className="modal-background animated fadeIn faster" />
         <div className="modal-card animated fadeInDown faster">
           <header className="modal-card-head">
-            <p className="modal-card-title">Edit Route</p>
+            <p className="modal-card-title">{modalTitle}</p>
             <button className="delete" aria-label="close" onClick={this.props.onClose} />
           </header>
           <section className="modal-card-body">
@@ -110,8 +139,12 @@ export default class extends React.Component<ModalProps, ModalState> {
                 <label className="label">HTTP Method</label>
                 <div className="control">
                   <div className="select">
-                    <select>
-                      <option value="get">{httpMethod}</option>
+                    <select value={httpMethod} onChange={this.updateRoute("httpMethod")}>
+                      {HTTP_METHOD_LIST.map(method => (
+                        <option key={method} value={method}>
+                          {method}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -120,8 +153,12 @@ export default class extends React.Component<ModalProps, ModalState> {
                 <label className="label">Status Code</label>
                 <div className="control">
                   <div className="select">
-                    <select>
-                      <option value="201">{statusCode}</option>
+                    <select value={statusCode} onChange={this.updateRoute("statusCode")}>
+                      {STATUS_CODES.map(test => (
+                        <option key={test} value={test}>
+                          {test}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
