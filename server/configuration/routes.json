@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "route": "/test",
+      "httpMethod": "GET",
+      "statusCode": "200",
+      "delay": "0",
+      "payload": {
+        "test": true
+      }
+    },
+    {
+      "id": "7223c88e-bf3d-40c1-9d57-f5405a26c98a",
+      "route": "/fruits",
+      "httpMethod": "GET",
+      "statusCode": "200",
+      "delay": 0,
+      "payload": {
+        "test": true
+      }
+    }
+  ],
+  "settings": {
+    "features": {
+      "chaosMonkey": true
+    }
+  }
+}
