@@ -1,4 +1,3 @@
-
 ### Node ###
 # Logs
 logs
@@ -25,3 +24,5 @@ node_modules/
 # dotenv environment variables file
 .env
 .env.test
+
+package-lock.json

@@ -1,88 +1,91 @@
-import React, { Component } from "react";
-import ScrollReveal from "scrollreveal";
-import Routes from "./components/Routes";
-// import Modal from "./components/Modal";
-import Modal from "./components/Modal/hooks-modal";
+import React, { useState } from "react";
+import useScrollReval from "./hooks/useScrollReveal";
+import RouteList from "./components/RouteList";
 import Logo from "./components/Logo";
-import "./App.css";
-import "./bulma.css";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedRoute: null
-    };
+import { buildRoute, deleteRoute } from "./utils/routes-api";
 
-    this.setSelectedRoute = this.setSelectedRoute.bind(this);
-    this.addRoute = this.addRoute.bind(this);
-  }
+import RouteModal from "./components/RouteModal";
+import SettingsModal from "./components/SettingsModal";
+import ConfirmationDialog from "./components/ConfirmationDialog";
 
-  componentDidMount() {
-    const sr = (window.sr = ScrollReveal());
-    sr.reveal(".hero .title, .card, .subtitle");
+import { settings } from "./config/routes.json";
 
-    sr.reveal(".route", {
-      duration: 750,
-      distance: "40px",
-      easing: "cubic-bezier(0.5, -0.01, 0, 1.005)",
-      interval: 64,
-      origin: "bottom",
-      viewFactor: 0.32
-    });
-  }
+import "./scss/index.scss";
 
-  setSelectedRoute(item, action = "edit") {
-    this.setState({
-      selectedRoute: item,
-      modalAction: action
-    });
-  }
+export default function() {
+  useScrollReval([
+    { selector: ".hero .title, .card, .subtitle " },
+    { selector: ".route", options: { duration: 750, distance: "40px", easing: "cubic-bezier(0.5, -0.01, 0, 1.005)", interval: 64, origin: "bottom", viewFactor: 0.32 } }
+  ]);
 
-  // Change this, is doesnt really make sense
-  addRoute() {
-    this.setSelectedRoute({}, "new");
-  }
+  const [selectedRoute, setSelectedRoute] = useState();
+  const [routeToBeRemoved, setRouteToBeRemoved] = useState();
+  const [settingsModalVisible, showSettingsModal] = useState(false);
 
-  render() {
-    return (
-      <div>
-        <section className="hero is-info is-medium main-background">
-          <nav>
-            <div className="is-pulled-left">
-              <h1>MockIt</h1>
-            </div>
-            <div className="is-pulled-right">
-              <a className="button is-primary" onClick={this.addRoute}>
-                <strong>Add Route</strong>
-              </a>
-            </div>
-          </nav>
+  const { features: { chaosMonkey = false } = {} } = settings;
 
-          <div className="hero-body">
-            <div className="container has-text-centered">
-              <Logo />
-              <p className="subtitle">A tool to quickly mock out end points, setup delays and more...</p>
-            </div>
+  return (
+    <>
+      <section className="hero is-info is-medium main-background">
+        <nav>
+          <div className="is-pulled-left">
+            <h1>MockIt</h1>
           </div>
-        </section>
+          <div className="is-pulled-right">
+            <a className="button is-primary mr10" onClick={() => setSelectedRoute(buildRoute())}>
+              <strong>Add Route</strong>
+            </a>
+            <a className="button is-info" onClick={() => showSettingsModal(true)}>
+              <strong>Settings</strong>
+            </a>
+          </div>
+        </nav>
 
-        {this.state.selectedRoute && <Modal route={this.state.selectedRoute} action={this.state.modalAction} onClose={() => this.setSelectedRoute(null)} />}
+        <div className="hero-body">
+          <div className="container has-text-centered">
+            <Logo />
+            <p className="subtitle">A tool to quickly mock out end points, setup delays and more...</p>
+          </div>
+        </div>
+      </section>
 
-        <main>
-          <Routes onEdit={this.setSelectedRoute} />
-        </main>
+      {selectedRoute && <RouteModal route={selectedRoute} onClose={() => setSelectedRoute(null)} />}
 
-        {/* <footer className="footer">
-          <div className="content has-text-centered">
-            <p>
-              <strong>MockIt</strong> by <a href="https://jgthms.com">David Boyne</a>.
+      {routeToBeRemoved && (
+        <ConfirmationDialog heading={`Delete Route`} onConfirm={() => deleteRoute(routeToBeRemoved)} onClose={() => setRouteToBeRemoved(null)}>
+          <p>
+            Are you sure you want to delete the route : <strong>{routeToBeRemoved.route}</strong> ?
+          </p>
+        </ConfirmationDialog>
+      )}
+
+      {settingsModalVisible && <SettingsModal onClose={() => showSettingsModal(false)} />}
+
+      <main>
+        {chaosMonkey && (
+          <>
+            <p className="chaos-monkey has-text-centered">
+              <span role="img" aria-label="monkey">
+                🐒
+              </span>
             </p>
-          </div>
-        </footer> */}
-      </div>
-    );
-  }
-}
+            <p className=" mb20 has-text-centered">The chaos monkey is enabled and causing havoc on all APIs...</p>
+          </>
+        )}
 
-export default App;
+        <RouteList onRouteEdit={route => setSelectedRoute(route)} onRouteDelete={route => setRouteToBeRemoved(route)} />
+      </main>
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>MockIt</strong> an OpenSource tool developed by{" "}
+            <a href="https://github.com/boyney123" target="_blank" rel="noopener noreferrer">
+              David Boyne
+            </a>
+          </p>
+        </div>
+      </footer>
+    </>
+  );
+}

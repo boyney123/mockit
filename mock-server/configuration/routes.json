@@ -1,10 +1,16 @@
 {
+  "settings": {
+    "features": {
+      "chaosMonkey": true,
+      "cors": true
+    }
+  },
   "routes": [
     {
       "route": "/",
       "payload": { "test": "Update from client s" },
       "statusCode": "201",
-      "delay": 6000
+      "delay": 0
     },
     {
       "route": "/test",

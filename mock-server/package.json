@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "chokidar": "^2.0.4",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "fs-extra": "^7.0.1",
     "nodemon": "^1.18.9"

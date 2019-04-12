@@ -1,8 +1,14 @@
 {
+  "settings": {
+    "features": {
+      "chaosMonkey": true,
+      "cors": true
+    }
+  },
   "routes": [
     {
       "id": "1f4dfdf3-5712-48b7-9310-6314f8ee2adc",
-      "route": "/RandomOne",
+      "route": "/user",
       "payload": {
         "httpMethod": "get",
         "newRoute": true,
@@ -11,6 +17,19 @@
       "httpMethod": "POST",
       "statusCode": "201",
       "delay": "500"
+    },
+    {
+      "id": "1f4dfdf3-5712-48b7-9310-6314f8ee2add",
+      "route": "/fruit",
+      "payload": {
+        "httpMethod": "get",
+        "newRoute": true,
+        "Money": 100
+      },
+      "httpMethod": "POST",
+      "statusCode": "201",
+      "delay": "0",
+      "disabled": true
     }
   ]
 }

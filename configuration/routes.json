@@ -1,43 +1,80 @@
 {
+    "settings": {
+        "features": {
+            "chaosMonkey": false,
+            "cors": true
+        }
+    },
     "routes": [
         {
+            "id": "b0e91a33-787c-4d54-8c58-10ac970e2865",
+            "route": "/user",
+            "httpMethod": "GET",
+            "statusCode": "200",
+            "delay": "0",
+            "payload": {
+                "name": "Ellen Emard",
+                "username": "Mohamed.Pfeffer84",
+                "email": "Chauncey14@yahoo.com",
+                "address": {
+                    "street": "Durgan Locks",
+                    "suite": "Apt. 331",
+                    "city": "West Sid",
+                    "zipcode": "16439",
+                    "geo": {
+                        "lat": "-65.7730",
+                        "lng": "-140.2122"
+                    }
+                },
+                "phone": "024.912.5659 x5359",
+                "website": "osborne.net",
+                "company": {
+                    "name": "Barrows - Jakubowski",
+                    "catchPhrase": "Programmable client-server parallelism",
+                    "bs": "integrated whiteboard e-markets"
+                }
+            },
+            "disabled": false
+        },
+        {
+            "id": "bd8893f7-68d5-4090-8ae2-20529191cd88",
             "route": "/random",
             "httpMethod": "GET",
             "statusCode": "200",
             "delay": "0",
             "payload": {
-                "name": "David Boyne",
-                "username": "Mckenna_Nader85",
-                "email": "Antonietta.Kertzmann36@hotmail.com",
+                "name": "Fanny Rath",
+                "username": "Adell.Adams",
+                "email": "Clair30@yahoo.com",
                 "address": {
-                    "street": "Gabrielle Inlet",
-                    "suite": "Suite 038",
-                    "city": "South Korystad",
-                    "zipcode": "93302",
+                    "street": "Carroll Meadow",
+                    "suite": "Suite 114",
+                    "city": "West Astrid",
+                    "zipcode": "02752",
                     "geo": {
-                        "lat": "-22.1233",
-                        "lng": "60.1890"
+                        "lat": "-3.4480",
+                        "lng": "86.2320"
                     }
                 },
-                "phone": "171.057.7028",
-                "website": "jaclyn.com",
+                "phone": "527.926.2249 x635",
+                "website": "evans.biz",
                 "company": {
-                    "name": "Mayert and Sons",
-                    "catchPhrase": "Synergistic systemic internet solution",
-                    "bs": "real-time envisioneer vortals"
+                    "name": "Mills - Schinner",
+                    "catchPhrase": "Profound clear-thinking array",
+                    "bs": "compelling disintermediate mindshare"
                 }
             },
-            "id": "c41ba5df-9dea-4bb8-8e9a-73dc7a0bf86e"
+            "disabled": false
         },
         {
-            "route": "/fruit",
+            "id": "56477240-796b-4fa5-bfa2-d09d804e3d24",
+            "route": "/newRoute",
             "httpMethod": "GET",
             "statusCode": "200",
-            "delay": "5000",
+            "delay": "1000",
             "payload": {
                 "test": true
-            },
-            "id": "7223c88e-bf3d-40c1-9d57-f5405a26c98a"
+            }
         }
     ]
 }

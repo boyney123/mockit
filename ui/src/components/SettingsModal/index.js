@@ -1,0 +1,82 @@
+import React, { useState } from "react";
+import { settings as applicationSettings } from "../../config/routes.json";
+import { updateSettings } from "../../utils/routes-api";
+
+const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, heading, children } = {}) {
+  const [settings, setSettings] = useState(applicationSettings);
+
+  const { features: { chaosMonkey, cors } = {} } = settings;
+
+  const setFeature = (feature, value) => {
+    const newSettings = {
+      ...settings
+    };
+
+    newSettings["features"][feature] = value;
+
+    console.log("asdas", feature, value, newSettings);
+
+    setSettings(newSettings);
+  };
+
+  const saveSettings = async () => {
+    try {
+      await updateSettings(settings);
+    } catch (error) {
+      console.log("Error");
+    }
+  };
+
+  return (
+    <>
+      <div className="modal is-active">
+        <div className="modal-background animated fadeIn faster" />
+        <div className="modal-card animated fadeInDown faster">
+          <header className="modal-card-head">
+            <p className="modal-card-title">Settings</p>
+            <button className="delete" aria-label="close" onClick={onClose} />
+          </header>
+          <section className="modal-card-body">
+            <div className="field">
+              <label className="label">Chaos Monkey</label>
+              <p className="mb10">Unleash the monkey. The monkey will randomly take down end points and enforce failures on your routes.</p>
+              <div className="control">
+                <input
+                  id="chaosMonkeyFeature"
+                  type="checkbox"
+                  name="chaosMonkeyFeature"
+                  className="switch is-primary"
+                  checked={chaosMonkey}
+                  onChange={e => setFeature("chaosMonkey", e.target.checked)}
+                />
+                <label for="chaosMonkeyFeature">Enable Monkey 🙊</label>
+              </div>
+            </div>
+            <hr />
+            <div className="field">
+              <label className="label">CORS</label>
+              <p className="mb10">
+                Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources on a web page to be requested from another domain outside the domain from which the first resource
+                was served. This feature enables CORS for all routes.
+              </p>
+              <div className="control">
+                <input id="corsFeature" type="checkbox" name="corsFeature" className="switch is-primary" checked={cors} onChange={e => setFeature("cors", e.target.checked)} />
+                <label for="corsFeature">Enable CORS</label>
+              </div>
+            </div>
+          </section>
+          <footer className="modal-card-foot">
+            <button className="button is-primary" onClick={saveSettings}>
+              Save
+            </button>
+            <button className="button" onClick={onClose}>
+              Cancel
+            </button>
+          </footer>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default SettingsModal;

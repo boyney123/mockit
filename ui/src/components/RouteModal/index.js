@@ -1,73 +1,41 @@
 import React, { useState } from "react";
 import JSONInput from "react-json-editor-ajrm";
-import { Route, HttpMethods, StatusCodes } from "../../types";
-
+import { HttpMethods, StatusCodes } from "../../utils/consts";
+import { updateRoute as updateRouteRequest, createNewRoute } from "../../utils/routes-api";
 import faker from "faker";
 
-console.log(faker.helpers.userCard());
-
-export interface ModalProps {
-  route: Route;
-  onClose: any;
-  action: string;
-}
-
-const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT];
+const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT, HttpMethods.DELETE];
 const STATUS_CODES = [StatusCodes.OK, StatusCodes.CREATED, StatusCodes.NO_CONTENT, StatusCodes.BAD_REQUEST, StatusCodes.FORBIDDEN, StatusCodes.INTERNAL_SERVER_ERROR];
 
-const server = `${process.env.REACT_APP_MOCKIT_API_URL}/routes`;
+const Modal = function(props) {
+  const { onClose = () => {}, action = "new", route: editedRoute } = props;
 
-const Modal: React.SFC<ModalProps> = (props: ModalProps) => {
-  const { onClose = () => {}, action = "new", route: data } = props;
+  const [route, updateRoute] = useState(editedRoute.route);
+  const [httpMethod, updateHttpMethod] = useState(editedRoute.httpMethod);
+  const [statusCode, updateStatusCode] = useState(editedRoute.statusCode);
+  const [delay, updateDelay] = useState(editedRoute.delay);
+  const [payload, updatePayload] = useState(editedRoute.payload);
+  const [disabled, updateDisabled] = useState(editedRoute.disabled);
 
-  const defaults = {
-    route: "",
-    httpMethod: HttpMethods.GET,
-    statusCode: StatusCodes.OK,
-    delay: "0",
-    payload: { test: true }
-  };
+  const isNewRoute = editedRoute.id === undefined;
 
-  const modalData = {
-    ...defaults,
-    ...data
-  };
-
-  const [route, updateRoute] = useState(modalData.route);
-  const [httpMethod, updateHttpMethod] = useState(modalData.httpMethod);
-  const [statusCode, updateStatusCode] = useState(modalData.statusCode);
-  const [delay, updateDelay] = useState(modalData.delay);
-  const [payload, updatePayload] = useState(modalData.payload);
-
-  const modalTitle = action === "new" ? "Add Route" : "Edit Route";
-
-  let cleanedRoute = route;
-  if (route.charAt(0) == "/") {
-    cleanedRoute = route.substr(1, route.length);
-  }
+  const modalTitle = isNewRoute ? "Add Route" : "Edit Route";
 
   const saveChanges = async () => {
     try {
       const data = {
+        ...editedRoute,
         route,
         httpMethod,
         statusCode,
         delay,
         payload,
-        id: modalData.id
+        disabled
       };
 
-      const method = action === "new" ? HttpMethods.POST : HttpMethods.PUT;
-
-      const response = await fetch(server, {
-        method,
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-      onClose();
+      isNewRoute ? await createNewRoute(data) : await updateRouteRequest(data);
     } catch (error) {
+      alert("error");
       console.log("Error", error);
     }
   };
@@ -85,7 +53,7 @@ const Modal: React.SFC<ModalProps> = (props: ModalProps) => {
             <div className="field">
               <label className="label">Route</label>
               <div className="control has-icons-left">
-                <input className="input" type="text" placeholder="Text input" value={cleanedRoute} onChange={e => updateRoute(`/${e.currentTarget.value}`)} />
+                <input className="input" type="text" placeholder="Text input" value={route.replace("/", "")} onChange={e => updateRoute(`/${e.currentTarget.value}`)} />
                 <span className="icon is-small is-left">/</span>
               </div>
             </div>
@@ -123,6 +91,7 @@ const Modal: React.SFC<ModalProps> = (props: ModalProps) => {
                 <div className="control">
                   <div className="select">
                     <select value={delay} onChange={e => updateDelay(e.currentTarget.value)}>
+                      <option value="0">0</option>
                       <option value="250">250</option>
                       <option value="500">500</option>
                       <option value="1000">1000</option>
@@ -134,13 +103,23 @@ const Modal: React.SFC<ModalProps> = (props: ModalProps) => {
                 </div>
               </div>
             </div>
-            <div className="field">
+            <div className="field mt10">
               <label className="label">Response</label>
               <div className="control">
-                <JSONInput placeholder={payload} onChange={(e: any) => updatePayload(e.jsObject)} height="120px" width="100%" />
+                <JSONInput placeholder={payload} onChange={e => updatePayload(e.jsObject)} height="120px" width="100%" />
                 <a className="button is-small is-pulled-right random-data is-primary is-inverted" onClick={() => updatePayload(faker.helpers.userCard())}>
                   Randomly Generate Data
                 </a>
+              </div>
+            </div>
+            <hr />
+            <div className="field">
+              <div className="control">
+                <label className="label">Settings</label>
+                <label class="checkbox">
+                  <input type="checkbox" checked={disabled} className="mr10" onChange={e => updateDisabled(e.target.checked)} />
+                  <span>Disable Route</span>
+                </label>
               </div>
             </div>
           </section>
