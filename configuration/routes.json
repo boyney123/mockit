@@ -1,7 +1,7 @@
 {
     "settings": {
         "features": {
-            "chaosMonkey": false,
+            "chaosMonkey": true,
             "cors": true
         }
     },
@@ -34,7 +34,7 @@
                     "bs": "integrated whiteboard e-markets"
                 }
             },
-            "disabled": false
+            "disabled": true
         },
         {
             "id": "bd8893f7-68d5-4090-8ae2-20529191cd88",
@@ -72,6 +72,16 @@
             "httpMethod": "GET",
             "statusCode": "200",
             "delay": "1000",
+            "payload": {
+                "test": true
+            }
+        },
+        {
+            "id": "686819df-9cd4-4814-a75a-39f65ea76b8e",
+            "route": "/newRoute",
+            "httpMethod": "GET",
+            "statusCode": "200",
+            "delay": "0",
             "payload": {
                 "test": true
             }

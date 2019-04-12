@@ -1,6 +1,0 @@
-{
-  "bail": true,
-  "verbose": true,
-  "watchPathIgnorePatterns": ["<rootDir>/configuration"],
-  "coveragePathIgnorePatterns": ["/node_modules/", "/configuration/", "package.json", "jest.config.json", "package-lock.json"]
-}

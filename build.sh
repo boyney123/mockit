@@ -1,10 +1,10 @@
-cd api
-docker build -t mockit-api .
+cd mockit-routes
+docker build -t mockit-routes .
 cd ..
-cd mock-server
-docker build -t mockit-mock-server .
+cd client
+docker build -t mockit-client .
 cd ..
-cd ui
-docker build -t mockit-ui .
+cd server
+docker build -t mockit-server .
 cd ..
 docker-compose up -d
