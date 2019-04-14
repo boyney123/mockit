@@ -157,7 +157,7 @@ nav {
   margin-bottom: 20px;
 }
 
-@-webkit-keyframes spaceboots {
+@-webkit-keyframes monkey {
   0% {
     -webkit-transform: translate(0px, 1px) rotate(0deg);
   }
@@ -194,7 +194,7 @@ nav {
 }
 
 .chaos-monkey {
-  -webkit-animation-name: spaceboots;
+  -webkit-animation-name: monkey;
   -webkit-animation-duration: 0.8s;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;

@@ -9,18 +9,10 @@ const uuid = require("uuid/v4");
 
 const port = process.env.PORT || 4000;
 
+const { getConfig, writeConfig } = require("./utils/config-helper");
+
 app.use(cors());
 app.use(bodyParser.json());
-
-const getConfig = async () => {
-  return await fs.readJson(path.resolve(__dirname, "../configuration/routes.json"));
-};
-
-const writeConfig = async config => {
-  fs.writeJson(path.resolve(__dirname, "../configuration/routes.json"), config, {
-    spaces: 4
-  });
-};
 
 const requiredPropertiesForRoute = ["route", "httpMethod", "statusCode", "delay", "payload"];
 const isRouteValid = (route, additionalRequiredProperties = []) => {
@@ -39,8 +31,6 @@ app.post("/route", async (req, res) => {
     ...payload
   };
 
-  console.log("route", route);
-
   if (!isRouteValid(route)) {
     return res.sendStatus(400);
   }
@@ -54,8 +44,6 @@ app.post("/route", async (req, res) => {
 
 app.put("/route", async (req, res) => {
   const route = req.body;
-
-  console.log(route);
 
   if (!isRouteValid(route, ["id"])) {
     return res.sendStatus(400);
@@ -111,11 +99,3 @@ if (process.env.ENV !== "test") {
 }
 
 module.exports = app;
-
-/**
- * Choas feature:
- *
- * ------------------------------------------------
- * Take down routes randomly.... dont have them...
- * ------------------------------------------------
- */

@@ -1,22 +1,94 @@
 {
   "settings": {
     "features": {
-      "chaosMonkey": true,
-      "cors": true
+      "chaosMonkey": false,
+      "cors": true,
+      "authentication": {
+        "username": "test",
+        "password": "test"
+      }
     }
   },
   "routes": [
     {
-      "route": "/",
-      "payload": { "test": "Update from client s" },
-      "statusCode": "201",
-      "delay": 0
+      "id": "b0e91a33-787c-4d54-8c58-10ac970e2865",
+      "route": "/user",
+      "httpMethod": "GET",
+      "statusCode": "200",
+      "delay": "0",
+      "payload": {
+        "name": "Ellen Emard",
+        "username": "Mohamed.Pfeffer84",
+        "email": "Chauncey14@yahoo.com",
+        "address": {
+          "street": "Durgan Locks",
+          "suite": "Apt. 331",
+          "city": "West Sid",
+          "zipcode": "16439",
+          "geo": {
+            "lat": "-65.7730",
+            "lng": "-140.2122"
+          }
+        },
+        "phone": "024.912.5659 x5359",
+        "website": "osborne.net",
+        "company": {
+          "name": "Barrows - Jakubowski",
+          "catchPhrase": "Programmable client-server parallelism",
+          "bs": "integrated whiteboard e-markets"
+        }
+      },
+      "disabled": true
     },
     {
-      "route": "/test",
-      "payload": { "Risk": "Return some dummy data" },
-      "statusCode": "201",
-      "delay": 5000
+      "id": "bd8893f7-68d5-4090-8ae2-20529191cd88",
+      "route": "/random",
+      "httpMethod": "GET",
+      "statusCode": "200",
+      "delay": "0",
+      "payload": {
+        "name": "Fanny Rath",
+        "username": "Adell.Adams",
+        "email": "Clair30@yahoo.com",
+        "address": {
+          "street": "Carroll Meadow",
+          "suite": "Suite 114",
+          "city": "West Astrid",
+          "zipcode": "02752",
+          "geo": {
+            "lat": "-3.4480",
+            "lng": "86.2320"
+          }
+        },
+        "phone": "527.926.2249 x635",
+        "website": "evans.biz",
+        "company": {
+          "name": "Mills - Schinner",
+          "catchPhrase": "Profound clear-thinking array",
+          "bs": "compelling disintermediate mindshare"
+        }
+      },
+      "disabled": false
+    },
+    {
+      "id": "56477240-796b-4fa5-bfa2-d09d804e3d24",
+      "route": "/newRoute",
+      "httpMethod": "GET",
+      "statusCode": "200",
+      "delay": "1000",
+      "payload": {
+        "test": true
+      }
+    },
+    {
+      "id": "686819df-9cd4-4814-a75a-39f65ea76b8e",
+      "route": "/newRoute",
+      "httpMethod": "GET",
+      "statusCode": "200",
+      "delay": "0",
+      "payload": {
+        "test": true
+      }
     }
   ]
 }

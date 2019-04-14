@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "basic-auth": "^2.0.1",
     "chokidar": "^2.0.4",
     "cors": "^2.8.5",
     "express": "^4.16.4",

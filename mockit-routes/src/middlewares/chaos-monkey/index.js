@@ -8,7 +8,7 @@ const hitByMonkey = () => Math.random() > 0.5;
 
 module.exports = (req, res, next) => {
   if (!chaosMonkey) {
-    next();
+    return next();
   }
 
   // send random message back

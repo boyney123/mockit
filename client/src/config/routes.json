@@ -1,8 +1,13 @@
 {
   "settings": {
     "features": {
-      "chaosMonkey": true,
-      "cors": true
+      "chaosMonkey": false,
+      "cors": true,
+      "authentication": true
+    },
+    "authentication": {
+      "username": "test",
+      "password": "test"
     }
   },
   "routes": [

@@ -5,7 +5,7 @@ import { updateSettings } from "../../utils/routes-api";
 const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, heading, children } = {}) {
   const [settings, setSettings] = useState(applicationSettings);
 
-  const { features: { chaosMonkey, cors } = {} } = settings;
+  const { features: { chaosMonkey, cors, authentication } = {} } = settings;
 
   const setFeature = (feature, value) => {
     const newSettings = {
@@ -38,18 +38,18 @@ const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, headi
           </header>
           <section className="modal-card-body">
             <div className="field">
-              <label className="label">Chaos Monkey</label>
-              <p className="mb10">Unleash the monkey. The monkey will randomly take down end points and enforce failures on your routes.</p>
+              <label className="label">Basic Authentication</label>
+              <p className="mb10">Enable basic authentication on all routes. This can be configured with a username and password in the configuration file.</p>
               <div className="control">
                 <input
-                  id="chaosMonkeyFeature"
+                  id="basicAuthFeature"
                   type="checkbox"
-                  name="chaosMonkeyFeature"
+                  name="basicAuthFeature"
                   className="switch is-primary"
-                  checked={chaosMonkey}
-                  onChange={e => setFeature("chaosMonkey", e.target.checked)}
+                  checked={authentication}
+                  onChange={e => setFeature("authentication", e.target.checked)}
                 />
-                <label for="chaosMonkeyFeature">Enable Monkey 🙊</label>
+                <label for="basicAuthFeature">Enable Basic Authentication</label>
               </div>
             </div>
             <hr />
@@ -64,7 +64,24 @@ const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, headi
                 <label for="corsFeature">Enable CORS</label>
               </div>
             </div>
+            <hr />
+            <div className="field">
+              <label className="label">Chaos Monkey</label>
+              <p className="mb10">Unleash the monkey. The monkey will randomly take down end points and enforce failures on your routes.</p>
+              <div className="control">
+                <input
+                  id="chaosMonkeyFeature"
+                  type="checkbox"
+                  name="chaosMonkeyFeature"
+                  className="switch is-primary"
+                  checked={chaosMonkey}
+                  onChange={e => setFeature("chaosMonkey", e.target.checked)}
+                />
+                <label for="chaosMonkeyFeature">Enable Monkey 🙊</label>
+              </div>
+            </div>
           </section>
+
           <footer className="modal-card-foot">
             <button className="button is-primary" onClick={saveSettings}>
               Save

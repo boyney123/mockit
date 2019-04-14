@@ -1,47 +1,22 @@
 {
     "settings": {
         "features": {
-            "chaosMonkey": true,
-            "cors": true
+            "chaosMonkey": false,
+            "cors": true,
+            "authentication": false
+        },
+        "authentication": {
+            "username": "test",
+            "password": "test"
         }
     },
     "routes": [
         {
-            "id": "b0e91a33-787c-4d54-8c58-10ac970e2865",
-            "route": "/user",
-            "httpMethod": "GET",
-            "statusCode": "200",
-            "delay": "0",
-            "payload": {
-                "name": "Ellen Emard",
-                "username": "Mohamed.Pfeffer84",
-                "email": "Chauncey14@yahoo.com",
-                "address": {
-                    "street": "Durgan Locks",
-                    "suite": "Apt. 331",
-                    "city": "West Sid",
-                    "zipcode": "16439",
-                    "geo": {
-                        "lat": "-65.7730",
-                        "lng": "-140.2122"
-                    }
-                },
-                "phone": "024.912.5659 x5359",
-                "website": "osborne.net",
-                "company": {
-                    "name": "Barrows - Jakubowski",
-                    "catchPhrase": "Programmable client-server parallelism",
-                    "bs": "integrated whiteboard e-markets"
-                }
-            },
-            "disabled": true
-        },
-        {
             "id": "bd8893f7-68d5-4090-8ae2-20529191cd88",
-            "route": "/random",
+            "route": "/muggy",
             "httpMethod": "GET",
             "statusCode": "200",
-            "delay": "0",
+            "delay": "2000",
             "payload": {
                 "name": "Fanny Rath",
                 "username": "Adell.Adams",
@@ -67,18 +42,38 @@
             "disabled": false
         },
         {
-            "id": "56477240-796b-4fa5-bfa2-d09d804e3d24",
-            "route": "/newRoute",
+            "id": "6f935aa8-b629-4247-ba51-f02347b06e95",
+            "route": "/mot",
             "httpMethod": "GET",
             "statusCode": "200",
-            "delay": "1000",
+            "delay": "0",
             "payload": {
-                "test": true
-            }
+                "name": "Jermain Spinka",
+                "username": "Agnes71",
+                "email": "Taurean.Huels55@hotmail.com",
+                "address": {
+                    "street": "Kihn Inlet",
+                    "suite": "Apt. 784",
+                    "city": "South Doraside",
+                    "zipcode": "91828",
+                    "geo": {
+                        "lat": "-56.8426",
+                        "lng": "-122.9710"
+                    }
+                },
+                "phone": "810-578-0341",
+                "website": "jewell.name",
+                "company": {
+                    "name": "Quitzon, Wilderman and VonRueden",
+                    "catchPhrase": "Realigned zero administration encoding",
+                    "bs": "robust incubate synergies"
+                }
+            },
+            "disabled": false
         },
         {
-            "id": "686819df-9cd4-4814-a75a-39f65ea76b8e",
-            "route": "/newRoute",
+            "id": "ec6166c8-ac50-4f2c-9d6f-b26ed677fe72",
+            "route": "/redminder",
             "httpMethod": "GET",
             "statusCode": "200",
             "delay": "0",
