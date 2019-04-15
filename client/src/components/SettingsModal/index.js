@@ -14,8 +14,6 @@ const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, headi
 
     newSettings["features"][feature] = value;
 
-    console.log("asdas", feature, value, newSettings);
-
     setSettings(newSettings);
   };
 

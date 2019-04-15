@@ -96,7 +96,7 @@ describe("Route API", () => {
         .put("/route")
         .send({ ...updatedRoute })
         .set("Accept", "application/json")
-        .expect(200);
+        .expect(204);
 
       const config = getConfiguration();
 
@@ -129,11 +129,32 @@ describe("Route API", () => {
         .delete("/route")
         .send({ id: "1234" })
         .set("Accept", "application/json")
-        .expect(200);
+        .expect(204);
 
       const config = getConfiguration();
 
       expect(config.routes).toHaveLength(2);
+    });
+  });
+
+  describe("/settings", () => {
+    it("returns a 204 and updated the settings in the configuration with the settings provided in the payload", async () => {
+      await writeConfiguration({ settings: { test: true } });
+
+      await request(app)
+        .post("/settings")
+        .send({ newSetting: true })
+        .set("Accept", "application/json")
+        .expect(204);
+
+      const config = getConfiguration();
+
+      expect(config).toEqual({
+        settings: {
+          newSetting: true,
+          test: true
+        }
+      });
     });
   });
 });

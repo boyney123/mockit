@@ -28,10 +28,14 @@ routes.forEach(route => {
 
   if (!disabled) {
     app[method](path, (req, res) => {
-      console.log("Request for route", route);
+      // console.log("Request for route", route);
       res.status(statusCode).send(payload);
     });
   }
 });
 
-server = app.listen(port, () => console.log(`MockIt app listening on port ${port}!`));
+if (process.env.ENV !== "test") {
+  server = app.listen(port, () => console.log(`MockIt app listening on port ${port}!`));
+}
+
+module.exports = app;

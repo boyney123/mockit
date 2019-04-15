@@ -1,9 +1,9 @@
 {
     "settings": {
         "features": {
-            "chaosMonkey": false,
+            "chaosMonkey": true,
             "cors": true,
-            "authentication": false
+            "authentication": true
         },
         "authentication": {
             "username": "test",
@@ -13,7 +13,7 @@
     "routes": [
         {
             "id": "bd8893f7-68d5-4090-8ae2-20529191cd88",
-            "route": "/muggy",
+            "route": "/fruit",
             "httpMethod": "GET",
             "statusCode": "200",
             "delay": "2000",
@@ -39,11 +39,11 @@
                     "bs": "compelling disintermediate mindshare"
                 }
             },
-            "disabled": false
+            "disabled": true
         },
         {
             "id": "6f935aa8-b629-4247-ba51-f02347b06e95",
-            "route": "/mot",
+            "route": "/user",
             "httpMethod": "GET",
             "statusCode": "200",
             "delay": "0",
@@ -73,12 +73,22 @@
         },
         {
             "id": "ec6166c8-ac50-4f2c-9d6f-b26ed677fe72",
-            "route": "/redminder",
+            "route": "/users",
             "httpMethod": "GET",
             "statusCode": "200",
             "delay": "0",
             "payload": {
                 "test": true
+            }
+        },
+        {
+            "id": "61b4aaa9-bbe9-4cfc-80ee-3d8528a218e6",
+            "route": "/demo",
+            "httpMethod": "GET",
+            "statusCode": "200",
+            "delay": "0",
+            "payload": {
+                "message": "hello"
             }
         }
     ]
