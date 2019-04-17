@@ -79,7 +79,10 @@ export default function({ settings: propSettings }) {
       <footer className="footer" aria-label="Site footer">
         <div className="content has-text-centered">
           <p>
-            <strong>MockIt</strong> an OpenSource tool developed by{" "}
+            <a href="https://github.com/boyney123/mockit" target="_blank" rel="noopener noreferrer">
+              <strong>MockIt </strong>
+            </a>{" "}
+            an OpenSource tool developed by{" "}
             <a href="https://github.com/boyney123" aria-label="Github Repo" target="_blank" rel="noopener noreferrer">
               David Boyne
             </a>
