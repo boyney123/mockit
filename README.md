@@ -50,7 +50,7 @@ git clone git@github.com:boyney123/mockit.git
 Next go into `mockit` and run
 
 ```sh
-sh run build-and-start.sh
+sh build-and-start.sh
 ```
 
 _This will create all the docker containers required to run this application._
