@@ -3,4 +3,4 @@ node_js:
   - "10"
   - "8"
 script:
-  - install-and-test.sh
+  - bash install-and-test.sh
