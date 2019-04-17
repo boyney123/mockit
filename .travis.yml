@@ -2,10 +2,5 @@ language: node_js
 node_js:
   - "10"
   - "8"
-install:
-  - npm install -g codecov
-  - cd client && npm install
-  - cd mockit-routes && npm install
-  - cd server && npm install
 script:
-  - test.sh
+  - install-and-test.sh
