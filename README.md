@@ -5,7 +5,7 @@
 <p>Mock APIs fast with real end points, no more mocked JSON files for your response.</p>
 <p>Features: Hot reload on your API, UI to create, edit and delete end points, Chaos Engineering and more...</p>
 
-[Read the Docs](https://mockit-docs.netlify.com/) | [Edit the Docs](https://github.com/boyney123/mockit-docs/settings)
+[Read the Docs](https://mockit-docs.netlify.com/) | [Edit the Docs](https://github.com/boyney123/mockit-docs)
 
 _If you find this tool useful, feel free to buy my a ☕ 👍 | [Buy a drink](https://www.paypal.me/boyney123/5)_
 
