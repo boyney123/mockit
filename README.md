@@ -53,6 +53,11 @@ Next go into `mockit` and run (You need to make sure Docker is running)
 sh build-and-start.sh
 ```
 
+_If you have any problems with permissions you might need to chmod the file_
+```
+chmod +x build-and-start.sh && ./build-and-start.sh
+```
+
 _This will create all the docker containers required to run this application._
 
 Once everything is up and running go to [http://localhost:5000](http://localhost:5000) to see MockIt.
