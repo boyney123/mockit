@@ -1,0 +1,31 @@
+coverage:
+  status:
+    project:
+      default: off
+      client:
+        target: 90%
+        flags: client
+      server:
+        target: 90%
+        flags: server
+      mockit-routes:
+        target: 90%
+        flags: mockit-routes
+
+flags:
+  server:
+    paths:
+      - server/
+  client:
+    paths:
+      - client/
+  mockit-routes:
+    paths:
+      - mockit-routes/
+  tests:
+    paths:
+      - tests/
+
+comment:
+  layout: diff
+  require_changes: yes
