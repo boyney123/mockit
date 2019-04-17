@@ -5,7 +5,7 @@
 <p>Mock APIs fast with real end points, no more mocked JSON files for your response.</p>
 <p>Features: Hot reload on your API, UI to create, edit and delete end points, Chaos Engineering and more...</p>
 
-[Read the Docs](https://mockit-docs.netlify.com/) | [Edit the Docs](https://github.com/boyney123/mockit-docs)
+[Read the Docs](https://mockit.netlify.com/) | [Edit the Docs](https://github.com/boyney123/mockit-docs)
 
 _If you find this tool useful, feel free to buy me a ☕ 👍 -> [Buy a drink](https://www.paypal.me/boyney123/5)_
 
@@ -15,7 +15,7 @@ _If you find this tool useful, feel free to buy me a ☕ 👍 -> [Buy a drink](h
 
 [![Travis](https://img.shields.io/travis/boyney123/mockit/master.svg)](https://travis-ci.org/boyney123/mockit)
 [![CodeCov](https://codecov.io/gh/boyney123/mockit/branch/master/graph/badge.svg?token=AoXW3EFgMP)](https://codecov.io/gh/boyney123/mockit)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/6d5acca1-0959-4d92-a739-08f725fdc464/deploy-status)](https://app.netlify.com/sites/mockit-docs/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6d5acca1-0959-4d92-a739-08f725fdc464/deploy-status)](https://app.netlify.com/sites/mockit/deploys)
 [![MIT License][license-badge]][license]
 [![PRs Welcome][prs-badge]][prs]
 
@@ -39,7 +39,7 @@ This tool comes with a few features out the box:
 
 More information about how it works, its features can be found on the docs.
 
-[Read the docs and get started](https://mockit-docs.netlify.com/)
+[Read the docs and get started](https://mockit.netlify.com/)
 
 ## Getting Started
 
@@ -57,7 +57,7 @@ _This will create all the docker containers required to run this application._
 
 Once everything is up and running go to [http://localhost:5000](http://localhost:5000) to see MockIt.
 
-If you want to know how to use MockIt please [checkout the instructions](https://mockit-docs.netlify.com/docs/getting-started/routes).
+If you want to know how to use MockIt please [checkout the instructions](https://mockit.netlify.com/docs/getting-started/routes).
 
 ## Contributing
 
