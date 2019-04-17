@@ -1,7 +1,7 @@
 {
     "settings": {
         "features": {
-            "chaosMonkey": true,
+            "chaosMonkey": false,
             "cors": true,
             "authentication": true
         },
@@ -11,36 +11,6 @@
         }
     },
     "routes": [
-        {
-            "id": "bd8893f7-68d5-4090-8ae2-20529191cd88",
-            "route": "/fruit",
-            "httpMethod": "GET",
-            "statusCode": "200",
-            "delay": "2000",
-            "payload": {
-                "name": "Fanny Rath",
-                "username": "Adell.Adams",
-                "email": "Clair30@yahoo.com",
-                "address": {
-                    "street": "Carroll Meadow",
-                    "suite": "Suite 114",
-                    "city": "West Astrid",
-                    "zipcode": "02752",
-                    "geo": {
-                        "lat": "-3.4480",
-                        "lng": "86.2320"
-                    }
-                },
-                "phone": "527.926.2249 x635",
-                "website": "evans.biz",
-                "company": {
-                    "name": "Mills - Schinner",
-                    "catchPhrase": "Profound clear-thinking array",
-                    "bs": "compelling disintermediate mindshare"
-                }
-            },
-            "disabled": true
-        },
         {
             "id": "6f935aa8-b629-4247-ba51-f02347b06e95",
             "route": "/user",
