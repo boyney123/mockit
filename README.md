@@ -7,6 +7,8 @@
 
 [Read the Docs](https://mockit-docs.netlify.com/) | [Edit the Docs](https://github.com/boyney123/mockit-docs/settings)
 
+_If you find this tool useful, feel free to buy my a ☕ 👍 | [Buy a drink](https://www.paypal.me/boyney123/5)_
+
 </div>
 
 <hr/>
