@@ -39,6 +39,24 @@ More information about how it works, its features can be found on the docs.
 
 [Read the docs and get started](https://mockit-docs.netlify.com/)
 
+## Getting Started
+
+```sh
+git clone git@github.com:boyney123/mockit.git
+```
+
+Next go into `mockit` and run
+
+```sh
+sh run build-and-start.sh
+```
+
+_This will create all the docker containers required to run this application._
+
+Once everything is up and running go to [http://localhost:5000](http://localhost:5000) to see MockIt.
+
+If you want to know how to use MockIt please [checkout the instructions](https://mockit-docs.netlify.com/docs/getting-started/routes).
+
 ## Contributing
 
 If you have any questions, features or issues please raise any issue or pull requests you like.
