@@ -59,6 +59,12 @@ Once everything is up and running go to [http://localhost:5000](http://localhost
 
 If you want to know how to use MockIt please [checkout the instructions](https://mockit.netlify.com/docs/getting-started/routes).
 
+#### Permissions
+_If you have any problems with permissions you might need to chmod the file_
+```
+chmod +x build-and-start.sh && ./build-and-start.sh
+```
+
 ## Contributing
 
 If you have any questions, features or issues please raise any issue or pull requests you like.
