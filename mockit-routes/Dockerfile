@@ -1,4 +1,4 @@
-FROM node:8.15.0
+FROM node:11.4.0-alpine
 
 RUN mkdir -p /usr/src/mockit-routes
 WORKDIR /usr/src/mockit-routes
