@@ -47,7 +47,7 @@ More information about how it works, its features can be found on the docs.
 git clone git@github.com:boyney123/mockit.git
 ```
 
-Next go into `mockit` and run
+Next go into `mockit` and run (You need to make sure Docker is running)
 
 ```sh
 sh build-and-start.sh
