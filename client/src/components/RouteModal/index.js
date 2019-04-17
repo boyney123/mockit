@@ -8,7 +8,7 @@ const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT, Ht
 const STATUS_CODES = [StatusCodes.OK, StatusCodes.CREATED, StatusCodes.NO_CONTENT, StatusCodes.BAD_REQUEST, StatusCodes.FORBIDDEN, StatusCodes.INTERNAL_SERVER_ERROR];
 
 const Modal = function(props) {
-  const { onClose = () => {}, action = "new", route: editedRoute } = props;
+  const { onClose = () => {}, route: editedRoute } = props;
 
   const [route, updateRoute] = useState(editedRoute.route);
   const [httpMethod, updateHttpMethod] = useState(editedRoute.httpMethod);
@@ -35,14 +35,13 @@ const Modal = function(props) {
 
       isNewRoute ? await createNewRoute(data) : await updateRouteRequest(data);
     } catch (error) {
-      alert("error");
       console.log("Error", error);
     }
   };
 
   return (
     <>
-      <div className="modal is-active">
+      <div className="modal is-active" data-testid="route-modal">
         <div className="modal-background animated fadeIn faster" />
         <div className="modal-card animated fadeInDown faster">
           <header className="modal-card-head">
@@ -51,18 +50,22 @@ const Modal = function(props) {
           </header>
           <section className="modal-card-body">
             <div className="field">
-              <label className="label">Route</label>
+              <label htmlFor="route-name" className="label">
+                Route
+              </label>
               <div className="control has-icons-left">
-                <input className="input" type="text" placeholder="Text input" value={route.replace("/", "")} onChange={e => updateRoute(`/${e.currentTarget.value}`)} />
+                <input aria-label="route-name" className="input" type="text" placeholder="Text input" value={route.replace("/", "")} onChange={e => updateRoute(`/${e.currentTarget.value}`)} />
                 <span className="icon is-small is-left">/</span>
               </div>
             </div>
             <div className="field-body">
               <div className="field">
-                <label className="label">HTTP Method</label>
+                <label htmlFor="route-http" className="label">
+                  HTTP Method
+                </label>
                 <div className="control">
                   <div className="select">
-                    <select value={httpMethod} onChange={e => updateHttpMethod(e.currentTarget.value)}>
+                    <select aria-label="route-http" value={httpMethod} onChange={e => updateHttpMethod(e.currentTarget.value)}>
                       {HTTP_METHOD_LIST.map(method => (
                         <option key={method} value={method}>
                           {method}
@@ -76,7 +79,7 @@ const Modal = function(props) {
                 <label className="label">Status Code</label>
                 <div className="control">
                   <div className="select">
-                    <select value={statusCode} onChange={e => updateStatusCode(e.currentTarget.value)}>
+                    <select aria-label="route-statuscode" value={statusCode} onChange={e => updateStatusCode(e.currentTarget.value)}>
                       {STATUS_CODES.map(test => (
                         <option key={test} value={test}>
                           {test}
@@ -90,7 +93,7 @@ const Modal = function(props) {
                 <label className="label">Delay </label>
                 <div className="control">
                   <div className="select">
-                    <select value={delay} onChange={e => updateDelay(e.currentTarget.value)}>
+                    <select aria-label="route-delay" value={delay} onChange={e => updateDelay(e.currentTarget.value)}>
                       <option value="0">0</option>
                       <option value="250">250</option>
                       <option value="500">500</option>
@@ -106,8 +109,8 @@ const Modal = function(props) {
             <div className="field mt10">
               <label className="label">Response</label>
               <div className="control">
-                <JSONInput placeholder={payload} onChange={e => updatePayload(e.jsObject)} height="120px" width="100%" />
-                <a className="button is-small is-pulled-right random-data is-primary is-inverted" onClick={() => updatePayload(faker.helpers.userCard())}>
+                <JSONInput placeholder={payload} onChange={e => updatePayload(e.jsObject)} height="120px" width="100%" locale="en-gb" />
+                <a className="button is-small is-pulled-right random-data is-primary is-inverted" onClick={() => updatePayload(faker.helpers.userCard())} aria-label="route-randomly-generate-data">
                   Randomly Generate Data
                 </a>
               </div>
@@ -116,18 +119,18 @@ const Modal = function(props) {
             <div className="field">
               <div className="control">
                 <label className="label">Settings</label>
-                <label class="checkbox">
-                  <input type="checkbox" checked={disabled} className="mr10" onChange={e => updateDisabled(e.target.checked)} />
+                <label className="checkbox">
+                  <input aria-label="route-disable" type="checkbox" checked={disabled} className="mr10" onChange={e => updateDisabled(e.target.checked)} />
                   <span>Disable Route</span>
                 </label>
               </div>
             </div>
           </section>
           <footer className="modal-card-foot">
-            <button className="button is-success" onClick={saveChanges}>
+            <button aria-label="route-save" className="button is-success" onClick={saveChanges}>
               Save changes
             </button>
-            <button className="button" onClick={onClose}>
+            <button aria-label="route-cancel" className="button" onClick={onClose}>
               Cancel
             </button>
           </footer>

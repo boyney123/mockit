@@ -3,7 +3,7 @@
     "features": {
       "chaosMonkey": false,
       "cors": true,
-      "authentication": true
+      "authentication": false
     },
     "authentication": {
       "username": "test",

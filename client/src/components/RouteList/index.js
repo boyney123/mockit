@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import url from "url";
-import { routes } from "../../config/routes.json";
 import { MOCKIT_SERVER_URL } from "../../utils/consts";
 
 const openRoute = route => {
@@ -10,19 +9,24 @@ const openRoute = route => {
 };
 
 const RouteItem = function({ title, value }) {
-  return (
-    <div className="level-item has-text-centered">
-      <div>
-        <p className="heading">{title}</p>
+  const buildAriaLabel = label => (label ? `route-${title.toLowerCase()}-${label}` : `route-${title.toLowerCase()}`);
 
-        <p className="title is-size-6">{value}</p>
+  return (
+    <div className="level-item has-text-centered" aria-label={buildAriaLabel()}>
+      <div>
+        <p className="heading" aria-label={buildAriaLabel("title")}>
+          {title}
+        </p>
+        <p className="title is-size-6" aria-label={buildAriaLabel("value")}>
+          {value}
+        </p>
       </div>
     </div>
   );
 };
 
 const Routes = function(props) {
-  const { onRouteEdit = () => {}, onRouteDelete = () => {} } = props;
+  const { onRouteEdit = () => {}, onRouteDelete = () => {}, routes = [] } = props;
 
   const editRoute = item => {
     return event => {
@@ -45,7 +49,7 @@ const Routes = function(props) {
         const { delay = 0, route, statusCode, httpMethod, disabled = false } = item;
         const routeClassName = disabled ? "disabled" : "";
         return (
-          <div className="columns">
+          <div className="columns" key={route} aria-label="Route">
             <div className="column is-full">
               <div className={`route ${routeClassName}`} onClick={openRoute(route)}>
                 <nav className="level">
@@ -57,10 +61,10 @@ const Routes = function(props) {
                   <div className="level-item has-text-centered">
                     <div>
                       <p className="title is-size-4">
-                        <a className="button is-info mr10" onClick={editRoute(item)}>
+                        <a className="button is-info mr10" onClick={editRoute(item)} aria-label="Edit Route">
                           <strong>Edit</strong>
                         </a>
-                        <a className="button is-danger" onClick={deleteRoute(item)}>
+                        <a className="button is-danger" onClick={deleteRoute(item)} aria-label="Delete Route">
                           <strong>Delete</strong>
                         </a>
                       </p>

@@ -1,0 +1,5 @@
+{
+  "bail": true,
+  "verbose": true,
+  "coveragePathIgnorePatterns": ["/node_modules/", "/serviceWorker.js"]
+}

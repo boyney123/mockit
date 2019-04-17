@@ -27,7 +27,7 @@ const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, headi
 
   return (
     <>
-      <div className="modal is-active">
+      <div className="modal is-active" aria-label="Settings Modal">
         <div className="modal-background animated fadeIn faster" />
         <div className="modal-card animated fadeInDown faster">
           <header className="modal-card-head">
@@ -35,7 +35,7 @@ const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, headi
             <button className="delete" aria-label="close" onClick={onClose} />
           </header>
           <section className="modal-card-body">
-            <div className="field">
+            <div className="field" aria-label="feature-basic-auth">
               <label className="label">Basic Authentication</label>
               <p className="mb10">Enable basic authentication on all routes. This can be configured with a username and password in the configuration file.</p>
               <div className="control">
@@ -46,24 +46,33 @@ const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, headi
                   className="switch is-primary"
                   checked={authentication}
                   onChange={e => setFeature("authentication", e.target.checked)}
+                  aria-label="feature-basic-auth-input"
                 />
-                <label for="basicAuthFeature">Enable Basic Authentication</label>
+                <label htmlFor="basicAuthFeature">Enable Basic Authentication</label>
               </div>
             </div>
             <hr />
-            <div className="field">
+            <div className="field" aria-label="feature-cors">
               <label className="label">CORS</label>
               <p className="mb10">
                 Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources on a web page to be requested from another domain outside the domain from which the first resource
                 was served. This feature enables CORS for all routes.
               </p>
               <div className="control">
-                <input id="corsFeature" type="checkbox" name="corsFeature" className="switch is-primary" checked={cors} onChange={e => setFeature("cors", e.target.checked)} />
-                <label for="corsFeature">Enable CORS</label>
+                <input
+                  id="corsFeature"
+                  type="checkbox"
+                  name="corsFeature"
+                  className="switch is-primary"
+                  checked={cors}
+                  onChange={e => setFeature("cors", e.target.checked)}
+                  aria-label="feature-cors-input"
+                />
+                <label htmlFor="corsFeature">Enable CORS</label>
               </div>
             </div>
             <hr />
-            <div className="field">
+            <div className="field" aria-label="feature-chaos-monkey">
               <label className="label">Chaos Monkey</label>
               <p className="mb10">Unleash the monkey. The monkey will randomly take down end points and enforce failures on your routes.</p>
               <div className="control">
@@ -74,17 +83,18 @@ const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, headi
                   className="switch is-primary"
                   checked={chaosMonkey}
                   onChange={e => setFeature("chaosMonkey", e.target.checked)}
+                  aria-label="feature-chaos-monkey-input"
                 />
-                <label for="chaosMonkeyFeature">Enable Monkey 🙊</label>
+                <label htmlFor="chaosMonkeyFeature">Enable Monkey 🙊</label>
               </div>
             </div>
           </section>
 
           <footer className="modal-card-foot">
-            <button className="button is-primary" onClick={saveSettings}>
+            <button className="button is-primary" onClick={saveSettings} aria-label="save">
               Save
             </button>
-            <button className="button" onClick={onClose}>
+            <button className="button" onClick={onClose} aria-label="cancel">
               Cancel
             </button>
           </footer>

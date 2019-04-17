@@ -9,11 +9,11 @@ import RouteModal from "./components/RouteModal";
 import SettingsModal from "./components/SettingsModal";
 import ConfirmationDialog from "./components/ConfirmationDialog";
 
-import { settings } from "./config/routes.json";
+import { settings, routes } from "./config/routes.json";
 
 import "./scss/index.scss";
 
-export default function() {
+export default function({ settings: propSettings }) {
   useScrollReval([
     { selector: ".hero .title, .card, .subtitle " },
     { selector: ".route", options: { duration: 750, distance: "40px", easing: "cubic-bezier(0.5, -0.01, 0, 1.005)", interval: 64, origin: "bottom", viewFactor: 0.32 } }
@@ -23,7 +23,7 @@ export default function() {
   const [routeToBeRemoved, setRouteToBeRemoved] = useState();
   const [settingsModalVisible, showSettingsModal] = useState(false);
 
-  const { features: { chaosMonkey = false } = {} } = settings;
+  const { features: { chaosMonkey = false } = {} } = propSettings || settings;
 
   return (
     <>
@@ -33,10 +33,10 @@ export default function() {
             <h1>MockIt</h1>
           </div>
           <div className="is-pulled-right">
-            <a className="button is-primary mr10" onClick={() => setSelectedRoute(buildRoute())}>
+            <a className="button is-primary mr10" aria-label="Add Route" onClick={() => setSelectedRoute(buildRoute())}>
               <strong>Add Route</strong>
             </a>
-            <a className="button is-info" onClick={() => showSettingsModal(true)}>
+            <a className="button is-info" aria-label="Settings" onClick={() => showSettingsModal(true)}>
               <strong>Settings</strong>
             </a>
           </div>
@@ -65,7 +65,7 @@ export default function() {
       <main>
         {chaosMonkey && (
           <>
-            <p className="chaos-monkey has-text-centered">
+            <p className="chaos-monkey has-text-centered" aria-label="Chaos Monkey Feature">
               <span role="img" aria-label="monkey">
                 🐒
               </span>
@@ -74,13 +74,13 @@ export default function() {
           </>
         )}
 
-        <RouteList onRouteEdit={route => setSelectedRoute(route)} onRouteDelete={route => setRouteToBeRemoved(route)} />
+        <RouteList routes={routes} onRouteEdit={route => setSelectedRoute(route)} onRouteDelete={route => setRouteToBeRemoved(route)} />
       </main>
-      <footer class="footer">
-        <div class="content has-text-centered">
+      <footer className="footer" aria-label="Site footer">
+        <div className="content has-text-centered">
           <p>
             <strong>MockIt</strong> an OpenSource tool developed by{" "}
-            <a href="https://github.com/boyney123" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/boyney123" aria-label="Github Repo" target="_blank" rel="noopener noreferrer">
               David Boyne
             </a>
           </p>
