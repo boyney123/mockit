@@ -1,7 +1,7 @@
 <div align="center">
 
-<h2>Quickly create mock APIs.</h2>
-<p>Stop wasting time mocking APIs. MockIt gives you an interface to configure and create REAL mocked end points for your applications.</>
+<h2>MockIt: A tool to quickly create mocked APIs.</h2>
+<p>Stop wasting time mocking APIs. MockIt gives you an interface to configure and create REAL mocked end points for your applications. Whilst you wait for APIS to be built use MockIt to talk to a real service.</>
 
 [![Travis](https://img.shields.io/travis/boyney123/mockit/master.svg)](https://travis-ci.org/boyney123/mockit)
 [![CodeCov](https://codecov.io/gh/boyney123/mockit/branch/master/graph/badge.svg?token=AoXW3EFgMP)](https://codecov.io/gh/boyney123/mockit)
