@@ -73,6 +73,10 @@ chmod +x build-and-start.sh && ./build-and-start.sh
 - [React](https://reactjs.org/)
 - [Docker](https://www.docker.com/)
 
+## Documentation
+
+- [Docusaurus](https://docusaurus.io/)
+
 ## Testing
 
 - [jest](https://jestjs.io/)
