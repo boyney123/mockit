@@ -1,6 +1,7 @@
 <div align="center">
 
-<h2>A tool to quickly mockout end points, setup delays and more...</h2>
+<h2>Quickly create mock APIs.</h2>
+<p>Stop wasting time mocking APIs. MockIt gives you an interface to configure and create REAL mocked end points for your applications.</>
 
 [![Travis](https://img.shields.io/travis/boyney123/mockit/master.svg)](https://travis-ci.org/boyney123/mockit)
 [![CodeCov](https://codecov.io/gh/boyney123/mockit/branch/master/graph/badge.svg?token=AoXW3EFgMP)](https://codecov.io/gh/boyney123/mockit)
@@ -11,7 +12,7 @@
 <hr />
 
 <img alt="header" src="./images/demo.gif" />
-<h3>Mock APIs fast with real end points, no more mocked JSON files for your response.</h3>
+<h3>Features: Live Reload, Choas Engineering, Authentication, CORS and more...</h3>
 
 [Read the Docs](https://mockit.netlify.com/) | [Edit the Docs](https://github.com/boyney123/mockit-docs)
 
