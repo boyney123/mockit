@@ -66,6 +66,19 @@ _If you have any problems with permissions you might need to chmod the file_
 chmod +x build-and-start.sh && ./build-and-start.sh
 ```
 
+# Tools
+
+- [nodemon - Listening for changes](https://github.com/remy/nodemon)
+- [Express](https://expressjs.com/)
+- [React](https://reactjs.org/)
+- [Docker](https://www.docker.com/)
+
+## Testing
+
+- [jest](https://jestjs.io/)
+- [react-testing-library](https://github.com/kentcdodds/react-testing-library)
+- [supertest](https://github.com/visionmedia/supertest)
+
 # Contributing
 
 If you have any questions, features or issues please raise any issue or pull requests you like.
