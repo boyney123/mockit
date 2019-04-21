@@ -59,6 +59,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "peterjgrainger",
+      "name": "Peter Grainger",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1332395?v=4",
+      "profile": "http://grainger.xyz",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
