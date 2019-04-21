@@ -1,3 +1,3 @@
-module.exports = () => {
-  hitByMonkey: () => Math.random() > 0.5;
+module.exports = {
+  hitByMonkey: () => Math.random() > 0.5
 };

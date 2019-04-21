@@ -10,9 +10,6 @@ module.exports = (req, res, next) => {
     return next();
   }
 
-  // console.log("hit", hitByMonkey());
-  // console.log("hit", hitByMonkey());
-
   // send random message back
   if (hitByMonkey()) {
     return res.send("Monkey left you a 🍌...");
