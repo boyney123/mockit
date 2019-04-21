@@ -1,0 +1,56 @@
+{
+  "projectName": "mockit",
+  "projectOwner": "boyney123",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "boyney123",
+      "name": "David Boyne",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3268013?v=4",
+      "profile": "https://medium.com/@boyney123",
+      "contributions": [
+        "code",
+        "doc",
+        "design",
+        "ideas",
+        "review",
+        "tool"
+      ]
+    },
+    {
+      "login": "lirantal",
+      "name": "Liran Tal",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/316371?v=4",
+      "profile": "https://medium.com/@liran.tal",
+      "contributions": [
+        "security"
+      ]
+    },
+    {
+      "login": "Hongarc",
+      "name": "Hongarc",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/19208123?v=4",
+      "profile": "https://fb.com/RemoveU",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "Calinou",
+      "name": "Hugo Locurcio",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/180032?v=4",
+      "profile": "https://hugo.pro",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
