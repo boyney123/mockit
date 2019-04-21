@@ -125,7 +125,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://medium.com/@boyney123"><img src="https://avatars1.githubusercontent.com/u/3268013?v=4" width="100px;" alt="David Boyne"/><br /><sub><b>David Boyne</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Code">💻</a> <a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Documentation">📖</a> <a href="#design-boyney123" title="Design">🎨</a></td></tr></table>
+<table><tr><td align="center"><a href="https://medium.com/@boyney123"><img src="https://avatars1.githubusercontent.com/u/3268013?v=4" width="100px;" alt="David Boyne"/><br /><sub><b>David Boyne</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Code">💻</a> <a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Documentation">📖</a> <a href="#design-boyney123" title="Design">🎨</a> <a href="#ideas-boyney123" title="Ideas, Planning, & Feedback">🤔</a></td></tr></table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
