@@ -8,7 +8,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6d5acca1-0959-4d92-a739-08f725fdc464/deploy-status)](https://app.netlify.com/sites/mockit/deploys)
 [![MIT License][license-badge]][license]
 [![PRs Welcome][prs-badge]][prs]
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 
 <hr />
 
@@ -125,7 +125,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://medium.com/@boyney123"><img src="https://avatars1.githubusercontent.com/u/3268013?v=4" width="100px;" alt="David Boyne"/><br /><sub><b>David Boyne</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Code">💻</a> <a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Documentation">📖</a> <a href="#design-boyney123" title="Design">🎨</a> <a href="#ideas-boyney123" title="Ideas, Planning, & Feedback">🤔</a> <a href="#review-boyney123" title="Reviewed Pull Requests">👀</a> <a href="#tool-boyney123" title="Tools">🔧</a></td><td align="center"><a href="https://medium.com/@liran.tal"><img src="https://avatars1.githubusercontent.com/u/316371?v=4" width="100px;" alt="Liran Tal"/><br /><sub><b>Liran Tal</b></sub></a><br /><a href="#security-lirantal" title="Security">🛡️</a></td><td align="center"><a href="https://fb.com/RemoveU"><img src="https://avatars1.githubusercontent.com/u/19208123?v=4" width="100px;" alt="Hongarc"/><br /><sub><b>Hongarc</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=Hongarc" title="Documentation">📖</a></td></tr></table>
+<table><tr><td align="center"><a href="https://medium.com/@boyney123"><img src="https://avatars1.githubusercontent.com/u/3268013?v=4" width="100px;" alt="David Boyne"/><br /><sub><b>David Boyne</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Code">💻</a> <a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Documentation">📖</a> <a href="#design-boyney123" title="Design">🎨</a> <a href="#ideas-boyney123" title="Ideas, Planning, & Feedback">🤔</a> <a href="#review-boyney123" title="Reviewed Pull Requests">👀</a> <a href="#tool-boyney123" title="Tools">🔧</a></td><td align="center"><a href="https://medium.com/@liran.tal"><img src="https://avatars1.githubusercontent.com/u/316371?v=4" width="100px;" alt="Liran Tal"/><br /><sub><b>Liran Tal</b></sub></a><br /><a href="#security-lirantal" title="Security">🛡️</a></td><td align="center"><a href="https://fb.com/RemoveU"><img src="https://avatars1.githubusercontent.com/u/19208123?v=4" width="100px;" alt="Hongarc"/><br /><sub><b>Hongarc</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=Hongarc" title="Documentation">📖</a></td><td align="center"><a href="https://hugo.pro"><img src="https://avatars3.githubusercontent.com/u/180032?v=4" width="100px;" alt="Hugo Locurcio"/><br /><sub><b>Hugo Locurcio</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=Calinou" title="Code">💻</a></td></tr></table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
