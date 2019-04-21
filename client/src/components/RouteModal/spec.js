@@ -4,6 +4,7 @@ import { render, fireEvent, cleanup } from "react-testing-library";
 import "jest-dom/extend-expect";
 import RouteModal from "./";
 import * as utils from "../../utils/routes-api";
+import {StatusCodes} from "../../utils/consts";
 
 afterEach(cleanup);
 
@@ -64,7 +65,7 @@ describe("Route Modal", () => {
       const dropdown = getByLabelText("route-statuscode");
       const dropdownOptions = dropdown.children;
 
-      expect(dropdownOptions.length).toEqual(6);
+      expect(dropdownOptions.length).toEqual(Object.keys(StatusCodes).length);
 
       expect(getByValue("200", dropdownOptions)).toBeVisible();
       expect(getByValue("201", dropdownOptions)).toBeVisible();
