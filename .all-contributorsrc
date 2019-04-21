@@ -50,6 +50,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "FattusMannus",
+      "name": "Andrew Hall",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/724328?v=4",
+      "profile": "http://www.andrewroberthall.co.uk",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
