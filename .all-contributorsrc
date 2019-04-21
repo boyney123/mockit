@@ -23,6 +23,15 @@
         "review",
         "tool"
       ]
+    },
+    {
+      "login": "lirantal",
+      "name": "Liran Tal",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/316371?v=4",
+      "profile": "https://medium.com/@liran.tal",
+      "contributions": [
+        "security"
+      ]
     }
   ],
   "contributorsPerLine": 7
