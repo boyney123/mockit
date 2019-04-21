@@ -32,6 +32,15 @@
       "contributions": [
         "security"
       ]
+    },
+    {
+      "login": "Hongarc",
+      "name": "Hongarc",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/19208123?v=4",
+      "profile": "https://fb.com/RemoveU",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
