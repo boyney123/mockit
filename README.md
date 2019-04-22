@@ -3,9 +3,6 @@
 <h2>MockIt: A tool to quickly create mocked APIs.</h2>
 <p>Stop wasting time mocking APIs. MockIt gives you an interface to configure and create REAL mocked end points for your applications. Whilst you wait for APIS to be built use MockIt to talk to a real service.</>
   
-  <h3>Features: Live Reload, Chaos Engineering, Authentication, CORS and more...</h3>
-
-[Read the Docs](https://mockit.netlify.com/) | [Edit the Docs](https://github.com/boyney123/mockit-docs)
 
   
   <hr />
@@ -24,6 +21,11 @@
 <hr />
 
 <img alt="header" src="./images/demo.gif" />
+
+  <h3>Features: Live Reload, Chaos Engineering, Authentication, CORS and more...</h3>
+
+[Read the Docs](https://mockit.netlify.com/) | [Edit the Docs](https://github.com/boyney123/mockit-docs)
+
 
 </div>
 
