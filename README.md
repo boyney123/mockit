@@ -13,7 +13,7 @@
 <hr />
 
 <img alt="header" src="./images/demo.gif" />
-<h3>Features: Live Reload, Choas Engineering, Authentication, CORS and more...</h3>
+<h3>Features: Live Reload, Chaos Engineering, Authentication, CORS and more...</h3>
 
 [Read the Docs](https://mockit.netlify.com/) | [Edit the Docs](https://github.com/boyney123/mockit-docs)
 
@@ -36,7 +36,7 @@ This tool was designed to help developers quickly create end points for their ap
 This tool comes with a few features out the box:
 
 - CORS
-- Basic Authentictaion
+- Basic Authentication
 - Chaos Monkey (Unleash a monkey to take down your end points)
 
 More information about how it works, its features can be found on the docs.
