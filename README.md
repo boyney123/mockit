@@ -18,6 +18,10 @@
 [![Star on GitHub][github-star-badge]][github-star]
 [![Tweet][twitter-badge]][twitter]
 
+
+
+[Donate ☕](https://www.paypal.me/boyney123/5)
+
 <hr />
 
 <img alt="header" src="./images/demo.gif" />
