@@ -66,7 +66,7 @@ git clone git@github.com:boyney123/mockit.git
 ```
 
 ```sh
-cd mockit && sh build-and-start.sh
+cd mockit && docker-compose up
 ```
 
 Once everything is up and running go to [http://localhost:5000](http://localhost:5000) to see MockIt.
