@@ -2,9 +2,7 @@
 
 <h2>MockIt: A tool to quickly create mocked APIs.</h2>
 <p>Stop wasting time mocking APIs. MockIt gives you an interface to configure and create REAL mocked end points for your applications. Whilst you wait for APIS to be built use MockIt to talk to a real service.</>
-  
 
-  
   <hr />
 
 [![Travis](https://img.shields.io/travis/boyney123/mockit/master.svg)](https://travis-ci.org/boyney123/mockit)
@@ -18,8 +16,6 @@
 [![Star on GitHub][github-star-badge]][github-star]
 [![Tweet][twitter-badge]][twitter]
 
-
-
 [Donate ☕](https://www.paypal.me/boyney123/5)
 
 <hr />
@@ -29,7 +25,6 @@
   <h3>Features: Live Reload, Chaos Engineering, Authentication, CORS and more...</h3>
 
 [Read the Docs](https://mockit.netlify.com/) | [Edit the Docs](https://github.com/boyney123/mockit-docs)
-
 
 </div>
 
@@ -66,7 +61,7 @@ git clone git@github.com:boyney123/mockit.git
 ```
 
 ```sh
-cd mockit && docker-compose up
+cd mockit && docker-compose up -d
 ```
 
 Once everything is up and running go to [http://localhost:5000](http://localhost:5000) to see MockIt.
