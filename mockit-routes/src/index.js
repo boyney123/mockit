@@ -22,13 +22,16 @@ if (corsFeature) {
 }
 
 routes.forEach(route => {
-  const { route: path, statusCode, payload, disabled = false, httpMethod = "GET" } = route;
+  const { route: path, statusCode, payload, disabled = false, httpMethod = "GET", headers = [] } = route;
 
   const method = httpMethod.toLowerCase();
 
   if (!disabled) {
     app[method](path, (req, res) => {
-      // console.log("Request for route", route);
+      Object.keys(headers).forEach(key => {
+        res.set(key, headers[key]);
+      });
+
       res.status(statusCode).send(payload);
     });
   }

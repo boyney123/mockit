@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import JSONInput from "react-json-editor-ajrm";
 import { HttpMethods, StatusCodes } from "../../utils/consts";
 import { updateRoute as updateRouteRequest, createNewRoute } from "../../utils/routes-api";
@@ -6,6 +6,30 @@ import faker from "faker";
 
 const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT, HttpMethods.DELETE];
 const STATUS_CODES = [StatusCodes.OK, StatusCodes.CREATED, StatusCodes.NO_CONTENT, StatusCodes.BAD_REQUEST, StatusCodes.FORBIDDEN, StatusCodes.INTERNAL_SERVER_ERROR];
+
+const HeaderInput = function({ key: initialKey, value: initialValue, onBlur = () => {}, onChange = () => {} } = {}) {
+  const [key, setKey] = useState(initialKey);
+  const [value, setValue] = useState(initialValue);
+
+  const update = (field, inputValue) => {
+    field === "key" ? setKey(value) : setValue(inputValue);
+  };
+
+  useEffect(() => {
+    if (key && value) onBlur({ [key]: value });
+  }, [key, value]);
+
+  return (
+    <div className="columns">
+      <div className="control column">
+        <input className="input" placeHolder="Key" aria-label="header-key" onChange={onChange} onBlur={e => update("key", e.target.value)} />
+      </div>
+      <div className="control column">
+        <input className="input" placeHolder="Value" aria-label="header-value" onChange={onChange} onBlur={e => update("value", e.target.value)} />
+      </div>
+    </div>
+  );
+};
 
 const Modal = function(props) {
   const { onClose = () => {}, route: editedRoute } = props;
@@ -16,10 +40,18 @@ const Modal = function(props) {
   const [delay, updateDelay] = useState(editedRoute.delay);
   const [payload, updatePayload] = useState(editedRoute.payload);
   const [disabled, updateDisabled] = useState(editedRoute.disabled);
+  const [headers, updateHeaders] = useState(editedRoute.headers);
 
   const isNewRoute = editedRoute.id === undefined;
 
   const modalTitle = isNewRoute ? "Add Route" : "Edit Route";
+
+  const setHeader = (key, value) => {
+    updateHeaders({
+      ...headers,
+      [key]: value
+    });
+  };
 
   const saveChanges = async () => {
     try {
@@ -30,7 +62,8 @@ const Modal = function(props) {
         statusCode,
         delay,
         payload,
-        disabled
+        disabled,
+        headers
       };
 
       isNewRoute ? await createNewRoute(data) : await updateRouteRequest(data);
@@ -116,6 +149,10 @@ const Modal = function(props) {
               </div>
             </div>
             <hr />
+            <div className="field mt10">
+              <label className="label">Response Headers (optional)</label>
+              <HeaderInput onBlur={console.log} />
+            </div>
             <div className="field">
               <div className="control">
                 <label className="label">Settings</label>
