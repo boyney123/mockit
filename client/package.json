@@ -10,7 +10,7 @@
     "react": "v16.8.3",
     "react-dom": "v16.8.3",
     "react-json-editor-ajrm": "^2.5.9",
-    "react-scripts": "2.1.8",
+    "react-scripts": "3.0.0",
     "scrollreveal": "^4.0.5",
     "uuid": "^3.3.2"
   },
