@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "brace": "^0.11.1",
     "bulma": "^0.7.4",
     "bulma-extensions": "^6.2.4",
     "faker": "^4.1.0",
     "node-sass": "^4.11.0",
     "react": "v16.8.3",
+    "react-ace": "^6.5.0",
     "react-dom": "v16.8.3",
     "react-json-editor-ajrm": "^2.5.9",
     "react-scripts": "2.1.3",
