@@ -2,9 +2,7 @@
 
 <h2>MockIt: A tool to quickly create mocked APIs.</h2>
 <p>Stop wasting time mocking APIs. MockIt gives you an interface to configure and create REAL mocked end points for your applications. Whilst you wait for APIS to be built use MockIt to talk to a real service.</>
-  
 
-  
   <hr />
 
 [![Travis](https://img.shields.io/travis/boyney123/mockit/master.svg)](https://travis-ci.org/boyney123/mockit)
@@ -12,13 +10,11 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6d5acca1-0959-4d92-a739-08f725fdc464/deploy-status)](https://app.netlify.com/sites/mockit/deploys)
 [![MIT License][license-badge]][license]
 [![PRs Welcome][prs-badge]][prs]
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
 
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
 [![Tweet][twitter-badge]][twitter]
-
-
 
 [Donate ☕](https://www.paypal.me/boyney123/5)
 
@@ -29,7 +25,6 @@
   <h3>Features: Live Reload, Chaos Engineering, Authentication, CORS and more...</h3>
 
 [Read the Docs](https://mockit.netlify.com/) | [Edit the Docs](https://github.com/boyney123/mockit-docs)
-
 
 </div>
 
@@ -66,7 +61,7 @@ git clone git@github.com:boyney123/mockit.git
 ```
 
 ```sh
-cd mockit && sh build-and-start.sh
+cd mockit && docker-compose up -d
 ```
 
 Once everything is up and running go to [http://localhost:5000](http://localhost:5000) to see MockIt.
@@ -145,7 +140,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://medium.com/@boyney123"><img src="https://avatars1.githubusercontent.com/u/3268013?v=4" width="100px;" alt="David Boyne"/><br /><sub><b>David Boyne</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Code">💻</a> <a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Documentation">📖</a> <a href="#design-boyney123" title="Design">🎨</a> <a href="#ideas-boyney123" title="Ideas, Planning, & Feedback">🤔</a> <a href="#review-boyney123" title="Reviewed Pull Requests">👀</a> <a href="#tool-boyney123" title="Tools">🔧</a></td><td align="center"><a href="https://medium.com/@liran.tal"><img src="https://avatars1.githubusercontent.com/u/316371?v=4" width="100px;" alt="Liran Tal"/><br /><sub><b>Liran Tal</b></sub></a><br /><a href="#security-lirantal" title="Security">🛡️</a></td><td align="center"><a href="https://fb.com/RemoveU"><img src="https://avatars1.githubusercontent.com/u/19208123?v=4" width="100px;" alt="Hongarc"/><br /><sub><b>Hongarc</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=Hongarc" title="Documentation">📖</a></td><td align="center"><a href="https://hugo.pro"><img src="https://avatars3.githubusercontent.com/u/180032?v=4" width="100px;" alt="Hugo Locurcio"/><br /><sub><b>Hugo Locurcio</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=Calinou" title="Code">💻</a></td><td align="center"><a href="http://www.andrewroberthall.co.uk"><img src="https://avatars1.githubusercontent.com/u/724328?v=4" width="100px;" alt="Andrew Hall"/><br /><sub><b>Andrew Hall</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=FattusMannus" title="Documentation">📖</a></td><td align="center"><a href="http://grainger.xyz"><img src="https://avatars1.githubusercontent.com/u/1332395?v=4" width="100px;" alt="Peter Grainger"/><br /><sub><b>Peter Grainger</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=peterjgrainger" title="Documentation">📖</a></td></tr></table>
+<table><tr><td align="center"><a href="https://medium.com/@boyney123"><img src="https://avatars1.githubusercontent.com/u/3268013?v=4" width="100px;" alt="David Boyne"/><br /><sub><b>David Boyne</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Code">💻</a> <a href="https://github.com/boyney123/mockit/commits?author=boyney123" title="Documentation">📖</a> <a href="#design-boyney123" title="Design">🎨</a> <a href="#ideas-boyney123" title="Ideas, Planning, & Feedback">🤔</a> <a href="#review-boyney123" title="Reviewed Pull Requests">👀</a> <a href="#tool-boyney123" title="Tools">🔧</a></td><td align="center"><a href="https://medium.com/@liran.tal"><img src="https://avatars1.githubusercontent.com/u/316371?v=4" width="100px;" alt="Liran Tal"/><br /><sub><b>Liran Tal</b></sub></a><br /><a href="#security-lirantal" title="Security">🛡️</a></td><td align="center"><a href="https://fb.com/RemoveU"><img src="https://avatars1.githubusercontent.com/u/19208123?v=4" width="100px;" alt="Hongarc"/><br /><sub><b>Hongarc</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=Hongarc" title="Documentation">📖</a></td><td align="center"><a href="https://hugo.pro"><img src="https://avatars3.githubusercontent.com/u/180032?v=4" width="100px;" alt="Hugo Locurcio"/><br /><sub><b>Hugo Locurcio</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=Calinou" title="Code">💻</a></td><td align="center"><a href="http://www.andrewroberthall.co.uk"><img src="https://avatars1.githubusercontent.com/u/724328?v=4" width="100px;" alt="Andrew Hall"/><br /><sub><b>Andrew Hall</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=FattusMannus" title="Documentation">📖</a></td><td align="center"><a href="http://grainger.xyz"><img src="https://avatars1.githubusercontent.com/u/1332395?v=4" width="100px;" alt="Peter Grainger"/><br /><sub><b>Peter Grainger</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=peterjgrainger" title="Documentation">📖</a></td><td align="center"><a href="https://github.com/wohlben"><img src="https://avatars2.githubusercontent.com/u/9362553?v=4" width="100px;" alt="Ben"/><br /><sub><b>Ben</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=wohlben" title="Code">💻</a></td></tr></table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
