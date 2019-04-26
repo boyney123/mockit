@@ -86,6 +86,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "fbricon",
+      "name": "Fred Bricon",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/148698?v=4",
+      "profile": "https://github.com/fbricon",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
