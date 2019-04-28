@@ -1,7 +1,7 @@
 <div align="center">
 
 <h2>MockIt: A tool to quickly create mocked APIs.</h2>
-<p>Stop wasting time mocking APIs. MockIt gives you an interface to configure and create REAL mocked end points for your applications. Whilst you wait for APIS to be built use MockIt to talk to a real service.</>
+<p>Stop wasting time mocking APIs. MockIt gives you an interface to configure and create REAL mocked endpoints for your applications. Whilst you wait for APIS to be built use MockIt to talk to a real service.</>
 
   <hr />
 
@@ -40,13 +40,13 @@ When building applications you often need to interact with services. When the se
 
 # This solution
 
-This tool was designed to help developers quickly create end points for their applications. No need to create a server, just use docker and run this project locally. You can create, edit and manage routes to your API. Every change to the API will be reflected on the server and updated straight away.
+This tool was designed to help developers quickly create endpoints for their applications. No need to create a server, just use docker and run this project locally. You can create, edit and manage routes to your API. Every change to the API will be reflected on the server and updated straight away.
 
 This tool comes with a few features out the box:
 
 - CORS
 - Basic Authentication
-- Chaos Monkey (Unleash a monkey to take down your end points)
+- Chaos Monkey (Unleash a monkey to take down your endpoints)
 
 More information about how it works, its features can be found on the docs.
 
@@ -76,19 +76,19 @@ _If you have any problems with permissions you might need to chmod the file_
 chmod +x build-and-start.sh && ./build-and-start.sh
 ```
 
-# Viewing the dashboard, server and api
+# Viewing the dashboard, server and API
 
 Once Docker is running you have three applications running on the machine.
 
 1. The client: [http://localhost:5000](http://localhost:5000)
-2. The client server: [http://localhost:4000](http://localhost:4000)
+2. The client-server: [http://localhost:4000](http://localhost:4000)
 3. The MockIt API (this is the server that runs your API): [http://localhost:3000](http://localhost:3000)
 
 If you want to view the dashboard to get started go to [http://localhost:5000](http://localhost:5000).
 
 If you want to interact with your new API go to [http://localhost:3000](http://localhost:3000).
 
-For example if you have a `/user` route setup, go to [http://localhost:3000/user](http://localhost:3000/user) to view the data.
+For example, if you have a `/user` route setup, go to [http://localhost:3000/user](http://localhost:3000/user) to view the data.
 
 # Tools
 
