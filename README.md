@@ -76,6 +76,12 @@ _If you have any problems with permissions you might need to chmod the file_
 chmod +x install-and-test.sh && ./install-and-test.sh
 ```
 
+_If you get error: `Couldn't connect to Docker daemon at http+docker://localhost - is it running?` you might need run_ with *sudo*
+
+```
+sudo docker-compose up -d
+```
+
 # Viewing the dashboard, server and API
 
 Once Docker is running you have three applications running on the machine.
