@@ -73,7 +73,7 @@ For instructions on how to use MockIt please see the [documentation](https://moc
 _If you have any problems with permissions you might need to chmod the file_
 
 ```
-chmod +x build-and-start.sh && ./build-and-start.sh
+chmod +x install-and-test.sh && ./install-and-test.sh
 ```
 
 # Viewing the dashboard, server and API
