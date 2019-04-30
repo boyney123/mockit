@@ -70,16 +70,26 @@ For instructions on how to use MockIt please see the [documentation](https://moc
 
 ## Permissions
 
-_If you have any problems with permissions you might need to chmod the file_
-
-```
-chmod +x install-and-test.sh && ./install-and-test.sh
-```
 
 _If you get error: `Couldn't connect to Docker daemon at http+docker://localhost - is it running?` you might need run_ with *sudo*
 
 ```
 sudo docker-compose up -d
+```
+
+
+## Local install and running tests
+
+If you want to install and run the tests for all apps then you can run this script:
+
+```
+sh install-and-test.sh
+```
+
+_If you have any problems with permissions you might need to chmod the file_
+
+```
+chmod +x install-and-test.sh && ./install-and-test.sh
 ```
 
 # Viewing the dashboard, server and API
