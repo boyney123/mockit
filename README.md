@@ -57,7 +57,7 @@ More information about how it works, its features can be found on the docs.
 _Make sure you have docker running_
 
 ```sh
-git clone git@github.com:boyney123/mockit.git
+git clone https://github.com/boyney123/mockit.git
 ```
 
 ```sh
