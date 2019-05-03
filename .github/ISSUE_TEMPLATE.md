@@ -6,7 +6,7 @@
 
 ## Problem description:
 
-<!-- Please describe why the current behavior is a problem -->
+<!-- Please describe why the current behaviour is a problem -->
 
 ## Suggested solution:
 
