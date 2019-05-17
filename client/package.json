@@ -6,12 +6,14 @@
     "bulma": "^0.7.4",
     "bulma-extensions": "^6.2.4",
     "faker": "^4.1.0",
+    "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
     "react": "v16.8.3",
     "react-dom": "v16.8.3",
     "react-json-editor-ajrm": "^2.5.9",
     "react-scripts": "3.0.0",
     "scrollreveal": "^4.0.5",
+    "styled-components": "^4.2.0",
     "uuid": "^3.3.2"
   },
   "scripts": {

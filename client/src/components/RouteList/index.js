@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import _ from "lodash";
 import styled from "styled-components";
 import Route from "./Route";
@@ -45,6 +45,8 @@ const RouteTitleText = styled.span`
 `;
 
 const Routes = function({ routes, ...props }) {
+  const [groupRoutes, setGroupRoutes] = useState(false);
+
   const groupedRoutes = useMemo(() => {
     // This function takes all the routes and groupes them by paths.
     // Parent routes get a children object containing their direct children.
@@ -184,12 +186,30 @@ const Routes = function({ routes, ...props }) {
 
   return (
     <React.Fragment>
+      <div className="control">
+        <input
+          id="basicAuthFeature"
+          type="checkbox"
+          name="basicAuthFeature"
+          className="switch is-primary"
+          checked={groupRoutes}
+          onChange={() => {
+            setGroupRoutes(!groupRoutes);
+          }}
+          aria-label="feature-basic-auth-input"
+        />
+        <label htmlFor="basicAuthFeature">Grouped routes</label>
+      </div>
       {routes.length === 0 ? (
         <p className="no-routes has-text-centered">
           No routes found. Click "Add Route" to get started.
         </p>
-      ) : (
+      ) : groupRoutes ? (
         renderLevel(groupedRoutes, 0)
+      ) : (
+        _.map(routes, (route, key) => (
+          <Route routeItem={route} key={key} {...props} />
+        ))
       )}
     </React.Fragment>
   );
