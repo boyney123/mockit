@@ -1,171 +1,197 @@
-import React, { useState } from "react";
-import url from "url";
+import React, { useMemo } from "react";
 import _ from "lodash";
 import styled from "styled-components";
+import Route from "./Route";
 
-import { MOCKIT_SERVER_URL } from "../../utils/consts";
-
-const Wrapper = styled.div`
+const Wrapper = styled.details`
   padding-left: 20px;
 `;
 
-const openRoute = route => {
-  return () => {
-    window.open(url.resolve(MOCKIT_SERVER_URL, route), "_blank");
-  };
-};
+const RouteTitle = styled.summary`
+  color: #1d1d1d;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.3em;
+  padding-left: 50px;
+  position: relative;
 
-const RouteItem = function({ title, value }) {
-  const buildAriaLabel = label =>
-    label
-      ? `route-${title.toLowerCase()}-${label}`
-      : `route-${title.toLowerCase()}`;
+  &:before {
+    position: absolute;
+    content: " ";
+    height: 2px;
+    background-color: #209cee;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: -1;
+  }
 
-  return (
-    <div className="level-item has-text-centered" aria-label={buildAriaLabel()}>
-      <div>
-        <p className="heading" aria-label={buildAriaLabel("title")}>
-          {title}
-        </p>
-        <p className="title is-size-6" aria-label={buildAriaLabel("value")}>
-          {value}
-        </p>
-      </div>
-    </div>
-  );
-};
+  &:focus {
+    outline: none;
+  }
 
-const Routes = function(props) {
-  const {
-    onRouteEdit = () => {},
-    onRouteDelete = () => {},
-    routes = []
-  } = props;
+  &::-webkit-details-marker {
+    background: white;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+`;
 
-  const editRoute = item => {
-    return event => {
-      event.stopPropagation();
-      onRouteEdit(item);
-    };
-  };
+const RouteTitleText = styled.span`
+  background-color: white;
+  padding-right: 10px;
+  margin-left: -10px;
+`;
 
-  const deleteRoute = item => {
-    return event => {
-      event.stopPropagation();
-      onRouteDelete(item);
-    };
-  };
+const Routes = function({ routes, ...props }) {
+  const groupedRoutes = useMemo(() => {
+    // This function takes all the routes and groupes them by paths.
+    // Parent routes get a children object containing their direct children.
+    // Children in their turn can also have children.
+    //
+    // An example of grouped routes would be
+    // {
+    //   user: {
+    //     id: "1f4dfdf3-5712-48b7-9310-6314f8ee2adc",
+    //     route: "/user",
+    //     payload: {
+    //       httpMethod: "get",
+    //       newRoute: true,
+    //       Money: 100
+    //     },
+    //     httpMethod: "POST",
+    //     statusCode: "201",
+    //     delay: "500",
+    //     children: {
+    //       login: {
+    //         id: "1f4dfdf3-5712-48b7-9310-6314f8ee2adc",
+    //         route: "/user/get/it/now",
+    //         payload: {
+    //           httpMethod: "get",
+    //           newRoute: true,
+    //           Money: 100
+    //         },
+    //         httpMethod: "POST",
+    //         statusCode: "201",
+    //         delay: "500"
+    //       }
+    //     }
+    //   },
+    //   fruit: {
+    //     id: "1f4dfdf3-5712-48b7-9310-6314f8ee2add",
+    //     route: "/fruit",
+    //     payload: {
+    //       httpMethod: "get",
+    //       newRoute: true,
+    //       Money: 100
+    //     },
+    //     httpMethod: "POST",
+    //     statusCode: "201",
+    //     delay: "0",
+    //     disabled: true,
+    //     children: {}
+    //   },
+    //   cart: {
+    //     children: {
+    //       purchase: {
+    //         children: {
+    //           vise: {
+    //             id: "1f4dfdf3-5712-48b7-9310-6314f8ee2add",
+    //             route: "/nothing/more/deleted",
+    //             payload: {
+    //               httpMethod: "get",
+    //               newRoute: true,
+    //               Money: 100
+    //             },
+    //             httpMethod: "POST",
+    //             statusCode: "201",
+    //             delay: "0"
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
 
-  const orderedRoutes = _.orderBy(routes, route => {
-    return route.route.split("/").length;
-  });
-  const groupedRoutes = {};
+    // We need to order routes by route length. Otherwise, if a deeper router would appear
+    // before a a shallower route, the shallow route would overwrite the deep route
+    // when using _.set
+    const orderedRoutes = _.orderBy(routes, route => {
+      return route.route.split("/").length;
+    });
 
-  orderedRoutes.forEach(route => {
-    const paths = route.route.split("/");
+    const routesObject = {};
+    orderedRoutes.forEach(route => {
+      const paths = route.route.split("/");
+      const routeDepth = paths.length;
+      const parentPath = paths.slice(1, paths.length - 1);
+      const lastLevel = paths[paths.length - 1];
 
-    _.set(groupedRoutes, paths.slice(1, paths.length), { ...route });
-    // paths.forEach()
-  });
+      // routes with a depth lower than three are the first-level routes since all routes
+      // start with a slash, so their split path becomes ['', 'path']
+      if (routeDepth < 3) {
+        routesObject[lastLevel] = {
+          ...route,
+          children: {}
+        };
+      } else {
+        let pathToChild = [];
+        parentPath.forEach((parent, index) => {
+          const currentLevelPath = parentPath.slice(0, index + 1);
+          const currentLevelPathWithChildren = [];
+          currentLevelPath.forEach(path => {
+            currentLevelPathWithChildren.push(path, "children");
+          });
+          pathToChild = currentLevelPathWithChildren;
+        });
+        _.set(routesObject, [...pathToChild, lastLevel], { ...route });
+      }
+    });
 
-  console.log(groupedRoutes);
+    return routesObject;
+  }, [routes]);
 
-  const renderLevel = (routes, index, titleFromParent) => {
-    const fieldsInRoute = [
-      "id",
-      "route",
-      "payload",
-      "httpMethod",
-      "statusCode",
-      "delay",
-      "disabled"
-    ];
+  const renderLevel = (routes, index) => {
     return (
-      <div>
+      <React.Fragment>
         {_.map(routes, (item, key) => {
-          const {
-            delay = 0,
-            route,
-            statusCode,
-            httpMethod,
-            disabled = false
-          } = item;
-          const routeClassName = disabled ? "disabled" : "";
-
-          if (_.size(_.pick(item, fieldsInRoute)) > 0) {
+          if (_.size(_.omit(item, ["children"])) > 0) {
             return (
-              <Wrapper>
-                <div level={index}>
-                  {titleFromParent}/{key}
-                </div>
-                <div className="columns" key={route} aria-label="Route">
-                  <div className="column is-full">
-                    <div
-                      className={`route ${routeClassName}`}
-                      onClick={openRoute(route)}
-                    >
-                      <nav className="level">
-                        <RouteItem title="Route" value={route} />
-                        <RouteItem title="Delay" value={`${delay} ms`} />
-                        <RouteItem title="Status Code" value={statusCode} />
-                        <RouteItem title="HTTP" value={httpMethod} />
-
-                        <div className="level-item has-text-centered">
-                          <div>
-                            <p className="title is-size-4">
-                              <button
-                                className="button is-info mr10"
-                                onClick={editRoute(item)}
-                                aria-label="Edit Route"
-                              >
-                                <strong>Edit</strong>
-                              </button>
-                              <button
-                                className="button is-danger"
-                                onClick={deleteRoute(item)}
-                                aria-label="Delete Route"
-                              >
-                                <strong>Delete</strong>
-                              </button>
-                            </p>
-                          </div>
-                        </div>
-                      </nav>
-                    </div>
-                  </div>
-                </div>
-                {_.size(_.omit(item, fieldsInRoute)) > 0 &&
-                  renderLevel(_.omit(item, fieldsInRoute), index + 1)}
+              <Wrapper open key={key}>
+                <RouteTitle>
+                  <RouteTitleText>/{key}</RouteTitleText>
+                </RouteTitle>
+                <Route routeItem={item} {...props} />
+                {_.size(item.children) > 0 &&
+                  renderLevel(item.children, index + 1)}
               </Wrapper>
             );
           }
 
-          console.log(item);
-
           return (
-            <Wrapper>
-              {_.size(_.omit(item, fieldsInRoute)) > 0 &&
-                renderLevel(
-                  _.omit(item, fieldsInRoute),
-                  index,
-                  titleFromParent ? `${titleFromParent}/${key}` : key
-                )}
+            <Wrapper open key={key}>
+              <RouteTitle>
+                <RouteTitleText>/{key}</RouteTitleText>
+              </RouteTitle>
+              {_.size(item.children) > 0 && renderLevel(item.children, index)}
             </Wrapper>
           );
         })}
-      </div>
+      </React.Fragment>
     );
   };
 
   return (
-    <>
-      {routes.length === 0 && (
+    <React.Fragment>
+      {routes.length === 0 ? (
         <p className="no-routes has-text-centered">
           No routes found. Click "Add Route" to get started.
         </p>
+      ) : (
+        renderLevel(groupedRoutes, 0)
       )}
-      {renderLevel(groupedRoutes, 0)}
-    </>
+    </React.Fragment>
   );
 };
 

@@ -14,10 +14,7 @@ import { settings, routes } from "./config/routes.json";
 import "./scss/index.scss";
 
 export default function({ settings: propSettings }) {
-  useScrollReval([
-    { selector: ".hero .title, .card, .subtitle " },
-    { selector: ".route", options: { duration: 750, distance: "40px", easing: "cubic-bezier(0.5, -0.01, 0, 1.005)", interval: 64, origin: "bottom", viewFactor: 0.32 } }
-  ]);
+  useScrollReval([{ selector: ".hero .title, .card, .subtitle " }]);
 
   const [selectedRoute, setSelectedRoute] = useState();
   const [routeToBeRemoved, setRouteToBeRemoved] = useState();
