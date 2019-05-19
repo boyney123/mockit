@@ -2,38 +2,23 @@
 import React from "react";
 import { render, fireEvent, cleanup } from "react-testing-library";
 import "jest-dom/extend-expect";
-import RouteList from "./";
+import Route from "./";
+import RouteItem from "./RouteItem";
 
 afterEach(cleanup);
 
-const buildRoutes = () => {
-  return [
-    {
-      id: "1",
-      route: "/test",
-      delay: "500",
-      statusCode: "200",
-      httpMethod: "GET"
-    },
-    {
-      id: "2",
-      route: "/test2",
-      delay: "0",
-      statusCode: "200",
-      httpMethod: "GET"
-    }
-  ];
-};
+const buildRoute = () => ({
+  id: "1",
+  route: "/test",
+  delay: "500",
+  statusCode: "200",
+  httpMethod: "GET"
+});
 
-describe("RouteList", () => {
+describe("Route", () => {
   describe("renders", () => {
-    it("the list of given routes", () => {
-      const { getAllByLabelText } = render(<RouteList routes={buildRoutes()} />);
-      const routes = getAllByLabelText("Route");
-      expect(routes.length).toBe(2);
-    });
-    it("a route has the route, delay, statuscode, http method rendered", () => {
-      const { getByLabelText, getAllByLabelText, getByText } = render(<RouteList routes={buildRoutes()} />);
+    it("renders the route, delay, statuscode, http method rendered", () => {
+      const { getByLabelText, getAllByLabelText, getByText } = render(<Route routeItem={buildRoute()} />);
       const routes = getAllByLabelText("Route");
       const route = routes[0];
 
@@ -45,7 +30,7 @@ describe("RouteList", () => {
     });
 
     it("the route renders with an edit and delete button", () => {
-      const { getByLabelText } = render(<RouteList routes={buildRoutes()} />);
+      const { getByLabelText } = render(<Route routeItem={buildRoute()} />);
       expect(getByLabelText("Edit Route")).toBeVisible();
       expect(getByLabelText("Delete Route")).toBeVisible();
     });
@@ -55,7 +40,7 @@ describe("RouteList", () => {
     describe("onRouteEdit", () => {
       it("is called when the edit route button is clicked", () => {
         const spy = jest.fn();
-        const { getByLabelText } = render(<RouteList routes={buildRoutes()} onRouteEdit={spy} />);
+        const { getByLabelText } = render(<Route routeItem={buildRoute()} onRouteEdit={spy} />);
         fireEvent.click(getByLabelText("Edit Route"));
         expect(spy).toHaveBeenCalled();
       });
@@ -63,10 +48,18 @@ describe("RouteList", () => {
     describe("onRouteDelete", () => {
       it("is called when the delete route button is clicked", () => {
         const spy = jest.fn();
-        const { getByLabelText } = render(<RouteList routes={buildRoutes()} onRouteDelete={spy} />);
+        const { getByLabelText } = render(<Route routeItem={buildRoute()} onRouteDelete={spy} />);
         fireEvent.click(getByLabelText("Delete Route"));
         expect(spy).toHaveBeenCalled();
       });
+    });
+  });
+
+  describe("RouteItem", () => {
+    it("renders the given title and value", () => {
+      const { getByLabelText } = render(<RouteItem title="TestTitle" value="TestValue" />);
+      expect(getByLabelText("route-testtitle-title")).toHaveTextContent("TestTitle");
+      expect(getByLabelText("route-testtitle-value")).toHaveTextContent("TestValue");
     });
   });
 });

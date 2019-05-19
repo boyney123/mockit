@@ -5,13 +5,7 @@ import RouteItem from "./RouteItem";
 import { MOCKIT_SERVER_URL } from "../../utils/consts";
 
 const Route = ({ routeItem, onRouteDelete, onRouteEdit }) => {
-  const {
-    delay = 0,
-    route,
-    statusCode,
-    httpMethod,
-    disabled = false
-  } = routeItem;
+  const { delay = 0, route, statusCode, httpMethod, disabled = false } = routeItem;
   const routeClassName = disabled ? "disabled" : "";
 
   const openRoute = route => {
@@ -32,7 +26,7 @@ const Route = ({ routeItem, onRouteDelete, onRouteEdit }) => {
 
   return (
     <div className="column is-full">
-      <div className={`route ${routeClassName}`} onClick={openRoute(route)}>
+      <div className={`route ${routeClassName}`} onClick={openRoute(route)} aria-label="Route">
         <nav className="level">
           <RouteItem title="Route" value={route} />
           <RouteItem title="Delay" value={`${delay} ms`} />
@@ -42,18 +36,10 @@ const Route = ({ routeItem, onRouteDelete, onRouteEdit }) => {
           <div className="level-item has-text-centered">
             <div>
               <p className="title is-size-4">
-                <button
-                  className="button is-info mr10"
-                  onClick={editRoute}
-                  aria-label="Edit Route"
-                >
+                <button className="button is-info mr10" onClick={editRoute} aria-label="Edit Route">
                   <strong>Edit</strong>
                 </button>
-                <button
-                  className="button is-danger"
-                  onClick={deleteRoute}
-                  aria-label="Delete Route"
-                >
+                <button className="button is-danger" onClick={deleteRoute} aria-label="Delete Route">
                   <strong>Delete</strong>
                 </button>
               </p>

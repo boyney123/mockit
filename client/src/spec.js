@@ -1,6 +1,6 @@
 // __tests__/fetch.test.js
 import React from "react";
-import { render, fireEvent, cleanup, waitForElement, queryAllByLabelText } from "react-testing-library";
+import { render, fireEvent, cleanup, queryAllByLabelText } from "react-testing-library";
 import * as utils from "./utils/routes-api";
 import "jest-dom/extend-expect";
 import App from "./App";
@@ -28,7 +28,7 @@ describe("App", () => {
     it("renders a list of routes based on the routes in the configuration", () => {
       const { container } = render(<App />);
       const routes = queryAllByLabelText(container, "Route");
-      expect(routes).toHaveLength(2);
+      expect(routes).toHaveLength(3);
     });
 
     it("renders a footer on the screen with a link to the github repo", () => {

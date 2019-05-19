@@ -19,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "REACT_APP_MOCKIT_API_URL=localhost react-scripts test",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "jest": {
@@ -42,6 +42,7 @@
     "dom-testing-library": "^3.19.1",
     "jest-dom": "^3.1.3",
     "nock": "^10.0.6",
+    "react-app-rewired": "^2.1.3",
     "react-testing-library": "^6.1.2"
   }
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useScrollReval from "./hooks/useScrollReveal";
-import RouteList from "./components/RouteList";
+import RouteListStack from "./components/RouteListStack";
+import RouteListGroup from "./components/RouteListGroup";
 import Logo from "./components/Logo";
 
 import { buildRoute, deleteRoute } from "./utils/routes-api";
@@ -20,7 +21,7 @@ export default function({ settings: propSettings }) {
   const [routeToBeRemoved, setRouteToBeRemoved] = useState();
   const [settingsModalVisible, showSettingsModal] = useState(false);
 
-  const { features: { chaosMonkey = false } = {} } = propSettings || settings;
+  const { features: { chaosMonkey = false, groupedRoutes = false } = {} } = propSettings || settings;
 
   return (
     <>
@@ -70,8 +71,13 @@ export default function({ settings: propSettings }) {
             <p className=" mb20 has-text-centered">The chaos monkey is enabled and causing havoc on all APIs...</p>
           </>
         )}
+        {routes.length === 0 && <p className="no-routes has-text-centered">No routes found. Click "Add Route" to get started.</p>}
 
-        <RouteList routes={routes} onRouteEdit={route => setSelectedRoute(route)} onRouteDelete={route => setRouteToBeRemoved(route)} />
+        {groupedRoutes ? (
+          <RouteListGroup routes={routes} onRouteEdit={route => setSelectedRoute(route)} onRouteDelete={route => setRouteToBeRemoved(route)} />
+        ) : (
+          <RouteListStack routes={routes} onRouteEdit={route => setSelectedRoute(route)} onRouteDelete={route => setRouteToBeRemoved(route)} />
+        )}
       </main>
       <footer className="footer" aria-label="Site footer">
         <div className="content has-text-centered">

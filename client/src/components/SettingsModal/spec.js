@@ -65,6 +65,21 @@ describe("Settings Dialog", () => {
         expect(getByLabelText("feature-chaos-monkey-input").checked).toEqual(true);
       });
     });
+    describe("Grouped Routes", () => {
+      it("renders the feature with an input", () => {
+        const { getByLabelText } = render(<SettingsDialog />);
+        expect(getByLabelText("feature-grouped-routes")).toBeVisible();
+        expect(getByLabelText("feature-grouped-routes-input")).toBeVisible();
+      });
+
+      it("clicking on the feature enables grouped routes and updates the input value", () => {
+        const { getByLabelText } = render(<SettingsDialog />);
+
+        expect(getByLabelText("feature-grouped-routes-input").checked).toEqual(false);
+        fireEvent.change(getByLabelText("feature-grouped-routes-input"), { target: { checked: true } });
+        expect(getByLabelText("feature-grouped-routes-input").checked).toEqual(true);
+      });
+    });
   });
 
   describe("saving settings", () => {
