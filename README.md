@@ -61,7 +61,7 @@ git clone https://github.com/boyney123/mockit.git
 ```
 
 ```sh
-cd mockit && docker-compose up -d
+cd mockit && docker-compose up --build -d
 ```
 
 Once everything is up and running go to [http://localhost:5000](http://localhost:5000) to see MockIt.
@@ -74,7 +74,7 @@ For instructions on how to use MockIt please see the [documentation](https://moc
 _If you get error: `Couldn't connect to Docker daemon at http+docker://localhost - is it running?` you might need run_ with *sudo*
 
 ```
-sudo docker-compose up -d
+sudo docker-compose up --build -d
 ```
 
 
