@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useScrollReval from "./hooks/useScrollReveal";
-import RouteList from "./components/RouteList";
+import RouteListStack from "./components/RouteListStack";
+import RouteListGroup from "./components/RouteListGroup";
 import Logo from "./components/Logo";
 
 import { buildRoute, deleteRoute } from "./utils/routes-api";
@@ -9,21 +10,20 @@ import RouteModal from "./components/RouteModal";
 import SettingsModal from "./components/SettingsModal";
 import ConfirmationDialog from "./components/ConfirmationDialog";
 
-import { settings, routes } from "./config/routes.json";
+import { settings, routes as configRoutes } from "./config/routes.json";
 
 import "./scss/index.scss";
 
-export default function({ settings: propSettings }) {
-  useScrollReval([
-    { selector: ".hero .title, .card, .subtitle " },
-    { selector: ".route", options: { duration: 750, distance: "40px", easing: "cubic-bezier(0.5, -0.01, 0, 1.005)", interval: 64, origin: "bottom", viewFactor: 0.32 } }
-  ]);
+export default function({ settings: propSettings, customRoutes }) {
+  useScrollReval([{ selector: ".hero .title, .card, .subtitle " }]);
 
   const [selectedRoute, setSelectedRoute] = useState();
   const [routeToBeRemoved, setRouteToBeRemoved] = useState();
   const [settingsModalVisible, showSettingsModal] = useState(false);
 
-  const { features: { chaosMonkey = false } = {} } = propSettings || settings;
+  const routes = customRoutes || configRoutes;
+
+  const { features: { chaosMonkey = false, groupedRoutes = false } = {} } = propSettings || settings;
 
   return (
     <>
@@ -73,8 +73,17 @@ export default function({ settings: propSettings }) {
             <p className=" mb20 has-text-centered">The chaos monkey is enabled and causing havoc on all APIs...</p>
           </>
         )}
+        {routes.length === 0 && (
+          <p aria-label="no-routes" className="no-routes has-text-centered">
+            No routes found. Click "Add Route" to get started.
+          </p>
+        )}
 
-        <RouteList routes={routes} onRouteEdit={route => setSelectedRoute(route)} onRouteDelete={route => setRouteToBeRemoved(route)} />
+        {groupedRoutes ? (
+          <RouteListGroup routes={routes} onRouteEdit={route => setSelectedRoute(route)} onRouteDelete={route => setRouteToBeRemoved(route)} />
+        ) : (
+          <RouteListStack routes={routes} onRouteEdit={route => setSelectedRoute(route)} onRouteDelete={route => setRouteToBeRemoved(route)} />
+        )}
       </main>
       <footer className="footer" aria-label="Site footer">
         <div className="content has-text-centered">

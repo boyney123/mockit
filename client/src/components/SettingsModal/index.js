@@ -5,7 +5,7 @@ import { updateSettings } from "../../utils/routes-api";
 const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, heading, children } = {}) {
   const [settings, setSettings] = useState(applicationSettings);
 
-  const { features: { chaosMonkey, cors, authentication } = {} } = settings;
+  const { features: { chaosMonkey, cors, authentication, groupedRoutes } = {} } = settings;
 
   const setFeature = (feature, value) => {
     const newSettings = {
@@ -86,6 +86,23 @@ const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, headi
                   aria-label="feature-chaos-monkey-input"
                 />
                 <label htmlFor="chaosMonkeyFeature">Enable Monkey 🙊</label>
+              </div>
+            </div>
+            <hr />
+            <div className="field" aria-label="feature-grouped-routes">
+              <label className="label">Group routes</label>
+              <p className="mb10">With the ability to group routes, you can quickly hide a whole list of routes that share the same basepath.</p>
+              <div className="control">
+                <input
+                  id="groupedRoutesFeature"
+                  type="checkbox"
+                  name="groupedRoutesFeature"
+                  className="switch is-primary"
+                  checked={groupedRoutes}
+                  onChange={e => setFeature("groupedRoutes", e.target.checked)}
+                  aria-label="feature-grouped-routes-input"
+                />
+                <label htmlFor="groupedRoutesFeature">Enable Grouped Routes</label>
               </div>
             </div>
           </section>
