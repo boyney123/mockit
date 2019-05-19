@@ -105,5 +105,5 @@ export default function({ routes, onRouteDelete, onRouteEdit }) {
     return routesObject;
   }, [routes]);
 
-  return renderLevel(groupedRoutes, onRouteEdit, onRouteDelete);
+  return <div aria-label="routes-grouped">{renderLevel(groupedRoutes, onRouteEdit, onRouteDelete)}</div>;
 }

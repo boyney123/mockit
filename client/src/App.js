@@ -10,16 +10,18 @@ import RouteModal from "./components/RouteModal";
 import SettingsModal from "./components/SettingsModal";
 import ConfirmationDialog from "./components/ConfirmationDialog";
 
-import { settings, routes } from "./config/routes.json";
+import { settings, routes as configRoutes } from "./config/routes.json";
 
 import "./scss/index.scss";
 
-export default function({ settings: propSettings }) {
+export default function({ settings: propSettings, customRoutes }) {
   useScrollReval([{ selector: ".hero .title, .card, .subtitle " }]);
 
   const [selectedRoute, setSelectedRoute] = useState();
   const [routeToBeRemoved, setRouteToBeRemoved] = useState();
   const [settingsModalVisible, showSettingsModal] = useState(false);
+
+  const routes = customRoutes || configRoutes;
 
   const { features: { chaosMonkey = false, groupedRoutes = false } = {} } = propSettings || settings;
 
@@ -71,7 +73,11 @@ export default function({ settings: propSettings }) {
             <p className=" mb20 has-text-centered">The chaos monkey is enabled and causing havoc on all APIs...</p>
           </>
         )}
-        {routes.length === 0 && <p className="no-routes has-text-centered">No routes found. Click "Add Route" to get started.</p>}
+        {routes.length === 0 && (
+          <p aria-label="no-routes" className="no-routes has-text-centered">
+            No routes found. Click "Add Route" to get started.
+          </p>
+        )}
 
         {groupedRoutes ? (
           <RouteListGroup routes={routes} onRouteEdit={route => setSelectedRoute(route)} onRouteDelete={route => setRouteToBeRemoved(route)} />

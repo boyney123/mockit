@@ -36,7 +36,7 @@ describe("Route", () => {
     });
   });
 
-  describe("props", () => {
+  describe("props and actions", () => {
     describe("onRouteEdit", () => {
       it("is called when the edit route button is clicked", () => {
         const spy = jest.fn();
@@ -52,6 +52,15 @@ describe("Route", () => {
         fireEvent.click(getByLabelText("Delete Route"));
         expect(spy).toHaveBeenCalled();
       });
+    });
+
+    it.only("when clicking on the route the user is navigated to that route in the browser", () => {
+      const globalOpen = global.open;
+      global.open = jest.fn();
+      const { getByLabelText } = render(<Route routeItem={buildRoute()} />);
+      fireEvent.click(getByLabelText("Route"));
+      expect(global.open).toBeCalledWith("localhost:/test", "_blank");
+      global.open = globalOpen;
     });
   });
 
