@@ -20,6 +20,16 @@
         "newRoute": true,
         "Money": 100
       },
+      "headers": [
+        {
+          "header": "Accept",
+          "value": "application/json"
+        },
+        {
+          "header": "x-api-key",
+          "value": "abcdef12345"
+        }
+      ],
       "httpMethod": "POST",
       "statusCode": "201",
       "delay": "500"
@@ -44,6 +54,12 @@
         "newRoute": true,
         "Money": 100
       },
+      "headers": [
+        {
+          "header": "test",
+          "value": "test"
+        }
+      ],
       "httpMethod": "POST",
       "statusCode": "201",
       "delay": "0",

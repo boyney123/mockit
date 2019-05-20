@@ -3,33 +3,42 @@ import JSONInput from "react-json-editor-ajrm";
 import { HttpMethods, StatusCodes } from "../../utils/consts";
 import { updateRoute as updateRouteRequest, createNewRoute } from "../../utils/routes-api";
 import faker from "faker";
+import uuid from "uuid/v4";
 
 const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT, HttpMethods.DELETE];
 const STATUS_CODES = [StatusCodes.OK, StatusCodes.CREATED, StatusCodes.NO_CONTENT, StatusCodes.BAD_REQUEST, StatusCodes.FORBIDDEN, StatusCodes.INTERNAL_SERVER_ERROR];
 
-const HeaderInput = function({ key: initialKey, value: initialValue, onBlur = () => {}, onChange = () => {} } = {}) {
-  const [key, setKey] = useState(initialKey);
+const HeaderInput = function({ index, header: initialHeader, value: initialValue, onBlur = () => {}, onChange = () => {}, onRemove = () => {} } = {}) {
+  const [header, setHeader] = useState(initialHeader);
   const [value, setValue] = useState(initialValue);
 
   const update = (field, inputValue) => {
-    field === "key" ? setKey(value) : setValue(inputValue);
+    field === "header" ? setHeader(inputValue) : setValue(inputValue);
   };
 
   useEffect(() => {
-    if (key && value) onBlur({ [key]: value });
-  }, [key, value]);
+    if (header && value) onBlur({ index, header, value });
+  }, [header, value]);
 
   return (
-    <div className="columns">
+    <div className="columns Header">
       <div className="control column">
-        <input className="input" placeHolder="Key" aria-label="header-key" onChange={onChange} onBlur={e => update("key", e.target.value)} />
+        <input className="input" placeHolder="Key" value={header} aria-label="header-key" onChange={e => update("header", e.target.value)} />
       </div>
       <div className="control column">
-        <input className="input" placeHolder="Value" aria-label="header-value" onChange={onChange} onBlur={e => update("value", e.target.value)} />
+        <input className="input" placeHolder="Value" value={value} aria-label="header-value" onChange={e => update("value", e.target.value)} />
+      </div>
+      <div className="control column is-1 Header__Remove" onClick={onRemove}>
+        <i class="far fa-times-circle" />
       </div>
     </div>
   );
 };
+
+/**
+ * add header adds some input fields
+ * Clicking X removes the field from the array....
+ */
 
 const Modal = function(props) {
   const { onClose = () => {}, route: editedRoute } = props;
@@ -40,17 +49,18 @@ const Modal = function(props) {
   const [delay, updateDelay] = useState(editedRoute.delay);
   const [payload, updatePayload] = useState(editedRoute.payload);
   const [disabled, updateDisabled] = useState(editedRoute.disabled);
-  const [headers, updateHeaders] = useState(editedRoute.headers);
+  const [headers, updateHeaders] = useState(editedRoute.headers || []);
 
   const isNewRoute = editedRoute.id === undefined;
 
   const modalTitle = isNewRoute ? "Add Route" : "Edit Route";
 
-  const setHeader = (key, value) => {
-    updateHeaders({
-      ...headers,
-      [key]: value
-    });
+  const setHeader = header => {
+    const { index } = header;
+    const newHeaders = headers.concat([]);
+    newHeaders[index] = header;
+    console.log("header", headers);
+    updateHeaders(newHeaders);
   };
 
   const saveChanges = async () => {
@@ -71,6 +81,8 @@ const Modal = function(props) {
       console.log("Error", error);
     }
   };
+
+  console.log("headers", headers);
 
   return (
     <>
@@ -151,7 +163,12 @@ const Modal = function(props) {
             <hr />
             <div className="field mt10">
               <label className="label">Response Headers (optional)</label>
-              <HeaderInput onBlur={console.log} />
+              {headers.map((header, index) => {
+                return <HeaderInput index={index} {...header} onBlur={setHeader} />;
+              })}
+              <button aria-label="route-save" className="button is-primary is-small is-pulled-right" onClick={saveChanges}>
+                Add Header
+              </button>
             </div>
             <div className="field">
               <div className="control">
