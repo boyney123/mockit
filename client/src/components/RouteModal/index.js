@@ -4,8 +4,20 @@ import { HttpMethods, StatusCodes } from "../../utils/consts";
 import { updateRoute as updateRouteRequest, createNewRoute } from "../../utils/routes-api";
 import faker from "faker";
 
-const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT, HttpMethods.DELETE];
-const STATUS_CODES = [StatusCodes.OK, StatusCodes.CREATED, StatusCodes.NO_CONTENT, StatusCodes.BAD_REQUEST, StatusCodes.FORBIDDEN, StatusCodes.INTERNAL_SERVER_ERROR];
+const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT, HttpMethods.PATCH, HttpMethods.DELETE];
+const STATUS_CODES = [
+  StatusCodes.OK,
+  StatusCodes.CREATED,
+  StatusCodes.ACCEPTED,
+  StatusCodes.NO_CONTENT,
+  StatusCodes.BAD_REQUEST,
+  StatusCodes.UNAUTHORIZED,
+  StatusCodes.FORBIDDEN,
+  StatusCodes.NOT_FOUND,
+  StatusCodes.CONFLICT,
+  StatusCodes.UNPROCESSABLE_ENTITY,
+  StatusCodes.INTERNAL_SERVER_ERROR
+];
 
 const Modal = function(props) {
   const { onClose = () => {}, route: editedRoute } = props;
