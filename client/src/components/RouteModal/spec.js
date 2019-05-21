@@ -50,12 +50,13 @@ describe("Route Modal", () => {
       const dropdown = getByLabelText("route-http");
       const dropdownOptions = dropdown.children;
 
-      expect(dropdownOptions.length).toEqual(4);
+      expect(dropdownOptions.length).toEqual(5);
 
       expect(getByValue("GET", dropdownOptions)).toBeVisible();
       expect(getByValue("POST", dropdownOptions)).toBeVisible();
       expect(getByValue("PUT", dropdownOptions)).toBeVisible();
       expect(getByValue("DELETE", dropdownOptions)).toBeVisible();
+      expect(getByValue("PATCH", dropdownOptions)).toBeVisible();
     });
 
     it("with a dropdown list of all available status code", () => {
@@ -64,13 +65,18 @@ describe("Route Modal", () => {
       const dropdown = getByLabelText("route-statuscode");
       const dropdownOptions = dropdown.children;
 
-      expect(dropdownOptions.length).toEqual(6);
+      expect(dropdownOptions.length).toEqual(11);
 
       expect(getByValue("200", dropdownOptions)).toBeVisible();
       expect(getByValue("201", dropdownOptions)).toBeVisible();
+      expect(getByValue("202", dropdownOptions)).toBeVisible();
       expect(getByValue("204", dropdownOptions)).toBeVisible();
       expect(getByValue("400", dropdownOptions)).toBeVisible();
       expect(getByValue("401", dropdownOptions)).toBeVisible();
+      expect(getByValue("403", dropdownOptions)).toBeVisible();
+      expect(getByValue("404", dropdownOptions)).toBeVisible();
+      expect(getByValue("409", dropdownOptions)).toBeVisible();
+      expect(getByValue("422", dropdownOptions)).toBeVisible();
       expect(getByValue("500", dropdownOptions)).toBeVisible();
     });
 
