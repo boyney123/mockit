@@ -21,6 +21,8 @@ if (corsFeature) {
   app.use(cors());
 }
 
+app.disable('x-powered-by');
+
 routes.forEach(route => {
   const { route: path, statusCode, payload, disabled = false, httpMethod = "GET" } = route;
 
