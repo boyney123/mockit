@@ -1,108 +1,116 @@
 {
-    "settings": {
-        "features": {
-            "chaosMonkey": false,
-            "cors": true,
-            "authentication": false
-        },
-        "authentication": {
-            "username": "test",
-            "password": "test"
-        }
+  "settings": {
+    "features": {
+      "chaosMonkey": false,
+      "cors": true,
+      "authentication": false,
+      "groupedRoutes": false
     },
-    "routes": [
-        {
-            "id": "6f935aa8-b629-4247-ba51-f02347b06e95",
-            "route": "/user",
-            "httpMethod": "GET",
-            "statusCode": "200",
-            "delay": "0",
-            "payload": {
-                "name": "Jermain Spinka",
-                "username": "Agnes71",
-                "email": "Taurean.Huels55@hotmail.com",
-                "address": {
-                    "street": "Kihn Inlet",
-                    "suite": "Apt. 784",
-                    "city": "South Doraside",
-                    "zipcode": "91828",
-                    "geo": {
-                        "lat": "-56.8426",
-                        "lng": "-122.9710"
-                    }
-                },
-                "phone": "810-578-0341",
-                "website": "jewell.name",
-                "company": {
-                    "name": "Quitzon, Wilderman and VonRueden",
-                    "catchPhrase": "Realigned zero administration encoding",
-                    "bs": "robust incubate synergies"
-                }
-            },
-            "disabled": false
+    "authentication": {
+      "username": "test",
+      "password": "test"
+    }
+  },
+  "routes": [
+    {
+      "id": "6f935aa8-b629-4247-ba51-f02347b06e95",
+      "route": "/user",
+      "httpMethod": "GET",
+      "statusCode": "200",
+      "delay": "0",
+      "payload": {
+        "name": "Jermain Spinka",
+        "username": "Agnes71",
+        "email": "Taurean.Huels55@hotmail.com",
+        "address": {
+          "street": "Kihn Inlet",
+          "suite": "Apt. 784",
+          "city": "South Doraside",
+          "zipcode": "91828",
+          "geo": {
+            "lat": "-56.8426",
+            "lng": "-122.9710"
+          }
         },
-        {
-            "id": "ec6166c8-ac50-4f2c-9d6f-b26ed677fe72",
-            "route": "/users",
-            "httpMethod": "GET",
-            "statusCode": "200",
-            "delay": "0",
-            "payload": [
-                {
-                    "name": "Edison Littel",
-                    "username": "Tyrel.Funk24",
-                    "email": "Burnice38@yahoo.com",
-                    "address": {
-                        "street": "Christelle Drive",
-                        "suite": "Apt. 884",
-                        "city": "Hoegerport",
-                        "zipcode": "59938",
-                        "geo": {
-                            "lat": "-49.1240",
-                            "lng": "148.9288"
-                        }
-                    },
-                    "phone": "(030) 225-3359 x582",
-                    "website": "priscilla.com",
-                    "company": {
-                        "name": "Reynolds Inc",
-                        "catchPhrase": "User-centric value-added productivity",
-                        "bs": "ubiquitous leverage paradigms"
-                    }
-                },
-                {
-                    "name": "Garth Corwin",
-                    "username": "Hilton33",
-                    "email": "Alvera_Runte78@yahoo.com",
-                    "address": {
-                        "street": "Ervin Gardens",
-                        "suite": "Apt. 778",
-                        "city": "Lake Laurynburgh",
-                        "zipcode": "39378",
-                        "geo": {
-                            "lat": "77.6111",
-                            "lng": "124.8899"
-                        }
-                    },
-                    "phone": "(477) 397-0658",
-                    "website": "selena.net",
-                    "company": {
-                        "name": "Schmeler LLC",
-                        "catchPhrase": "Adaptive global middleware",
-                        "bs": "interactive deploy bandwidth"
-                    }
-                }
-            ]
-        },
-        {
-            "id": "61b4aaa9-bbe9-4cfc-80ee-3d8528a218e6",
-            "route": "/demo",
-            "httpMethod": "GET",
-            "statusCode": "200",
-            "delay": "0",
-            "payload": {
-                "message": "hello"
-            }
+        "phone": "810-578-0341",
+        "website": "jewell.name",
+        "company": {
+          "name": "Quitzon, Wilderman and VonRueden",
+          "catchPhrase": "Realigned zero administration encoding",
+          "bs": "robust incubate synergies"
         }
-    ]
+      },
+      "disabled": false,
+      "headers": [
+        {
+          "id": "b3f30451-3e1c-444f-9bfc-cb42441e9824",
+          "header": "x-api-key",
+          "value": "testing123"
+        }
+      ]
+    },
+    {
+      "id": "ec6166c8-ac50-4f2c-9d6f-b26ed677fe72",
+      "route": "/users",
+      "httpMethod": "GET",
+      "statusCode": "200",
+      "delay": "0",
+      "payload": [
+        {
+          "name": "Edison Littel",
+          "username": "Tyrel.Funk24",
+          "email": "Burnice38@yahoo.com",
+          "address": {
+            "street": "Christelle Drive",
+            "suite": "Apt. 884",
+            "city": "Hoegerport",
+            "zipcode": "59938",
+            "geo": {
+              "lat": "-49.1240",
+              "lng": "148.9288"
+            }
+          },
+          "phone": "(030) 225-3359 x582",
+          "website": "priscilla.com",
+          "company": {
+            "name": "Reynolds Inc",
+            "catchPhrase": "User-centric value-added productivity",
+            "bs": "ubiquitous leverage paradigms"
+          }
+        },
+        {
+          "name": "Garth Corwin",
+          "username": "Hilton33",
+          "email": "Alvera_Runte78@yahoo.com",
+          "address": {
+            "street": "Ervin Gardens",
+            "suite": "Apt. 778",
+            "city": "Lake Laurynburgh",
+            "zipcode": "39378",
+            "geo": {
+              "lat": "77.6111",
+              "lng": "124.8899"
+            }
+          },
+          "phone": "(477) 397-0658",
+          "website": "selena.net",
+          "company": {
+            "name": "Schmeler LLC",
+            "catchPhrase": "Adaptive global middleware",
+            "bs": "interactive deploy bandwidth"
+          }
+        }
+      ]
+    },
+    {
+      "id": "61b4aaa9-bbe9-4cfc-80ee-3d8528a218e6",
+      "route": "/demo",
+      "httpMethod": "GET",
+      "statusCode": "200",
+      "delay": "0",
+      "payload": {
+        "message": "hello"
+      }
+    }
+  ]
 }

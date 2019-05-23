@@ -24,13 +24,15 @@ if (corsFeature) {
 app.disable('x-powered-by');
 
 routes.forEach(route => {
-  const { route: path, statusCode, payload, disabled = false, httpMethod = "GET" } = route;
+  const { route: path, statusCode, payload, disabled = false, httpMethod = "GET", headers = [] } = route;
 
   const method = httpMethod.toLowerCase();
 
   if (!disabled) {
     app[method](path, (req, res) => {
-      // console.log("Request for route", route);
+      headers.forEach(({ header, value } = {}) => {
+        res.set(header, value);
+      });
       res.status(statusCode).send(payload);
     });
   }
