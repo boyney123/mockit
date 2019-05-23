@@ -28,10 +28,9 @@ routes.forEach(route => {
 
   if (!disabled) {
     app[method](path, (req, res) => {
-      Object.keys(headers).forEach(key => {
-        res.set(key, headers[key]);
+      headers.forEach(({ header, value } = {}) => {
+        res.set(header, value);
       });
-
       res.status(statusCode).send(payload);
     });
   }

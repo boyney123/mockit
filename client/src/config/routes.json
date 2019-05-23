@@ -22,10 +22,12 @@
       },
       "headers": [
         {
+          "id": "1",
           "header": "Accept",
           "value": "application/json"
         },
         {
+          "id": "2",
           "header": "x-api-key",
           "value": "abcdef12345"
         }

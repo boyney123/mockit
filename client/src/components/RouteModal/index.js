@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import JSONInput from "react-json-editor-ajrm";
+import HeaderInput from "../HeaderInput";
 import { HttpMethods, StatusCodes } from "../../utils/consts";
 import { updateRoute as updateRouteRequest, createNewRoute } from "../../utils/routes-api";
 import faker from "faker";
@@ -8,35 +9,9 @@ import uuid from "uuid/v4";
 const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT, HttpMethods.DELETE];
 const STATUS_CODES = [StatusCodes.OK, StatusCodes.CREATED, StatusCodes.NO_CONTENT, StatusCodes.BAD_REQUEST, StatusCodes.FORBIDDEN, StatusCodes.INTERNAL_SERVER_ERROR];
 
-const HeaderInput = function({ index, header: initialHeader, value: initialValue, onBlur = () => {}, onChange = () => {}, onRemove = () => {} } = {}) {
-  const [header, setHeader] = useState(initialHeader);
-  const [value, setValue] = useState(initialValue);
-
-  const update = (field, inputValue) => {
-    field === "header" ? setHeader(inputValue) : setValue(inputValue);
-  };
-
-  useEffect(() => {
-    if (header && value) onBlur({ index, header, value });
-  }, [header, value]);
-
-  return (
-    <div className="columns Header">
-      <div className="control column">
-        <input className="input" placeHolder="Key" value={header} aria-label="header-key" onChange={e => update("header", e.target.value)} />
-      </div>
-      <div className="control column">
-        <input className="input" placeHolder="Value" value={value} aria-label="header-value" onChange={e => update("value", e.target.value)} />
-      </div>
-      <div className="control column is-1 Header__Remove" onClick={onRemove}>
-        <i class="far fa-times-circle" />
-      </div>
-    </div>
-  );
-};
-
 /**
  * add header adds some input fields
+ *
  * Clicking X removes the field from the array....
  */
 
@@ -55,16 +30,30 @@ const Modal = function(props) {
 
   const modalTitle = isNewRoute ? "Add Route" : "Edit Route";
 
-  const setHeader = header => {
-    const { index } = header;
-    const newHeaders = headers.concat([]);
-    newHeaders[index] = header;
-    console.log("header", headers);
-    updateHeaders(newHeaders);
+  const setHeader = updatedHeader => {
+    const { id } = updatedHeader;
+
+    const updatedHeaders = headers.map((header, index) => {
+      if (id !== header.id) return header;
+      return {
+        ...header,
+        ...updatedHeader
+      };
+    });
+
+    updateHeaders(updatedHeaders);
+  };
+
+  const addNewHeader = () => updateHeaders(headers.concat([{ id: uuid(), header: "", value: "" }]));
+  const removeHeader = route => {
+    const filteredHeaders = headers.filter(({ id } = {}) => id !== route);
+    updateHeaders(filteredHeaders);
   };
 
   const saveChanges = async () => {
     try {
+      const cleanedHeaders = headers.filter(({ header, value }) => header !== "" && value !== "");
+
       const data = {
         ...editedRoute,
         route,
@@ -73,7 +62,7 @@ const Modal = function(props) {
         delay,
         payload,
         disabled,
-        headers
+        headers: cleanedHeaders
       };
 
       isNewRoute ? await createNewRoute(data) : await updateRouteRequest(data);
@@ -81,8 +70,6 @@ const Modal = function(props) {
       console.log("Error", error);
     }
   };
-
-  console.log("headers", headers);
 
   return (
     <>
@@ -162,11 +149,14 @@ const Modal = function(props) {
             </div>
             <hr />
             <div className="field mt10">
-              <label className="label">Response Headers (optional)</label>
+              <label className="label" aria-label="no-headers-message">
+                Response Headers (optional)
+              </label>
+              {headers.length === 0 && <i>No headers added.</i>}
               {headers.map((header, index) => {
-                return <HeaderInput index={index} {...header} onBlur={setHeader} />;
+                return <HeaderInput data={header} onBlur={setHeader} onRemove={removeHeader} />;
               })}
-              <button aria-label="route-save" className="button is-primary is-small is-pulled-right" onClick={saveChanges}>
+              <button aria-label="add-header" className="button is-primary is-small is-pulled-right" onClick={addNewHeader}>
                 Add Header
               </button>
             </div>
