@@ -1,2 +1,6 @@
-{"routes":[]}
-test":true}}
+{
+    "settings": {
+        "test": true,
+        "newSetting": true
+    }
+}
