@@ -3,6 +3,7 @@ import useScrollReval from "./hooks/useScrollReveal";
 import RouteListStack from "./components/RouteListStack";
 import RouteListGroup from "./components/RouteListGroup";
 import Logo from "./components/Logo";
+import { version } from "../package.json";
 
 import { buildRoute, deleteRoute } from "./utils/routes-api";
 
@@ -89,7 +90,7 @@ export default function({ settings: propSettings, customRoutes }) {
         <div className="content has-text-centered">
           <p>
             <a href="https://github.com/boyney123/mockit" target="_blank" rel="noopener noreferrer">
-              <strong>MockIt </strong>
+              <strong>MockIt v{version} </strong>
             </a>{" "}
             an OpenSource tool developed by{" "}
             <a href="https://github.com/boyney123" aria-label="Github Repo" target="_blank" rel="noopener noreferrer">
