@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import JSONInput from "react-json-editor-ajrm";
+import HeaderInput from "../HeaderInput";
 import { HttpMethods, StatusCodes } from "../../utils/consts";
 import { updateRoute as updateRouteRequest, createNewRoute } from "../../utils/routes-api";
 import faker from "faker";
+import uuid from "uuid/v4";
 
-const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT, HttpMethods.DELETE];
-const STATUS_CODES = [StatusCodes.OK, StatusCodes.CREATED, StatusCodes.NO_CONTENT, StatusCodes.BAD_REQUEST, StatusCodes.FORBIDDEN, StatusCodes.INTERNAL_SERVER_ERROR];
+const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT, HttpMethods.PATCH, HttpMethods.DELETE];
+const STATUS_CODES = [
+  StatusCodes.OK,
+  StatusCodes.CREATED,
+  StatusCodes.ACCEPTED,
+  StatusCodes.NO_CONTENT,
+  StatusCodes.BAD_REQUEST,
+  StatusCodes.UNAUTHORIZED,
+  StatusCodes.FORBIDDEN,
+  StatusCodes.NOT_FOUND,
+  StatusCodes.CONFLICT,
+  StatusCodes.UNPROCESSABLE_ENTITY,
+  StatusCodes.INTERNAL_SERVER_ERROR
+];
+
+/**
+ * add header adds some input fields
+ *
+ * Clicking X removes the field from the array....
+ */
 
 const Modal = function(props) {
   const { onClose = () => {}, route: editedRoute } = props;
@@ -16,13 +36,36 @@ const Modal = function(props) {
   const [delay, updateDelay] = useState(editedRoute.delay);
   const [payload, updatePayload] = useState(editedRoute.payload);
   const [disabled, updateDisabled] = useState(editedRoute.disabled);
+  const [headers, updateHeaders] = useState(editedRoute.headers || []);
 
   const isNewRoute = editedRoute.id === undefined;
 
   const modalTitle = isNewRoute ? "Add Route" : "Edit Route";
 
+  const setHeader = updatedHeader => {
+    const { id } = updatedHeader;
+
+    const updatedHeaders = headers.map((header, index) => {
+      if (id !== header.id) return header;
+      return {
+        ...header,
+        ...updatedHeader
+      };
+    });
+
+    updateHeaders(updatedHeaders);
+  };
+
+  const addNewHeader = () => updateHeaders(headers.concat([{ id: uuid(), header: "", value: "" }]));
+  const removeHeader = route => {
+    const filteredHeaders = headers.filter(({ id } = {}) => id !== route);
+    updateHeaders(filteredHeaders);
+  };
+
   const saveChanges = async () => {
     try {
+      const cleanedHeaders = headers.filter(({ header, value }) => header !== "" && value !== "");
+
       const data = {
         ...editedRoute,
         route,
@@ -30,7 +73,8 @@ const Modal = function(props) {
         statusCode,
         delay,
         payload,
-        disabled
+        disabled,
+        headers: cleanedHeaders
       };
 
       isNewRoute ? await createNewRoute(data) : await updateRouteRequest(data);
@@ -116,6 +160,18 @@ const Modal = function(props) {
               </div>
             </div>
             <hr />
+            <div className="field mt10">
+              <label className="label" aria-label="no-headers-message">
+                Response Headers (optional)
+              </label>
+              {headers.length === 0 && <i>No headers added.</i>}
+              {headers.map((header, index) => {
+                return <HeaderInput data={header} onBlur={setHeader} onRemove={removeHeader} />;
+              })}
+              <button aria-label="add-header" className="button is-primary is-small is-pulled-right" onClick={addNewHeader}>
+                Add Header
+              </button>
+            </div>
             <div className="field">
               <div className="control">
                 <label className="label">Settings</label>

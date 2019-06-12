@@ -3,10 +3,11 @@
     "features": {
       "chaosMonkey": false,
       "cors": true,
-      "authentication": {
-        "username": "test",
-        "password": "test"
-      }
+      "authentication": false
+    },
+    "authentication": {
+      "username": "test",
+      "password": "test"
     }
   },
   "routes": [
@@ -46,6 +47,11 @@
       "httpMethod": "GET",
       "statusCode": "200",
       "delay": "0",
+      "headers": {
+        "x-testing": "tester",
+        "x-testing2": "tester2",
+        "x-testing3": "tester3"
+      },
       "payload": {
         "name": "Fanny Rath",
         "username": "Adell.Adams",

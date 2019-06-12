@@ -110,6 +110,19 @@ const exampleConfig = {
         test: true
       },
       disabled: false
+    },
+    {
+      route: "/headersExample",
+      httpMethod: "GET",
+      statusCode: "200",
+      delay: "0",
+      headers: [
+        {
+          header: "Content-Type",
+          value: "application/json"
+        }
+      ],
+      disabled: false
     }
   ]
 };
@@ -147,6 +160,14 @@ describe("Mockit Routes", () => {
         await request(app)
           .del("/deleteExample")
           .expect(200, { test: true });
+      });
+    });
+
+    describe("headers", () => {
+      it("when a route is configured with headers the headers are sent back in the response", async () => {
+        await request(app)
+          .get("/headersExample")
+          .expect("Content-Type", "application/json; charset=utf-8");
       });
     });
 

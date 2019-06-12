@@ -1,14 +1,14 @@
-What you did:
+## What you did:
 
-What happened:
+## What happened:
 
 <!-- Please provide the full error message/screenshots/anything -->
 
-Problem description:
+## Problem description:
 
-<!-- Please describe why the current behavior is a problem -->
+<!-- Please describe why the current behaviour is a problem -->
 
-Suggested solution:
+## Suggested solution:
 
 <!--
 It's ok if you don't have a suggested solution, but it really helps if you could

@@ -14,7 +14,8 @@ const buildRoute = () => {
     delay: "0",
     disabled: false,
     payload: { test: true },
-    statusCode: "200"
+    statusCode: "200",
+    headers: [{ id: 1, header: "Content-Type", value: "application/json" }, { id: 2, header: "x-api-key", value: "test" }]
   };
 };
 
@@ -50,12 +51,13 @@ describe("Route Modal", () => {
       const dropdown = getByLabelText("route-http");
       const dropdownOptions = dropdown.children;
 
-      expect(dropdownOptions.length).toEqual(4);
+      expect(dropdownOptions.length).toEqual(5);
 
       expect(getByValue("GET", dropdownOptions)).toBeVisible();
       expect(getByValue("POST", dropdownOptions)).toBeVisible();
       expect(getByValue("PUT", dropdownOptions)).toBeVisible();
       expect(getByValue("DELETE", dropdownOptions)).toBeVisible();
+      expect(getByValue("PATCH", dropdownOptions)).toBeVisible();
     });
 
     it("with a dropdown list of all available status code", () => {
@@ -64,13 +66,18 @@ describe("Route Modal", () => {
       const dropdown = getByLabelText("route-statuscode");
       const dropdownOptions = dropdown.children;
 
-      expect(dropdownOptions.length).toEqual(6);
+      expect(dropdownOptions.length).toEqual(11);
 
       expect(getByValue("200", dropdownOptions)).toBeVisible();
       expect(getByValue("201", dropdownOptions)).toBeVisible();
+      expect(getByValue("202", dropdownOptions)).toBeVisible();
       expect(getByValue("204", dropdownOptions)).toBeVisible();
       expect(getByValue("400", dropdownOptions)).toBeVisible();
       expect(getByValue("401", dropdownOptions)).toBeVisible();
+      expect(getByValue("403", dropdownOptions)).toBeVisible();
+      expect(getByValue("404", dropdownOptions)).toBeVisible();
+      expect(getByValue("409", dropdownOptions)).toBeVisible();
+      expect(getByValue("422", dropdownOptions)).toBeVisible();
       expect(getByValue("500", dropdownOptions)).toBeVisible();
     });
 
@@ -97,6 +104,20 @@ describe("Route Modal", () => {
       expect(getByLabelText("route-randomly-generate-data")).toBeVisible();
     });
 
+    it("with a list of headers when the route has headers", () => {
+      const route = buildRoute();
+      const { getAllByLabelText } = render(<RouteModal route={route} />);
+      const headers = getAllByLabelText("header");
+      expect(headers).toHaveLength(2);
+    });
+
+    it('a message saying "No headers added" when no headers are in the route', () => {
+      const route = buildRoute();
+      delete route["headers"];
+      const { getByLabelText } = render(<RouteModal route={route} />);
+      expect(getByLabelText("no-headers-message")).toBeVisible();
+    });
+
     it("with a checkbox to disable the route", () => {
       const route = buildRoute();
       const { getByLabelText } = render(<RouteModal route={route} />);
@@ -108,6 +129,43 @@ describe("Route Modal", () => {
       const { getByLabelText } = render(<RouteModal route={route} />);
       expect(getByLabelText("route-save")).toBeVisible();
       expect(getByLabelText("route-cancel")).toBeVisible();
+    });
+  });
+
+  describe("headers", () => {
+    it("when clicking `Add Header` two new inputs are shown", () => {
+      const route = buildRoute();
+      delete route["headers"];
+      const { getByLabelText } = render(<RouteModal route={route} />);
+      fireEvent.click(getByLabelText("add-header"));
+
+      expect(getByLabelText("header")).toBeVisible();
+      expect(getByLabelText("header-key").value).toBe("");
+      expect(getByLabelText("header-value").value).toBe("");
+    });
+
+    it("when clicking the remove button on the header the header is removed", () => {
+      const route = buildRoute();
+      delete route["headers"];
+      route["headers"] = [{ id: "1", header: "x-api-key", value: "test" }];
+
+      const { getByLabelText, queryByLabelText } = render(<RouteModal route={route} />);
+      fireEvent.click(getByLabelText("remove-header"));
+
+      expect(queryByLabelText("header")).toBeNull();
+    });
+
+    it("when clicking `Save Route` with empty headers on the screen they are removed before sending the data", () => {
+      const route = buildRoute();
+      route.headers.push({ id: 99, header: "", value: "" });
+
+      const { getByLabelText } = render(<RouteModal route={route} />);
+      fireEvent.click(getByLabelText("route-save"));
+
+      const expectedResult = Object.assign({}, route);
+      expectedResult.routes = expectedResult.headers.pop();
+
+      expect(utils.updateRoute).toHaveBeenCalledWith(route);
     });
   });
 
