@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/index",
     "test": "ENV=test jest --coverage --config jest.config.json",
-    "test:watch": "ENV=test jest --no-cache --watch --notify --notifyMode=change --coverage --config jest.config.json"
+    "test:watch": "ENV=test jest --no-cache --watch --notify --notifyMode=change --coverage --config jest.config.json",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [],
   "author": "",
@@ -17,10 +19,12 @@
     "express": "^4.16.4",
     "fs-extra": "^7.0.1",
     "lodash": "^4.17.11",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "jest": "^24.3.1",
     "supertest": "^3.4.2"
-  }
+  },
+  "snyk": true
 }
