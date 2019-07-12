@@ -18,8 +18,7 @@
     "express": "^4.16.4",
     "fs-extra": "^7.0.1",
     "husky": "^3.0.0",
-    "lint-staged": "^8.2.1",
-    "lodash": "^4.17.11",
+    "lint-staged": "^9.2.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
@@ -28,15 +27,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged --relative"
     }
   },
   "lint-staged": {
-    "relative": true,
-    "linters": {
-      "**/*.js": [
-        "detect-secrets-launcher"
-      ]
-    }
+    "**/*.js": [
+      "detect-secrets-launcher"
+    ]
   }
 }
