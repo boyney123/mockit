@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Fix for header format in mockit-routes ([boyney123](https://github.com/boyney123) in [#57](https://github.com/boyney123/mockit/pull/57))
+
 ## 1.1.0
 
 - Add the ability to group routes ([JDansercoer](https://github.com/JDansercoer) in [#42](https://github.com/boyney123/mockit/pull/42))
