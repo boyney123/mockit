@@ -1,3 +1,7 @@
+## 1.2.0
+
+- Prevent secrets from leaking to source control ([lirantal](https://github.com/lirantal) in [#59](https://github.com/boyney123/mockit/pull/59))
+
 ## 1.1.1
 
 - Fix for header format in mockit-routes ([boyney123](https://github.com/boyney123) in [#57](https://github.com/boyney123/mockit/pull/57))
