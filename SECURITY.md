@@ -40,4 +40,3 @@ sending the report over a secure medium.
 
 Your efforts to responsibly disclose your findings are sincerely appreciated and will be taken into account to acknowledge
 your contributions.
-```
