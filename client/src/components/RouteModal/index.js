@@ -130,21 +130,21 @@ const Modal = function(props) {
                 <div className="control">
                   <div className="select">
                       <select aria-label="route-statuscode" value={statusCode} onChange={e => updateStatusCode(e.currentTarget.value)}>
-                        <optgroup aria-label="2xx">
+                        <optgroup aria-label="2xx" label="2xx">
                           {statusCodeStartingWith("2").map(routeStatusCode => 
                             <option key={routeStatusCode} value={routeStatusCode}>
                               {routeStatusCode}
                             </option>
                           )}
                         </optgroup>
-                        <optgroup aria-label="4xx">
+                        <optgroup aria-label="4xx" label="4xx">
                           {statusCodeStartingWith("4").map(routeStatusCode =>
                             <option key={routeStatusCode} value={routeStatusCode}>
                               {routeStatusCode}
                             </option>
                           )}
                         </optgroup>
-                        <optgroup aria-label="5xx">
+                        <optgroup aria-label="5xx" label="5xx">
                           {statusCodeStartingWith("5").map(routeStatusCode =>
                             <option key={routeStatusCode} value={routeStatusCode}>
                               {routeStatusCode}
