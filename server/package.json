@@ -14,13 +14,25 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "detect-secrets": "^1.0.3",
     "express": "^4.16.4",
     "fs-extra": "^7.0.1",
-    "lodash": "^4.17.11",
+    "husky": "^3.0.0",
+    "lint-staged": "^9.2.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
     "jest": "^24.3.1",
     "supertest": "^3.4.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged --relative"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "detect-secrets-launcher --baseline .secrets-baseline"
+    ]
   }
 }
