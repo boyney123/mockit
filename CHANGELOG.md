@@ -1,3 +1,7 @@
+## 1.2.1
+
+- Added more status codes ([lirantal](https://github.com/zecarrera) in [#65](https://github.com/boyney123/mockit/pull/65))
+
 ## 1.2.0
 
 - Prevent secrets from leaking to source control ([lirantal](https://github.com/lirantal) in [#59](https://github.com/boyney123/mockit/pull/59))
