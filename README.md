@@ -10,7 +10,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6d5acca1-0959-4d92-a739-08f725fdc464/deploy-status)](https://app.netlify.com/sites/mockit/deploys)
 [![MIT License][license-badge]][license]
 [![PRs Welcome][prs-badge]][prs]
-[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
 
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
@@ -173,6 +173,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://blog.missj.club"><img src="https://avatars1.githubusercontent.com/u/19582252?v=4" width="100px;" alt="fliu2476"/><br /><sub><b>fliu2476</b></sub></a><br /><a href="https://github.com/boyney123/mockit/issues?q=author%3Afliu2476" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/de314"><img src="https://avatars1.githubusercontent.com/u/816693?v=4" width="100px;" alt="David Esposito"/><br /><sub><b>David Esposito</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=de314" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/mlaopane"><img src="https://avatars3.githubusercontent.com/u/23735276?v=4" width="100px;" alt="Mickaël"/><br /><sub><b>Mickaël</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=mlaopane" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/zecarrera"><img src="https://avatars1.githubusercontent.com/u/4092515?v=4" width="100px;" alt="José Carréra Alvares Neto"/><br /><sub><b>José Carréra Alvares Neto</b></sub></a><br /><a href="https://github.com/boyney123/mockit/commits?author=zecarrera" title="Code">💻</a></td>
   </tr>
 </table>
 
