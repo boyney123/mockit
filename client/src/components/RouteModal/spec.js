@@ -60,25 +60,37 @@ describe("Route Modal", () => {
       expect(getByValue("PATCH", dropdownOptions)).toBeVisible();
     });
 
+    it("with a dropdown list with three groups", () => {
+      const route = buildRoute();
+      const { getByLabelText } = render(<RouteModal route={route} />);
+      const dropdown = getByLabelText("route-statuscode");
+      const dropdownOptionGroups = dropdown.childNodes;
+      
+      expect(dropdownOptionGroups.length).toEqual(3);
+      expect(getByLabelText("2xx", dropdownOptionGroups)).toBeVisible();
+      expect(getByLabelText("4xx", dropdownOptionGroups)).toBeVisible();
+      expect(getByLabelText("5xx", dropdownOptionGroups)).toBeVisible();
+    });
+
     it("with a dropdown list of all available status code", () => {
       const route = buildRoute();
       const { getByLabelText, getByValue } = render(<RouteModal route={route} />);
       const dropdown = getByLabelText("route-statuscode");
-      const dropdownOptions = dropdown.children;
+      const dropdownOptionGroups = dropdown.childNodes;
 
-      expect(dropdownOptions.length).toEqual(11);
-
-      expect(getByValue("200", dropdownOptions)).toBeVisible();
-      expect(getByValue("201", dropdownOptions)).toBeVisible();
-      expect(getByValue("202", dropdownOptions)).toBeVisible();
-      expect(getByValue("204", dropdownOptions)).toBeVisible();
-      expect(getByValue("400", dropdownOptions)).toBeVisible();
-      expect(getByValue("401", dropdownOptions)).toBeVisible();
-      expect(getByValue("403", dropdownOptions)).toBeVisible();
-      expect(getByValue("404", dropdownOptions)).toBeVisible();
-      expect(getByValue("409", dropdownOptions)).toBeVisible();
-      expect(getByValue("422", dropdownOptions)).toBeVisible();
-      expect(getByValue("500", dropdownOptions)).toBeVisible();
+      expect(getByValue("200", dropdownOptionGroups[0].children)).toBeVisible();
+      expect(getByValue("201", dropdownOptionGroups[0].children)).toBeVisible();
+      expect(getByValue("202", dropdownOptionGroups[0].children)).toBeVisible();
+      expect(getByValue("204", dropdownOptionGroups[0].children)).toBeVisible();
+      expect(getByValue("400", dropdownOptionGroups[1].children)).toBeVisible();
+      expect(getByValue("401", dropdownOptionGroups[1].children)).toBeVisible();
+      expect(getByValue("403", dropdownOptionGroups[1].children)).toBeVisible();
+      expect(getByValue("404", dropdownOptionGroups[1].children)).toBeVisible();
+      expect(getByValue("409", dropdownOptionGroups[1].children)).toBeVisible();
+      expect(getByValue("422", dropdownOptionGroups[1].children)).toBeVisible();
+      expect(getByValue("500", dropdownOptionGroups[2].children)).toBeVisible();
+      expect(getByValue("503", dropdownOptionGroups[2].children)).toBeVisible();
+      expect(getByValue("504", dropdownOptionGroups[2].children)).toBeVisible();
     });
 
     it("with a dropdown list of all available delay values", () => {

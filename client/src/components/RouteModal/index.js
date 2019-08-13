@@ -18,7 +18,9 @@ const STATUS_CODES = [
   StatusCodes.NOT_FOUND,
   StatusCodes.CONFLICT,
   StatusCodes.UNPROCESSABLE_ENTITY,
-  StatusCodes.INTERNAL_SERVER_ERROR
+  StatusCodes.INTERNAL_SERVER_ERROR,
+  StatusCodes.SERVICE_UNAVAILABLE,
+  StatusCodes.GATEWAY_TIMEOUT
 ];
 
 /**
@@ -83,6 +85,10 @@ const Modal = function(props) {
     }
   };
 
+  const statusCodeStartingWith = startingNumber => {
+    return STATUS_CODES.filter(routeStatusCode => routeStatusCode.startsWith(startingNumber));
+  };
+
   return (
     <>
       <div className="modal is-active" data-testid="route-modal">
@@ -123,13 +129,29 @@ const Modal = function(props) {
                 <label className="label">Status Code</label>
                 <div className="control">
                   <div className="select">
-                    <select aria-label="route-statuscode" value={statusCode} onChange={e => updateStatusCode(e.currentTarget.value)}>
-                      {STATUS_CODES.map(test => (
-                        <option key={test} value={test}>
-                          {test}
-                        </option>
-                      ))}
-                    </select>
+                      <select aria-label="route-statuscode" value={statusCode} onChange={e => updateStatusCode(e.currentTarget.value)}>
+                        <optgroup aria-label="2xx" label="2xx">
+                          {statusCodeStartingWith("2").map(routeStatusCode => 
+                            <option key={routeStatusCode} value={routeStatusCode}>
+                              {routeStatusCode}
+                            </option>
+                          )}
+                        </optgroup>
+                        <optgroup aria-label="4xx" label="4xx">
+                          {statusCodeStartingWith("4").map(routeStatusCode =>
+                            <option key={routeStatusCode} value={routeStatusCode}>
+                              {routeStatusCode}
+                            </option>
+                          )}
+                        </optgroup>
+                        <optgroup aria-label="5xx" label="5xx">
+                          {statusCodeStartingWith("5").map(routeStatusCode =>
+                            <option key={routeStatusCode} value={routeStatusCode}>
+                              {routeStatusCode}
+                            </option>
+                          )}
+                        </optgroup>
+                      </select>
                   </div>
                 </div>
               </div>
@@ -197,3 +219,4 @@ const Modal = function(props) {
 };
 
 export default Modal;
+

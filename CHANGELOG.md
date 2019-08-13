@@ -1,3 +1,9 @@
+## 1.2.1
+
+- Added more status codes ([zecarrera](https://github.com/zecarrera) in [#65](https://github.com/boyney123/mockit/pull/65))
+
+- Clean up markdown #64 ([lirantal](https://github.com/lirantal) in [#64](https://github.com/boyney123/mockit/pull/64))
+
 ## 1.2.0
 
 - Prevent secrets from leaking to source control ([lirantal](https://github.com/lirantal) in [#59](https://github.com/boyney123/mockit/pull/59))
