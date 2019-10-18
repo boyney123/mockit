@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import JSONInput from "react-json-editor-ajrm";
 import HeaderInput from "../HeaderInput";
 import { HttpMethods, StatusCodes } from "../../utils/consts";
@@ -131,7 +131,7 @@ const Modal = function(props) {
                   <div className="select">
                       <select aria-label="route-statuscode" value={statusCode} onChange={e => updateStatusCode(e.currentTarget.value)}>
                         <optgroup aria-label="2xx" label="2xx">
-                          {statusCodeStartingWith("2").map(routeStatusCode => 
+                          {statusCodeStartingWith("2").map(routeStatusCode =>
                             <option key={routeStatusCode} value={routeStatusCode}>
                               {routeStatusCode}
                             </option>
@@ -219,4 +219,3 @@ const Modal = function(props) {
 };
 
 export default Modal;
-
