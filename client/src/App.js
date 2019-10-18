@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useScrollReval from "./hooks/useScrollReveal";
+import useScrollReveal from "./hooks/useScrollReveal";
 import RouteListStack from "./components/RouteListStack";
 import RouteListGroup from "./components/RouteListGroup";
 import Logo from "./components/Logo";
@@ -16,7 +16,7 @@ import { settings, routes as configRoutes } from "./config/routes.json";
 import "./scss/index.scss";
 
 export default function({ settings: propSettings, customRoutes }) {
-  useScrollReval([{ selector: ".hero .title, .card, .subtitle " }]);
+  useScrollReveal(".hero .title, .card, .subtitle");
 
   const [selectedRoute, setSelectedRoute] = useState();
   const [routeToBeRemoved, setRouteToBeRemoved] = useState();
