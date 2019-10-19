@@ -176,9 +176,9 @@ const Modal = function(props) {
               <label className="label">Response</label>
               <div className="control">
                 <JSONInput placeholder={payload} onChange={e => updatePayload(e.jsObject)} height="120px" width="100%" locale="en-gb" />
-                <a className="button is-small is-pulled-right random-data is-primary is-inverted" onClick={() => updatePayload(faker.helpers.userCard())} aria-label="route-randomly-generate-data">
+                <button className="button is-small is-pulled-right random-data is-primary is-inverted" onClick={() => updatePayload(faker.helpers.userCard())} aria-label="route-randomly-generate-data">
                   Randomly Generate Data
-                </a>
+                </button>
               </div>
             </div>
             <hr />

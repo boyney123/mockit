@@ -85,7 +85,9 @@ const SettingsModal = function({ onClose = () => {}, onConfirm = () => {}, headi
                   onChange={e => setFeature("chaosMonkey", e.target.checked)}
                   aria-label="feature-chaos-monkey-input"
                 />
-                <label htmlFor="chaosMonkeyFeature">Enable Monkey 🙊</label>
+                <label htmlFor="chaosMonkeyFeature">Enable Monkey <span
+                  role="img" aria-label="Monkey">🙊</span>
+                </label>
               </div>
             </div>
             <hr />

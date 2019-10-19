@@ -34,12 +34,12 @@ export default function({ settings: propSettings, customRoutes }) {
             <h1>MockIt</h1>
           </div>
           <div className="is-pulled-right">
-            <a className="button is-primary mr10" aria-label="Add Route" onClick={() => setSelectedRoute(buildRoute())}>
+            <button className="button is-primary mr10" aria-label="Add Route" onClick={() => setSelectedRoute(buildRoute())}>
               <strong>Add Route</strong>
-            </a>
-            <a className="button is-info" aria-label="Settings" onClick={() => showSettingsModal(true)}>
+            </button>
+            <button className="button is-info" aria-label="Settings" onClick={() => showSettingsModal(true)}>
               <strong>Settings</strong>
-            </a>
+            </button>
           </div>
         </nav>
 
