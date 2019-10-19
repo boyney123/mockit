@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import uuid from "uuid/v4";
 
-export default function({ index, data = {}, onBlur = () => {}, onRemove = () => {} } = {}) {
+export default function({ data = {}, onBlur = () => {}, onRemove = () => {} } = {}) {
   const { id = uuid(), header: initialHeader, value: initialValue } = data;
 
   const [header, setHeader] = useState(initialHeader);
@@ -13,7 +13,7 @@ export default function({ index, data = {}, onBlur = () => {}, onRemove = () => 
 
   useEffect(() => {
     if (header && value) onBlur({ id, header, value });
-  }, [header, value]);
+  }, [id, onBlur, header, value]);
 
   return (
     <div className="columns Header" aria-label="header">

@@ -47,7 +47,7 @@ const Modal = function(props) {
   const setHeader = updatedHeader => {
     const { id } = updatedHeader;
 
-    const updatedHeaders = headers.map((header, index) => {
+    const updatedHeaders = headers.map(header => {
       if (id !== header.id) return header;
       return {
         ...header,
@@ -187,7 +187,7 @@ const Modal = function(props) {
                 Response Headers (optional)
               </label>
               {headers.length === 0 && <i>No headers added.</i>}
-              {headers.map((header, index) => {
+              {headers.map(header => {
                 return <HeaderInput data={header} onBlur={setHeader} onRemove={removeHeader} />;
               })}
               <button aria-label="add-header" className="button is-primary is-small is-pulled-right" onClick={addNewHeader}>
