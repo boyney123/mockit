@@ -11,7 +11,7 @@
     "react": "v16.8.3",
     "react-dom": "v16.8.3",
     "react-json-editor-ajrm": "^2.5.9",
-    "react-scripts": "3.0.0",
+    "react-scripts": "3.3.0",
     "scrollreveal": "^4.0.5",
     "styled-components": "^4.2.0",
     "uuid": "^3.3.2"
