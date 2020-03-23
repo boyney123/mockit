@@ -13,22 +13,24 @@ const buildRoutes = () => {
       route: "/test",
       delay: "500",
       statusCode: "200",
-      httpMethod: "GET"
+      httpMethod: "GET",
     },
     {
       id: "2",
       route: "/test2",
       delay: "0",
       statusCode: "200",
-      httpMethod: "GET"
-    }
+      httpMethod: "GET",
+    },
   ];
 };
 
 describe("RouteListStack", () => {
   describe("renders", () => {
     it("the list of given routes", () => {
-      const { getAllByLabelText } = render(<RouteListStack routes={buildRoutes()} />);
+      const { getAllByLabelText } = render(
+        <RouteListStack routes={buildRoutes()} />
+      );
       const routes = getAllByLabelText("Route");
       expect(routes.length).toBe(2);
     });
@@ -36,13 +38,17 @@ describe("RouteListStack", () => {
   describe("props", () => {
     it("when the user clicks on the edit button on the rendered route the given `onRouteEdit` callback is triggered", () => {
       const spy = jest.fn();
-      const { getByLabelText } = render(<RouteListStack routes={buildRoutes()} onRouteEdit={spy} />);
+      const { getByLabelText } = render(
+        <RouteListStack routes={buildRoutes()} onRouteEdit={spy} />
+      );
       fireEvent.click(getByLabelText("Edit Route"));
       expect(spy).toHaveBeenCalled();
     });
     it("when the user clicks on the delete button on the rendered route the given `onRouteDelete` callback is triggered", () => {
       const spy = jest.fn();
-      const { getByLabelText } = render(<RouteListStack routes={buildRoutes()} onRouteDelete={spy} />);
+      const { getByLabelText } = render(
+        <RouteListStack routes={buildRoutes()} onRouteDelete={spy} />
+      );
       fireEvent.click(getByLabelText("Delete Route"));
       expect(spy).toHaveBeenCalled();
     });

@@ -12,13 +12,15 @@ const buildRoute = () => ({
   route: "/test",
   delay: "500",
   statusCode: "200",
-  httpMethod: "GET"
+  httpMethod: "GET",
 });
 
 describe("Route", () => {
   describe("renders", () => {
     it("renders the route, delay, statuscode, http method rendered", () => {
-      const { getByLabelText, getAllByLabelText, getByText } = render(<Route routeItem={buildRoute()} />);
+      const { getByLabelText, getAllByLabelText, getByText } = render(
+        <Route routeItem={buildRoute()} />
+      );
       const routes = getAllByLabelText("Route");
       const route = routes[0];
 
@@ -40,7 +42,9 @@ describe("Route", () => {
     describe("onRouteEdit", () => {
       it("is called when the edit route button is clicked", () => {
         const spy = jest.fn();
-        const { getByLabelText } = render(<Route routeItem={buildRoute()} onRouteEdit={spy} />);
+        const { getByLabelText } = render(
+          <Route routeItem={buildRoute()} onRouteEdit={spy} />
+        );
         fireEvent.click(getByLabelText("Edit Route"));
         expect(spy).toHaveBeenCalled();
       });
@@ -48,7 +52,9 @@ describe("Route", () => {
     describe("onRouteDelete", () => {
       it("is called when the delete route button is clicked", () => {
         const spy = jest.fn();
-        const { getByLabelText } = render(<Route routeItem={buildRoute()} onRouteDelete={spy} />);
+        const { getByLabelText } = render(
+          <Route routeItem={buildRoute()} onRouteDelete={spy} />
+        );
         fireEvent.click(getByLabelText("Delete Route"));
         expect(spy).toHaveBeenCalled();
       });
@@ -66,9 +72,15 @@ describe("Route", () => {
 
   describe("RouteItem", () => {
     it("renders the given title and value", () => {
-      const { getByLabelText } = render(<RouteItem title="TestTitle" value="TestValue" />);
-      expect(getByLabelText("route-testtitle-title")).toHaveTextContent("TestTitle");
-      expect(getByLabelText("route-testtitle-value")).toHaveTextContent("TestValue");
+      const { getByLabelText } = render(
+        <RouteItem title="TestTitle" value="TestValue" />
+      );
+      expect(getByLabelText("route-testtitle-title")).toHaveTextContent(
+        "TestTitle"
+      );
+      expect(getByLabelText("route-testtitle-value")).toHaveTextContent(
+        "TestValue"
+      );
     });
   });
 });

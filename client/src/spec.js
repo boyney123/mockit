@@ -1,6 +1,11 @@
 // __tests__/fetch.test.js
 import React from "react";
-import { render, fireEvent, cleanup, queryAllByLabelText } from "react-testing-library";
+import {
+  render,
+  fireEvent,
+  cleanup,
+  queryAllByLabelText,
+} from "react-testing-library";
 import * as utils from "./utils/routes-api";
 import "jest-dom/extend-expect";
 import App from "./App";
@@ -10,7 +15,7 @@ jest.mock("./utils/routes-api", () => {
     deleteRoute: jest.fn(),
     buildRoute: jest.fn(() => {
       return { route: "/test" };
-    })
+    }),
   };
 });
 
@@ -57,7 +62,9 @@ describe("App", () => {
     describe("edit route", () => {
       it("when edit is selected on the route the modal dialog is shown with that route", () => {
         const settings = { features: { groupedRoutes: true } };
-        const { container, getByTestId, getByLabelText } = render(<App settings={settings} />);
+        const { container, getByTestId, getByLabelText } = render(
+          <App settings={settings} />
+        );
         const routes = queryAllByLabelText(container, "Route");
         const editButton = getByLabelText("Edit Route", { element: routes[0] });
 
@@ -65,7 +72,7 @@ describe("App", () => {
           editButton,
           new MouseEvent("click", {
             bubbles: true,
-            cancelable: true
+            cancelable: true,
           })
         );
 
@@ -76,9 +83,13 @@ describe("App", () => {
     describe("delete route", () => {
       const clickDeleteRoute = () => {
         const settings = { features: { groupedRoutes: true } };
-        const { getByLabelText, container, getByText } = render(<App settings={settings} />);
+        const { getByLabelText, container, getByText } = render(
+          <App settings={settings} />
+        );
         const routes = queryAllByLabelText(container, "Route");
-        const deleteButton = getByLabelText("Delete Route", { element: routes[0] });
+        const deleteButton = getByLabelText("Delete Route", {
+          element: routes[0],
+        });
 
         fireEvent.click(deleteButton);
 
@@ -113,7 +124,7 @@ describe("App", () => {
           editButton,
           new MouseEvent("click", {
             bubbles: true,
-            cancelable: true
+            cancelable: true,
           })
         );
 
@@ -125,7 +136,9 @@ describe("App", () => {
       const clickDeleteRoute = () => {
         const { getByLabelText, container, getByText } = render(<App />);
         const routes = queryAllByLabelText(container, "Route");
-        const deleteButton = getByLabelText("Delete Route", { element: routes[0] });
+        const deleteButton = getByLabelText("Delete Route", {
+          element: routes[0],
+        });
 
         fireEvent.click(deleteButton);
 

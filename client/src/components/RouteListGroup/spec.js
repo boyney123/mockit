@@ -13,36 +13,38 @@ const buildRoutes = () => {
       route: "/test",
       delay: "500",
       statusCode: "200",
-      httpMethod: "GET"
+      httpMethod: "GET",
     },
     {
       id: "2",
       route: "/test/test2",
       delay: "500",
       statusCode: "200",
-      httpMethod: "GET"
+      httpMethod: "GET",
     },
     {
       id: "1",
       route: "/test/test2/test3",
       delay: "500",
       statusCode: "200",
-      httpMethod: "GET"
+      httpMethod: "GET",
     },
     {
       id: "1",
       route: "/test/test2/test3/test4",
       delay: "500",
       statusCode: "200",
-      httpMethod: "GET"
-    }
+      httpMethod: "GET",
+    },
   ];
 };
 
 describe("RouteListGroup", () => {
   describe("renders", () => {
     it.only("the list of given routes with their own groups based of the route path", () => {
-      const { getAllByLabelText, getByLabelText, getByText } = render(<RouteListGroup routes={buildRoutes()} />);
+      const { getAllByLabelText, getByLabelText, getByText } = render(
+        <RouteListGroup routes={buildRoutes()} />
+      );
       const routes = getAllByLabelText("Route");
 
       expect(getByLabelText("route-group-test")).toBeVisible();

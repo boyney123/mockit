@@ -15,7 +15,10 @@ const buildRoute = () => {
     disabled: false,
     payload: { test: true },
     statusCode: "200",
-    headers: [{ id: 1, header: "Content-Type", value: "application/json" }, { id: 2, header: "x-api-key", value: "test" }]
+    headers: [
+      { id: 1, header: "Content-Type", value: "application/json" },
+      { id: 2, header: "x-api-key", value: "test" },
+    ],
   };
 };
 
@@ -42,12 +45,16 @@ describe("Route Modal", () => {
       const route = buildRoute();
       const { getByLabelText } = render(<RouteModal route={route} />);
 
-      expect(getByLabelText("route-name", { selector: "input" }).value).toEqual("newRoute");
+      expect(getByLabelText("route-name", { selector: "input" }).value).toEqual(
+        "newRoute"
+      );
     });
 
     it("with a dropdown list of all available http methods", () => {
       const route = buildRoute();
-      const { getByLabelText, getByValue } = render(<RouteModal route={route} />);
+      const { getByLabelText, getByValue } = render(
+        <RouteModal route={route} />
+      );
       const dropdown = getByLabelText("route-http");
       const dropdownOptions = dropdown.children;
 
@@ -65,7 +72,7 @@ describe("Route Modal", () => {
       const { getByLabelText } = render(<RouteModal route={route} />);
       const dropdown = getByLabelText("route-statuscode");
       const dropdownOptionGroups = dropdown.childNodes;
-      
+
       expect(dropdownOptionGroups.length).toEqual(3);
       expect(getByLabelText("2xx", dropdownOptionGroups)).toBeVisible();
       expect(getByLabelText("4xx", dropdownOptionGroups)).toBeVisible();
@@ -74,7 +81,9 @@ describe("Route Modal", () => {
 
     it("with a dropdown list of all available status code", () => {
       const route = buildRoute();
-      const { getByLabelText, getByValue } = render(<RouteModal route={route} />);
+      const { getByLabelText, getByValue } = render(
+        <RouteModal route={route} />
+      );
       const dropdown = getByLabelText("route-statuscode");
       const dropdownOptionGroups = dropdown.childNodes;
 
@@ -95,7 +104,9 @@ describe("Route Modal", () => {
 
     it("with a dropdown list of all available delay values", () => {
       const route = buildRoute();
-      const { getByLabelText, getByValue } = render(<RouteModal route={route} />);
+      const { getByLabelText, getByValue } = render(
+        <RouteModal route={route} />
+      );
       const dropdown = getByLabelText("route-delay");
       const dropdownOptions = dropdown.children;
 
@@ -161,7 +172,9 @@ describe("Route Modal", () => {
       delete route["headers"];
       route["headers"] = [{ id: "1", header: "x-api-key", value: "test" }];
 
-      const { getByLabelText, queryByLabelText } = render(<RouteModal route={route} />);
+      const { getByLabelText, queryByLabelText } = render(
+        <RouteModal route={route} />
+      );
       fireEvent.click(getByLabelText("remove-header"));
 
       expect(queryByLabelText("header")).toBeNull();
@@ -185,35 +198,45 @@ describe("Route Modal", () => {
     it("when entering a value into the route input field the value is updated", () => {
       const { getByLabelText } = render(<RouteModal route={buildRoute()} />);
       expect(getByLabelText("route-name").value).toEqual("newRoute");
-      fireEvent.change(getByLabelText("route-name"), { target: { value: "testRoute" } });
+      fireEvent.change(getByLabelText("route-name"), {
+        target: { value: "testRoute" },
+      });
       expect(getByLabelText("route-name").value).toEqual("testRoute");
     });
 
     it("when selecting a value from the dropdown list of HTTP methods the dropdown value is updated", () => {
       const { getByLabelText } = render(<RouteModal route={buildRoute()} />);
       expect(getByLabelText("route-http").value).toEqual("GET");
-      fireEvent.change(getByLabelText("route-http"), { target: { value: "POST" } });
+      fireEvent.change(getByLabelText("route-http"), {
+        target: { value: "POST" },
+      });
       expect(getByLabelText("route-http").value).toEqual("POST");
     });
 
     it("when selecting a value from the dropdown list of Status codes methods the dropdown value is updated", () => {
       const { getByLabelText } = render(<RouteModal route={buildRoute()} />);
       expect(getByLabelText("route-statuscode").value).toEqual("200");
-      fireEvent.change(getByLabelText("route-statuscode"), { target: { value: "500" } });
+      fireEvent.change(getByLabelText("route-statuscode"), {
+        target: { value: "500" },
+      });
       expect(getByLabelText("route-statuscode").value).toEqual("500");
     });
 
     it("when selecting a value from the delay list the dropdown value is updated", () => {
       const { getByLabelText } = render(<RouteModal route={buildRoute()} />);
       expect(getByLabelText("route-delay").value).toEqual("0");
-      fireEvent.change(getByLabelText("route-delay"), { target: { value: "500" } });
+      fireEvent.change(getByLabelText("route-delay"), {
+        target: { value: "500" },
+      });
       expect(getByLabelText("route-delay").value).toEqual("500");
     });
 
     it("when disabling the route the checkbox value is updated", () => {
       const { getByLabelText } = render(<RouteModal route={buildRoute()} />);
       expect(getByLabelText("route-disable").checked).toEqual(false);
-      fireEvent.change(getByLabelText("route-disable"), { target: { checked: true } });
+      fireEvent.change(getByLabelText("route-disable"), {
+        target: { checked: true },
+      });
       expect(getByLabelText("route-disable").checked).toEqual(true);
     });
 
@@ -237,13 +260,17 @@ describe("Route Modal", () => {
     describe("onClose", () => {
       it("is called when closing the modal dialog using the close button", () => {
         const spy = jest.fn();
-        const { getByLabelText } = render(<RouteModal route={buildRoute()} onClose={spy} />);
+        const { getByLabelText } = render(
+          <RouteModal route={buildRoute()} onClose={spy} />
+        );
         fireEvent.click(getByLabelText("close"));
         expect(spy).toHaveBeenCalled();
       });
       it("is called when clicking the cancel button", () => {
         const spy = jest.fn();
-        const { getByLabelText } = render(<RouteModal route={buildRoute()} onClose={spy} />);
+        const { getByLabelText } = render(
+          <RouteModal route={buildRoute()} onClose={spy} />
+        );
         fireEvent.click(getByLabelText("route-cancel"));
         expect(spy).toHaveBeenCalled();
       });

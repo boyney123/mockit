@@ -1,15 +1,9 @@
 module.exports = {
   env: {
     "browser": true,
-    "es6": true
-  },
-  globals: {
-    window: true,
-    define: true,
-    module: true,
-    process: true,
-    require: true,
-    arguments: true
+    "es6": true,
+    "jest": true,
+    "node": true
   },
   extends: [
     "plugin:react/recommended",

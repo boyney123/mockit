@@ -30,9 +30,15 @@ describe("Settings Dialog", () => {
       it("clicking on the feature enables basic authenication and updates the input value", () => {
         const { getByLabelText } = render(<SettingsDialog />);
 
-        expect(getByLabelText("feature-basic-auth-input").checked).toEqual(false);
-        fireEvent.change(getByLabelText("feature-basic-auth-input"), { target: { checked: true } });
-        expect(getByLabelText("feature-basic-auth-input").checked).toEqual(true);
+        expect(getByLabelText("feature-basic-auth-input").checked).toEqual(
+          false
+        );
+        fireEvent.change(getByLabelText("feature-basic-auth-input"), {
+          target: { checked: true },
+        });
+        expect(getByLabelText("feature-basic-auth-input").checked).toEqual(
+          true
+        );
       });
     });
     describe("CORS", () => {
@@ -46,7 +52,9 @@ describe("Settings Dialog", () => {
         const { getByLabelText } = render(<SettingsDialog />);
 
         expect(getByLabelText("feature-cors-input").checked).toEqual(true);
-        fireEvent.change(getByLabelText("feature-cors-input"), { target: { checked: false } });
+        fireEvent.change(getByLabelText("feature-cors-input"), {
+          target: { checked: false },
+        });
         expect(getByLabelText("feature-cors-input").checked).toEqual(false);
       });
     });
@@ -60,9 +68,15 @@ describe("Settings Dialog", () => {
       it("clicking on the feature enables basic authenication and updates the input value", () => {
         const { getByLabelText } = render(<SettingsDialog />);
 
-        expect(getByLabelText("feature-chaos-monkey-input").checked).toEqual(false);
-        fireEvent.change(getByLabelText("feature-chaos-monkey-input"), { target: { checked: true } });
-        expect(getByLabelText("feature-chaos-monkey-input").checked).toEqual(true);
+        expect(getByLabelText("feature-chaos-monkey-input").checked).toEqual(
+          false
+        );
+        fireEvent.change(getByLabelText("feature-chaos-monkey-input"), {
+          target: { checked: true },
+        });
+        expect(getByLabelText("feature-chaos-monkey-input").checked).toEqual(
+          true
+        );
       });
     });
     describe("Grouped Routes", () => {
@@ -75,9 +89,15 @@ describe("Settings Dialog", () => {
       it("clicking on the feature enables grouped routes and updates the input value", () => {
         const { getByLabelText } = render(<SettingsDialog />);
 
-        expect(getByLabelText("feature-grouped-routes-input").checked).toEqual(false);
-        fireEvent.change(getByLabelText("feature-grouped-routes-input"), { target: { checked: true } });
-        expect(getByLabelText("feature-grouped-routes-input").checked).toEqual(true);
+        expect(getByLabelText("feature-grouped-routes-input").checked).toEqual(
+          false
+        );
+        fireEvent.change(getByLabelText("feature-grouped-routes-input"), {
+          target: { checked: true },
+        });
+        expect(getByLabelText("feature-grouped-routes-input").checked).toEqual(
+          true
+        );
       });
     });
   });

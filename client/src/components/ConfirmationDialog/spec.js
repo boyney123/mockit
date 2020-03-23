@@ -9,7 +9,9 @@ afterEach(cleanup);
 describe("Confirmation Dialog", () => {
   describe("renders", () => {
     it("a header with the given header value", () => {
-      const { getByText } = render(<ConfirmationDialog heading="Test Header" />);
+      const { getByText } = render(
+        <ConfirmationDialog heading="Test Header" />
+      );
       expect(getByText("Test Header")).toBeVisible();
     });
 
@@ -23,7 +25,9 @@ describe("Confirmation Dialog", () => {
     });
 
     it("a delete and cancel button", () => {
-      const { getByLabelText } = render(<ConfirmationDialog heading="Test Header" />);
+      const { getByLabelText } = render(
+        <ConfirmationDialog heading="Test Header" />
+      );
       expect(getByLabelText("Delete")).toBeVisible();
       expect(getByLabelText("Cancel")).toBeVisible();
     });
@@ -33,13 +37,17 @@ describe("Confirmation Dialog", () => {
     describe("onClose", () => {
       it("is called when closing the modal dialog using the close button", () => {
         const spy = jest.fn();
-        const { getByLabelText } = render(<ConfirmationDialog heading="Test Header" onClose={spy} />);
+        const { getByLabelText } = render(
+          <ConfirmationDialog heading="Test Header" onClose={spy} />
+        );
         fireEvent.click(getByLabelText("close"));
         expect(spy).toHaveBeenCalled();
       });
       it("is called when clicking the cancel button", () => {
         const spy = jest.fn();
-        const { getByLabelText } = render(<ConfirmationDialog heading="Test Header" onClose={spy} />);
+        const { getByLabelText } = render(
+          <ConfirmationDialog heading="Test Header" onClose={spy} />
+        );
         fireEvent.click(getByLabelText("Cancel"));
         expect(spy).toHaveBeenCalled();
       });
@@ -47,7 +55,9 @@ describe("Confirmation Dialog", () => {
     describe("onConfirm", () => {
       it("is called when clicking the delete button", () => {
         const spy = jest.fn();
-        const { getByLabelText } = render(<ConfirmationDialog heading="Test Header" onConfirm={spy} />);
+        const { getByLabelText } = render(
+          <ConfirmationDialog heading="Test Header" onConfirm={spy} />
+        );
         fireEvent.click(getByLabelText("Delete"));
         expect(spy).toHaveBeenCalled();
       });

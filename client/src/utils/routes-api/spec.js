@@ -1,7 +1,13 @@
-import { createNewRoute, updateRoute, deleteRoute, buildRoute as buildRouteUtil, updateSettings } from "./index";
+import {
+  createNewRoute,
+  updateRoute,
+  deleteRoute,
+  buildRoute as buildRouteUtil,
+  updateSettings,
+} from "./index";
 
 const mockFetchPromise = Promise.resolve({
-  json: () => Promise.resolve({})
+  json: () => Promise.resolve({}),
 });
 
 jest.spyOn(window, "fetch").mockImplementation(() => mockFetchPromise); // 4
@@ -11,7 +17,7 @@ const buildRoute = () => ({
   httpMethod: "GET",
   delay: "2000",
   payload: { test: true },
-  statusCode: "200"
+  statusCode: "200",
 });
 
 describe("routes-api", () => {
@@ -27,7 +33,7 @@ describe("routes-api", () => {
         httpMethod: "GET",
         statusCode: "200",
         delay: "0",
-        payload: { test: true }
+        payload: { test: true },
       });
     });
   });
@@ -42,7 +48,7 @@ describe("routes-api", () => {
       expect(window.fetch.mock.calls[0][1]).toEqual({
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(route)
+        body: JSON.stringify(route),
       });
     });
   });
@@ -57,7 +63,7 @@ describe("routes-api", () => {
       expect(window.fetch.mock.calls[0][1]).toEqual({
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(route)
+        body: JSON.stringify(route),
       });
     });
   });
@@ -72,7 +78,7 @@ describe("routes-api", () => {
       expect(window.fetch.mock.calls[0][1]).toEqual({
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(route)
+        body: JSON.stringify(route),
       });
     });
   });
@@ -87,7 +93,7 @@ describe("routes-api", () => {
       expect(window.fetch.mock.calls[0][1]).toEqual({
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(route)
+        body: JSON.stringify(route),
       });
     });
   });
