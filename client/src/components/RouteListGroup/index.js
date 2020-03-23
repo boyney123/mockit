@@ -54,10 +54,19 @@ const renderLevel = (routes, onRouteEdit, onRouteDelete, index = 0) => {
         return (
           <Wrapper open key={key} aria-label={`route-group-${key}`}>
             <RouteTitle>
-              <RouteTitleText aria-label="route-group-header">/{key}</RouteTitleText>
+              <RouteTitleText aria-label="route-group-header">
+                /{key}
+              </RouteTitleText>
             </RouteTitle>
-            {hasChildren && <Route routeItem={item} onRouteDelete={onRouteDelete} onRouteEdit={onRouteEdit} />}
-            {_.size(item.children) > 0 && renderLevel(item.children, onRouteEdit, onRouteDelete, itemIndex)}
+            {hasChildren && (
+              <Route
+                routeItem={item}
+                onRouteDelete={onRouteDelete}
+                onRouteEdit={onRouteEdit}
+              />
+            )}
+            {_.size(item.children) > 0 &&
+              renderLevel(item.children, onRouteEdit, onRouteDelete, itemIndex)}
           </Wrapper>
         );
       })}
@@ -65,17 +74,17 @@ const renderLevel = (routes, onRouteEdit, onRouteDelete, index = 0) => {
   );
 };
 
-export default function({ routes, onRouteDelete, onRouteEdit }) {
+export default function ({ routes, onRouteDelete, onRouteEdit }) {
   const groupedRoutes = useMemo(() => {
     // We need to order routes by route length. Otherwise, if a deeper router would appear
     // before a a shallower route, the shallow route would overwrite the deep route
     // when using _.set
-    const orderedRoutes = _.orderBy(routes, route => {
+    const orderedRoutes = _.orderBy(routes, (route) => {
       return route.route.split("/").length;
     });
 
     const routesObject = {};
-    orderedRoutes.forEach(route => {
+    orderedRoutes.forEach((route) => {
       const paths = route.route.split("/");
       const routeDepth = paths.length;
       const parentPath = paths.slice(1, paths.length - 1);
@@ -86,14 +95,14 @@ export default function({ routes, onRouteDelete, onRouteEdit }) {
       if (routeDepth < 3) {
         routesObject[lastLevel] = {
           ...route,
-          children: {}
+          children: {},
         };
       } else {
         let pathToChild = [];
         parentPath.forEach((parent, index) => {
           const currentLevelPath = parentPath.slice(0, index + 1);
           const currentLevelPathWithChildren = [];
-          currentLevelPath.forEach(path => {
+          currentLevelPath.forEach((path) => {
             currentLevelPathWithChildren.push(path, "children");
           });
           pathToChild = currentLevelPathWithChildren;
@@ -105,5 +114,9 @@ export default function({ routes, onRouteDelete, onRouteEdit }) {
     return routesObject;
   }, [routes]);
 
-  return <div aria-label="routes-grouped">{renderLevel(groupedRoutes, onRouteEdit, onRouteDelete)}</div>;
+  return (
+    <div aria-label="routes-grouped">
+      {renderLevel(groupedRoutes, onRouteEdit, onRouteDelete)}
+    </div>
+  );
 }

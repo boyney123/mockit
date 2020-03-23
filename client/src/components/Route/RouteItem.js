@@ -1,7 +1,10 @@
 import React from "react";
 
 const RouteItem = ({ title, value }) => {
-  const buildAriaLabel = label => (label ? `route-${title.toLowerCase()}-${label}` : `route-${title.toLowerCase()}`);
+  const buildAriaLabel = (label) =>
+    label
+      ? `route-${title.toLowerCase()}-${label}`
+      : `route-${title.toLowerCase()}`;
 
   return (
     <div className="level-item has-text-centered" aria-label={buildAriaLabel()}>

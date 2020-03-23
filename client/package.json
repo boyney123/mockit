@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "./node_modules/.bin/eslint . --ext .js"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -40,8 +41,12 @@
   ],
   "devDependencies": {
     "dom-testing-library": "^3.19.1",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
     "jest-dom": "^3.1.3",
     "nock": "^10.0.6",
+    "prettier": "2.0.1",
     "react-app-rewired": "^2.1.3",
     "react-testing-library": "^6.1.2"
   }

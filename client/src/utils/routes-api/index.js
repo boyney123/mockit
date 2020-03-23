@@ -8,45 +8,45 @@ export const buildRoute = () => ({
   httpMethod: HttpMethods.GET,
   statusCode: StatusCodes.OK,
   delay: "0",
-  payload: { test: true }
+  payload: { test: true },
 });
 
-export const createNewRoute = async route => {
+export const createNewRoute = async (route) => {
   return await fetch(url.resolve(host, "/route"), {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(route)
+    body: JSON.stringify(route),
   });
 };
 
-export const updateRoute = async data => {
+export const updateRoute = async (data) => {
   return await fetch(url.resolve(host, "/route"), {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 };
 
-export const deleteRoute = async data => {
+export const deleteRoute = async (data) => {
   return await fetch(url.resolve(host, "/route"), {
     method: "DELETE",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 };
 
-export const updateSettings = async settings => {
+export const updateSettings = async (settings) => {
   return await fetch(url.resolve(host, "/settings"), {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(settings)
+    body: JSON.stringify(settings),
   });
 };

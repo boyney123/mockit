@@ -3,7 +3,7 @@ export const HttpMethods = {
   PUT: "PUT",
   PATCH: "PATCH",
   POST: "POST",
-  DELETE: "DELETE"
+  DELETE: "DELETE",
 };
 
 export const StatusCodes = {
@@ -19,7 +19,8 @@ export const StatusCodes = {
   UNPROCESSABLE_ENTITY: "422",
   INTERNAL_SERVER_ERROR: "500",
   SERVICE_UNAVAILABLE: "503",
-  GATEWAY_TIMEOUT: "504"
+  GATEWAY_TIMEOUT: "504",
 };
 
-export const MOCKIT_SERVER_URL = process.env.REACT_APP_MOCKIT_SERVER_URL || "localhost:3000";
+export const MOCKIT_SERVER_URL =
+  process.env.REACT_APP_MOCKIT_SERVER_URL || "localhost:3000";
