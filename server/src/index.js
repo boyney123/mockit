@@ -1,28 +1,36 @@
-const express = require("express");
-const pullAt = require("lodash/pullAt");
+const express = require('express');
+const pullAt = require('lodash/pullAt');
 const app = express();
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const fs = require("fs-extra");
-const path = require("path");
-const uuid = require("uuid/v4");
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const fs = require('fs-extra');
+const path = require('path');
+const uuid = require('uuid/v4');
 
 const port = process.env.PORT || 4000;
 
-const { getConfig, writeConfig } = require("./utils/config-helper");
+const { getConfig, writeConfig } = require('./utils/config-helper');
 
 app.use(cors());
 app.use(bodyParser.json());
 
-const requiredPropertiesForRoute = ["route", "httpMethod", "statusCode", "delay", "payload"];
+const requiredPropertiesForRoute = [
+  'route',
+  'httpMethod',
+  'statusCode',
+  'delay',
+  'payload'
+];
 const isRouteValid = (route, additionalRequiredProperties = []) => {
-  const required = requiredPropertiesForRoute.concat(additionalRequiredProperties);
-  return required.every(key => {
+  const required = requiredPropertiesForRoute.concat(
+    additionalRequiredProperties
+  );
+  return required.every((key) => {
     return route[key] !== undefined;
   });
 };
 
-app.post("/route", async (req, res) => {
+app.post('/route', async (req, res) => {
   const payload = req.body;
   const config = await getConfig();
 
@@ -42,10 +50,10 @@ app.post("/route", async (req, res) => {
   res.sendStatus(201);
 });
 
-app.put("/route", async (req, res) => {
+app.put('/route', async (req, res) => {
   const route = req.body;
 
-  if (!isRouteValid(route, ["id"])) {
+  if (!isRouteValid(route, ['id'])) {
     return res.sendStatus(400);
   }
 
@@ -59,7 +67,7 @@ app.put("/route", async (req, res) => {
   res.sendStatus(204);
 });
 
-app.delete("/route", async (req, res) => {
+app.delete('/route', async (req, res) => {
   const payload = req.body;
   const config = await getConfig();
 
@@ -69,7 +77,9 @@ app.delete("/route", async (req, res) => {
     return res.sendStatus(400);
   }
 
-  const routeIndex = config.routes.findIndex(({ id: routeId } = {}) => routeId === id);
+  const routeIndex = config.routes.findIndex(
+    ({ id: routeId } = {}) => routeId === id
+  );
 
   pullAt(config.routes, routeIndex);
 
@@ -77,7 +87,7 @@ app.delete("/route", async (req, res) => {
   return res.sendStatus(204);
 });
 
-app.post("/settings", async (req, res) => {
+app.post('/settings', async (req, res) => {
   const payload = req.body;
   const config = await getConfig();
 
@@ -88,14 +98,16 @@ app.post("/settings", async (req, res) => {
     ...payload
   };
 
-  config["settings"] = newSettings;
+  config['settings'] = newSettings;
 
   await writeConfig(config);
   return res.sendStatus(204);
 });
 
-if (process.env.ENV !== "test") {
-  server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+if (process.env.ENV !== 'test') {
+  server = app.listen(port, () =>
+    console.log(`Example app listening on port ${port}!`)
+  );
 }
 
 module.exports = app;

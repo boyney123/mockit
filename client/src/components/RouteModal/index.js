@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from "react";
-import JSONInput from "react-json-editor-ajrm";
-import HeaderInput from "../HeaderInput";
-import { HttpMethods, StatusCodes } from "../../utils/consts";
-import { updateRoute as updateRouteRequest, createNewRoute } from "../../utils/routes-api";
-import faker from "faker";
-import uuid from "uuid/v4";
+import React, { useState, useEffect } from 'react';
+import JSONInput from 'react-json-editor-ajrm';
+import HeaderInput from '../HeaderInput';
+import { HttpMethods, StatusCodes } from '../../utils/consts';
+import {
+  updateRoute as updateRouteRequest,
+  createNewRoute
+} from '../../utils/routes-api';
+import faker from 'faker';
+import uuid from 'uuid/v4';
 
-const HTTP_METHOD_LIST = [HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT, HttpMethods.PATCH, HttpMethods.DELETE];
+const HTTP_METHOD_LIST = [
+  HttpMethods.GET,
+  HttpMethods.POST,
+  HttpMethods.PUT,
+  HttpMethods.PATCH,
+  HttpMethods.DELETE
+];
 const STATUS_CODES = [
   StatusCodes.OK,
   StatusCodes.CREATED,
@@ -29,7 +38,7 @@ const STATUS_CODES = [
  * Clicking X removes the field from the array....
  */
 
-const Modal = function(props) {
+const Modal = function (props) {
   const { onClose = () => {}, route: editedRoute } = props;
 
   const [route, updateRoute] = useState(editedRoute.route);
@@ -42,9 +51,9 @@ const Modal = function(props) {
 
   const isNewRoute = editedRoute.id === undefined;
 
-  const modalTitle = isNewRoute ? "Add Route" : "Edit Route";
+  const modalTitle = isNewRoute ? 'Add Route' : 'Edit Route';
 
-  const setHeader = updatedHeader => {
+  const setHeader = (updatedHeader) => {
     const { id } = updatedHeader;
 
     const updatedHeaders = headers.map((header, index) => {
@@ -58,15 +67,18 @@ const Modal = function(props) {
     updateHeaders(updatedHeaders);
   };
 
-  const addNewHeader = () => updateHeaders(headers.concat([{ id: uuid(), header: "", value: "" }]));
-  const removeHeader = route => {
+  const addNewHeader = () =>
+    updateHeaders(headers.concat([{ id: uuid(), header: '', value: '' }]));
+  const removeHeader = (route) => {
     const filteredHeaders = headers.filter(({ id } = {}) => id !== route);
     updateHeaders(filteredHeaders);
   };
 
   const saveChanges = async () => {
     try {
-      const cleanedHeaders = headers.filter(({ header, value }) => header !== "" && value !== "");
+      const cleanedHeaders = headers.filter(
+        ({ header, value }) => header !== '' && value !== ''
+      );
 
       const data = {
         ...editedRoute,
@@ -81,12 +93,14 @@ const Modal = function(props) {
 
       isNewRoute ? await createNewRoute(data) : await updateRouteRequest(data);
     } catch (error) {
-      console.log("Error", error);
+      console.log('Error', error);
     }
   };
 
-  const statusCodeStartingWith = startingNumber => {
-    return STATUS_CODES.filter(routeStatusCode => routeStatusCode.startsWith(startingNumber));
+  const statusCodeStartingWith = (startingNumber) => {
+    return STATUS_CODES.filter((routeStatusCode) =>
+      routeStatusCode.startsWith(startingNumber)
+    );
   };
 
   return (
@@ -104,7 +118,14 @@ const Modal = function(props) {
                 Route
               </label>
               <div className="control has-icons-left">
-                <input aria-label="route-name" className="input" type="text" placeholder="Text input" value={route.replace("/", "")} onChange={e => updateRoute(`/${e.currentTarget.value}`)} />
+                <input
+                  aria-label="route-name"
+                  className="input"
+                  type="text"
+                  placeholder="Text input"
+                  value={route.replace('/', '')}
+                  onChange={(e) => updateRoute(`/${e.currentTarget.value}`)}
+                />
                 <span className="icon is-small is-left">/</span>
               </div>
             </div>
@@ -115,8 +136,12 @@ const Modal = function(props) {
                 </label>
                 <div className="control">
                   <div className="select">
-                    <select aria-label="route-http" value={httpMethod} onChange={e => updateHttpMethod(e.currentTarget.value)}>
-                      {HTTP_METHOD_LIST.map(method => (
+                    <select
+                      aria-label="route-http"
+                      value={httpMethod}
+                      onChange={(e) => updateHttpMethod(e.currentTarget.value)}
+                    >
+                      {HTTP_METHOD_LIST.map((method) => (
                         <option key={method} value={method}>
                           {method}
                         </option>
@@ -129,29 +154,33 @@ const Modal = function(props) {
                 <label className="label">Status Code</label>
                 <div className="control">
                   <div className="select">
-                      <select aria-label="route-statuscode" value={statusCode} onChange={e => updateStatusCode(e.currentTarget.value)}>
-                        <optgroup aria-label="2xx" label="2xx">
-                          {statusCodeStartingWith("2").map(routeStatusCode => 
-                            <option key={routeStatusCode} value={routeStatusCode}>
-                              {routeStatusCode}
-                            </option>
-                          )}
-                        </optgroup>
-                        <optgroup aria-label="4xx" label="4xx">
-                          {statusCodeStartingWith("4").map(routeStatusCode =>
-                            <option key={routeStatusCode} value={routeStatusCode}>
-                              {routeStatusCode}
-                            </option>
-                          )}
-                        </optgroup>
-                        <optgroup aria-label="5xx" label="5xx">
-                          {statusCodeStartingWith("5").map(routeStatusCode =>
-                            <option key={routeStatusCode} value={routeStatusCode}>
-                              {routeStatusCode}
-                            </option>
-                          )}
-                        </optgroup>
-                      </select>
+                    <select
+                      aria-label="route-statuscode"
+                      value={statusCode}
+                      onChange={(e) => updateStatusCode(e.currentTarget.value)}
+                    >
+                      <optgroup aria-label="2xx" label="2xx">
+                        {statusCodeStartingWith('2').map((routeStatusCode) => (
+                          <option key={routeStatusCode} value={routeStatusCode}>
+                            {routeStatusCode}
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup aria-label="4xx" label="4xx">
+                        {statusCodeStartingWith('4').map((routeStatusCode) => (
+                          <option key={routeStatusCode} value={routeStatusCode}>
+                            {routeStatusCode}
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup aria-label="5xx" label="5xx">
+                        {statusCodeStartingWith('5').map((routeStatusCode) => (
+                          <option key={routeStatusCode} value={routeStatusCode}>
+                            {routeStatusCode}
+                          </option>
+                        ))}
+                      </optgroup>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -159,7 +188,11 @@ const Modal = function(props) {
                 <label className="label">Delay </label>
                 <div className="control">
                   <div className="select">
-                    <select aria-label="route-delay" value={delay} onChange={e => updateDelay(e.currentTarget.value)}>
+                    <select
+                      aria-label="route-delay"
+                      value={delay}
+                      onChange={(e) => updateDelay(e.currentTarget.value)}
+                    >
                       <option value="0">0</option>
                       <option value="250">250</option>
                       <option value="500">500</option>
@@ -175,8 +208,18 @@ const Modal = function(props) {
             <div className="field mt10">
               <label className="label">Response</label>
               <div className="control">
-                <JSONInput placeholder={payload} onChange={e => updatePayload(e.jsObject)} height="120px" width="100%" locale="en-gb" />
-                <a className="button is-small is-pulled-right random-data is-primary is-inverted" onClick={() => updatePayload(faker.helpers.userCard())} aria-label="route-randomly-generate-data">
+                <JSONInput
+                  placeholder={payload}
+                  onChange={(e) => updatePayload(e.jsObject)}
+                  height="120px"
+                  width="100%"
+                  locale="en-gb"
+                />
+                <a
+                  className="button is-small is-pulled-right random-data is-primary is-inverted"
+                  onClick={() => updatePayload(faker.helpers.userCard())}
+                  aria-label="route-randomly-generate-data"
+                >
                   Randomly Generate Data
                 </a>
               </div>
@@ -188,9 +231,19 @@ const Modal = function(props) {
               </label>
               {headers.length === 0 && <i>No headers added.</i>}
               {headers.map((header, index) => {
-                return <HeaderInput data={header} onBlur={setHeader} onRemove={removeHeader} />;
+                return (
+                  <HeaderInput
+                    data={header}
+                    onBlur={setHeader}
+                    onRemove={removeHeader}
+                  />
+                );
               })}
-              <button aria-label="add-header" className="button is-primary is-small is-pulled-right" onClick={addNewHeader}>
+              <button
+                aria-label="add-header"
+                className="button is-primary is-small is-pulled-right"
+                onClick={addNewHeader}
+              >
                 Add Header
               </button>
             </div>
@@ -198,17 +251,31 @@ const Modal = function(props) {
               <div className="control">
                 <label className="label">Settings</label>
                 <label className="checkbox">
-                  <input aria-label="route-disable" type="checkbox" checked={disabled} className="mr10" onChange={e => updateDisabled(e.target.checked)} />
+                  <input
+                    aria-label="route-disable"
+                    type="checkbox"
+                    checked={disabled}
+                    className="mr10"
+                    onChange={(e) => updateDisabled(e.target.checked)}
+                  />
                   <span>Disable Route</span>
                 </label>
               </div>
             </div>
           </section>
           <footer className="modal-card-foot">
-            <button aria-label="route-save" className="button is-success" onClick={saveChanges}>
+            <button
+              aria-label="route-save"
+              className="button is-success"
+              onClick={saveChanges}
+            >
               Save changes
             </button>
-            <button aria-label="route-cancel" className="button" onClick={onClose}>
+            <button
+              aria-label="route-cancel"
+              className="button"
+              onClick={onClose}
+            >
               Cancel
             </button>
           </footer>
@@ -219,4 +286,3 @@ const Modal = function(props) {
 };
 
 export default Modal;
-

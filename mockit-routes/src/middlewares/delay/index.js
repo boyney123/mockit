@@ -1,9 +1,11 @@
-const fs = require("fs-extra");
-const path = require("path");
-const data = fs.readJsonSync(path.resolve(__dirname, "../../../configuration/routes.json"));
+const fs = require('fs-extra');
+const path = require('path');
+const data = fs.readJsonSync(
+  path.resolve(__dirname, '../../../configuration/routes.json')
+);
 const { routes } = data;
 
-const findRoute = path => {
+const findRoute = (path) => {
   return routes.find(({ route } = {}) => {
     return route === path;
   });
