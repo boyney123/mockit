@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const app = express();
 const cors = require('cors');
+const querystring = require('querystring');
 
 const port = process.env.PORT || 3000;
 
@@ -41,11 +42,38 @@ routes.forEach((route) => {
   const method = httpMethod.toLowerCase();
 
   if (!disabled) {
-    app[method](path, (req, res) => {
+    let param = null, pathURL = path;
+    let paths = path.split("?");
+    if (Object.keys(paths).length > 1) {
+      pathURL = paths[0];
+      param = paths[1];
+    }
+
+    app[method](pathURL, (req, res) => {
+      let code = statusCode;
+      let body = payload;
+
+      if (param != null) {
+        let params = param.split("&");
+        if (Object.keys(req.query).length != params.length) {
+          code = 404;
+          body = `Cannot ${method.toUpperCase()} ${pathURL}?${querystring.stringify(req.query)}`;
+        }
+
+        params.forEach((p) => {
+          let q = p.split("=");
+          if (req.query[q[0]] != q[1]) {
+            code = 404;
+            body = `Cannot ${method.toUpperCase()} ${pathURL}?${querystring.stringify(req.query)}`;
+            return;
+          }
+        });
+      }
+
       headers.forEach(({ header, value } = {}) => {
         res.set(header, value);
       });
-      res.status(statusCode).send(payload);
+      res.status(code).send(body);
     });
   }
 });
