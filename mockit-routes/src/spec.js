@@ -123,7 +123,17 @@ const exampleConfig = {
         }
       ],
       disabled: false
-    }
+    },
+    {
+      route: '/testParameter?id=1',
+      httpMethod: 'GET',
+      statusCode: '200',
+      delay: '0',
+      payload: {
+        test: true
+      },
+      disabled: false
+    },
   ]
 };
 
@@ -152,6 +162,13 @@ describe('Mockit Routes', () => {
       });
       it('when a route is configured with `DELETE` set as the httpMethod then that route can only be accessed through DELETE', async () => {
         await request(app).del('/deleteExample').expect(200, { test: true });
+      });
+      it('when a route is contain query parameter case match', async () => {
+        await request(app).get('/testParameter?id=1').expect(200, { test: true });
+      });
+      it('when a route is contain query parameter case not match', async () => {
+        await request(app).get('/testParameter?ids=1').expect(404, {});
+        await request(app).get('/testParameter?id=1&test=1').expect(404, {});
       });
     });
 
