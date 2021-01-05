@@ -74,7 +74,7 @@ const Modal = function (props) {
     updateHeaders(filteredHeaders);
   };
 
-  const saveChanges = async () => {
+  const saveChanges = () => {
     try {
       const cleanedHeaders = headers.filter(
         ({ header, value }) => header !== '' && value !== ''
@@ -91,7 +91,7 @@ const Modal = function (props) {
         headers: cleanedHeaders
       };
 
-      isNewRoute ? await createNewRoute(data) : await updateRouteRequest(data);
+      (isNewRoute ? createNewRoute(data) : updateRouteRequest(data)).then(() => onClose());
     } catch (error) {
       console.log('Error', error);
     }

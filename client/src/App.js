@@ -1,28 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import useScrollReval from './hooks/useScrollReveal';
 import RouteListStack from './components/RouteListStack';
 import RouteListGroup from './components/RouteListGroup';
 import Logo from './components/Logo';
 import { version } from '../package.json';
 
-import { buildRoute, deleteRoute } from './utils/routes-api';
+import {buildRoute, deleteRoute, getRoutes} from './utils/routes-api';
 
 import RouteModal from './components/RouteModal';
 import SettingsModal from './components/SettingsModal';
 import ConfirmationDialog from './components/ConfirmationDialog';
-
-import { settings, routes as configRoutes } from './config/routes.json';
 
 import './scss/index.scss';
 
 export default function ({ settings: propSettings, customRoutes }) {
   useScrollReval([{ selector: '.hero .title, .card, .subtitle ' }]);
 
-  const [selectedRoute, setSelectedRoute] = useState();
-  const [routeToBeRemoved, setRouteToBeRemoved] = useState();
+  const [selectedRoute, setSelectedRoute] = useState(null);
+  const [routeToBeRemoved, setRouteToBeRemoved] = useState(null);
   const [settingsModalVisible, showSettingsModal] = useState(false);
+  const [routes, setRoutes] = useState([] || customRoutes);
+  const [settings, setSettings] = useState({});
 
-  const routes = customRoutes || configRoutes;
+  useEffect(() => {
+    getRoutes().then((response) => {
+      setSettings(response.settings)
+      setRoutes(response.routes);
+    })
+  }, [])
+
+  useEffect(() => {
+    if (selectedRoute === null && routeToBeRemoved === null && settingsModalVisible === false) {
+      getRoutes().then((response) => {
+        setSettings(response.settings)
+        setRoutes(response.routes);
+      })
+    }
+  }, [selectedRoute, routeToBeRemoved, settingsModalVisible])
+
+  const onRemoveConfirmation = useCallback(() => {
+    deleteRoute(routeToBeRemoved).then(() => setRouteToBeRemoved(null))
+  });
+
+  const onRemoveClose = useCallback(() => setRouteToBeRemoved(null));
+
+  const onSettingsClose = useCallback(() => showSettingsModal(false));
 
   const { features: { chaosMonkey = false, groupedRoutes = false } = {} } =
     propSettings || settings;
@@ -72,8 +94,8 @@ export default function ({ settings: propSettings, customRoutes }) {
       {routeToBeRemoved && (
         <ConfirmationDialog
           heading={`Delete Route`}
-          onConfirm={() => deleteRoute(routeToBeRemoved)}
-          onClose={() => setRouteToBeRemoved(null)}
+          onConfirm={onRemoveConfirmation}
+          onClose={onRemoveClose}
         >
           <p>
             Are you sure you want to delete the route :{' '}
@@ -83,7 +105,7 @@ export default function ({ settings: propSettings, customRoutes }) {
       )}
 
       {settingsModalVisible && (
-        <SettingsModal onClose={() => showSettingsModal(false)} />
+        <SettingsModal onClose={onSettingsClose} settings={settings} />
       )}
 
       <main>
@@ -111,14 +133,14 @@ export default function ({ settings: propSettings, customRoutes }) {
         {groupedRoutes ? (
           <RouteListGroup
             routes={routes}
-            onRouteEdit={(route) => setSelectedRoute(route)}
-            onRouteDelete={(route) => setRouteToBeRemoved(route)}
+            onRouteEdit={setSelectedRoute}
+            onRouteDelete={setRouteToBeRemoved}
           />
         ) : (
           <RouteListStack
             routes={routes}
-            onRouteEdit={(route) => setSelectedRoute(route)}
-            onRouteDelete={(route) => setRouteToBeRemoved(route)}
+            onRouteEdit={setSelectedRoute}
+            onRouteDelete={setRouteToBeRemoved}
           />
         )}
       </main>

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { settings as applicationSettings } from '../../config/routes.json';
+
 import { updateSettings } from '../../utils/routes-api';
 
 const SettingsModal = function ({
   onClose = () => {},
   onConfirm = () => {},
   heading,
-  children
+  children,
+  settings: applicationSettings
 } = {}) {
   const [settings, setSettings] = useState(applicationSettings);
 
@@ -24,9 +25,9 @@ const SettingsModal = function ({
     setSettings(newSettings);
   };
 
-  const saveSettings = async () => {
+  const saveSettings = () => {
     try {
-      await updateSettings(settings);
+      updateSettings(settings).then(() => onClose());
     } catch (error) {
       console.log('Error');
     }

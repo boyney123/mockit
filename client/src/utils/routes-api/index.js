@@ -21,6 +21,14 @@ export const createNewRoute = async (route) => {
   });
 };
 
+export const getRoutes = () => {
+  return fetch(url.resolve(host, '/routes'), {
+    method: 'GET'
+  }).then(function (response) {
+    return response.json();
+  });
+};
+
 export const updateRoute = async (data) => {
   return await fetch(url.resolve(host, '/route'), {
     method: 'PUT',
