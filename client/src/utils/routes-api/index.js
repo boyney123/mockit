@@ -11,8 +11,8 @@ export const buildRoute = () => ({
   payload: { test: true }
 });
 
-export const createNewRoute = async (route) => {
-  return await fetch(url.resolve(host, '/route'), {
+export const createNewRoute = (route) => {
+  return fetch(url.resolve(host, '/route'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -29,8 +29,8 @@ export const getRoutes = () => {
   });
 };
 
-export const updateRoute = async (data) => {
-  return await fetch(url.resolve(host, '/route'), {
+export const updateRoute = (data) => {
+  return fetch(url.resolve(host, '/route'), {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -39,8 +39,8 @@ export const updateRoute = async (data) => {
   });
 };
 
-export const deleteRoute = async (data) => {
-  return await fetch(url.resolve(host, '/route'), {
+export const deleteRoute = (data) => {
+  return fetch(url.resolve(host, '/route'), {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -49,8 +49,8 @@ export const deleteRoute = async (data) => {
   });
 };
 
-export const updateSettings = async (settings) => {
-  return await fetch(url.resolve(host, '/settings'), {
+export const updateSettings = (settings) => {
+  return fetch(url.resolve(host, '/settings'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

@@ -7,7 +7,7 @@ const SettingsModal = function ({
   onConfirm = () => {},
   heading,
   children,
-  settings: applicationSettings
+  settings: applicationSettings = {}
 } = {}) {
   const [settings, setSettings] = useState(applicationSettings);
 

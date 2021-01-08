@@ -19,21 +19,14 @@ export default function ({ settings: propSettings, customRoutes }) {
   const [selectedRoute, setSelectedRoute] = useState(null);
   const [routeToBeRemoved, setRouteToBeRemoved] = useState(null);
   const [settingsModalVisible, showSettingsModal] = useState(false);
-  const [routes, setRoutes] = useState([] || customRoutes);
-  const [settings, setSettings] = useState({});
+  const [routes, setRoutes] = useState(customRoutes || []);
+  const [settings, setSettings] = useState(propSettings || {});
 
   useEffect(() => {
-    getRoutes().then((response) => {
-      setSettings(response.settings)
-      setRoutes(response.routes);
-    })
-  }, [])
-
-  useEffect(() => {
-    if (selectedRoute === null && routeToBeRemoved === null && settingsModalVisible === false) {
+    if (selectedRoute === null && routeToBeRemoved === null && settingsModalVisible === false && (!propSettings || !customRoutes)) {
       getRoutes().then((response) => {
-        setSettings(response.settings)
-        setRoutes(response.routes);
+        !propSettings && setSettings(response.settings);
+        !customRoutes && setRoutes(response.routes);
       })
     }
   }, [selectedRoute, routeToBeRemoved, settingsModalVisible])
@@ -46,8 +39,7 @@ export default function ({ settings: propSettings, customRoutes }) {
 
   const onSettingsClose = useCallback(() => showSettingsModal(false));
 
-  const { features: { chaosMonkey = false, groupedRoutes = false } = {} } =
-    propSettings || settings;
+  const { features: { chaosMonkey = false, groupedRoutes = false } = {} } = settings;
 
   return (
     <>

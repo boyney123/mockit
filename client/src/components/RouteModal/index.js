@@ -236,6 +236,7 @@ const Modal = function (props) {
                     data={header}
                     onBlur={setHeader}
                     onRemove={removeHeader}
+                    key={header + '-' + index}
                   />
                 );
               })}
