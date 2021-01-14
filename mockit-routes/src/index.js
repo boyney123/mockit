@@ -1,8 +1,9 @@
 const express = require('express');
+const app = express();
 const fs = require('fs-extra');
 const path = require('path');
-const app = express();
 const cors = require('cors');
+var proxy = require('express-http-proxy');
 
 const port = process.env.PORT || 3000;
 
@@ -13,16 +14,13 @@ const basicAuth = require('./middlewares/basic-auth');
 const data = fs.readJsonSync(
   path.resolve(__dirname, '../configuration/routes.json')
 );
-const {
-  routes,
-  settings: { features: { cors: corsFeature } = {} } = {}
-} = data;
+const { routes, settings: { features = {} } = {} } = data;
 
 app.use(basicAuth);
 app.use(delayMiddleware);
 app.use(chaosMonkeyMiddleware);
 
-if (corsFeature) {
+if (features.cors) {
   app.use(cors());
 }
 
@@ -49,6 +47,10 @@ routes.forEach((route) => {
     });
   }
 });
+
+if (features.proxying.enabled && features.proxying.domain) {
+  app.use(proxy(features.proxying.domain));
+}
 
 if (process.env.ENV !== 'test') {
   server = app.listen(port, () =>
