@@ -143,9 +143,9 @@ const SettingsModal = function ({
             <div className="field" aria-label="feature-request-proxying">
               <label className="label">Request proxying</label>
               <p className="mb10">
-                Send unhandled requests to a real domain. Can be used to stub out
-                the functionality of a real endpoint, or to enrich a live API
-                with new mock endpoints.
+                Send unhandled requests to a real domain. Can be used to stub
+                out the functionality of a real endpoint, or to enrich a live
+                API with new mock endpoints.
               </p>
               <div className="control">
                 <input
@@ -164,6 +164,7 @@ const SettingsModal = function ({
                 </label>
 
                 <input
+                  aria-label="feature-request-proxying-text-input"
                   disabled={!proxying.enabled}
                   type="text"
                   className="mt10"
