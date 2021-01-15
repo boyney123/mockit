@@ -100,6 +100,42 @@ describe('Settings Dialog', () => {
         );
       });
     });
+    describe('Request Proxying', () => {
+      it('renders the feature with an input', () => {
+        const { getByLabelText } = render(<SettingsDialog />);
+        expect(getByLabelText('feature-request-proxying')).toBeVisible();
+        expect(getByLabelText('feature-request-proxying-input')).toBeVisible();
+        expect(
+          getByLabelText('feature-request-proxying-text-input')
+        ).toBeVisible();
+      });
+
+      it('clicking on the feature enables request proxying and updates the input value', () => {
+        const { getByLabelText } = render(<SettingsDialog />);
+
+        expect(
+          getByLabelText('feature-request-proxying-input').checked
+        ).toEqual(false);
+        fireEvent.change(getByLabelText('feature-request-proxying-input'), {
+          target: { checked: true }
+        });
+        expect(
+          getByLabelText('feature-request-proxying-input').checked
+        ).toEqual(true);
+      });
+
+      it('disables the input field when the feature is disabled', () => {
+        const { getByLabelText } = render(<SettingsDialog />);
+
+        expect(
+          getByLabelText('feature-request-proxying-text-input').disabled
+        ).toEqual(true);
+        fireEvent.click(getByLabelText('feature-request-proxying-input'));
+        expect(
+          getByLabelText('feature-request-proxying-text-input').disabled
+        ).toEqual(false);
+      });
+    });
   });
 
   describe('saving settings', () => {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import _ from 'lodash';
 import { settings as applicationSettings } from '../../config/routes.json';
 import { updateSettings } from '../../utils/routes-api';
 
@@ -11,7 +12,13 @@ const SettingsModal = function ({
   const [settings, setSettings] = useState(applicationSettings);
 
   const {
-    features: { chaosMonkey, cors, authentication, groupedRoutes } = {}
+    features: {
+      chaosMonkey,
+      cors,
+      authentication,
+      groupedRoutes,
+      proxying = {}
+    } = {}
   } = settings;
 
   const setFeature = (feature, value) => {
@@ -19,7 +26,7 @@ const SettingsModal = function ({
       ...settings
     };
 
-    newSettings['features'][feature] = value;
+    _.set(newSettings, `features.${feature}`, value);
 
     setSettings(newSettings);
   };
@@ -92,8 +99,8 @@ const SettingsModal = function ({
             <div className="field" aria-label="feature-chaos-monkey">
               <label className="label">Chaos Monkey</label>
               <p className="mb10">
-                Unleash the monkey. The monkey will randomly take down end
-                points and enforce failures on your routes.
+                Unleash the monkey. The monkey will randomly take down endpoints
+                and enforce failures on your routes.
               </p>
               <div className="control">
                 <input
@@ -130,6 +137,43 @@ const SettingsModal = function ({
                 <label htmlFor="groupedRoutesFeature">
                   Enable Grouped Routes
                 </label>
+              </div>
+            </div>
+            <hr />
+            <div className="field" aria-label="feature-request-proxying">
+              <label className="label">Request proxying</label>
+              <p className="mb10">
+                Send unhandled requests to a real domain. Can be used to stub
+                out the functionality of a real endpoint, or to enrich a live
+                API with new mock endpoints.
+              </p>
+              <div className="control">
+                <input
+                  id="requestProxyingFeature"
+                  type="checkbox"
+                  name="requestProxyingFeature"
+                  className="switch is-primary"
+                  checked={proxying.enabled}
+                  onChange={(e) =>
+                    setFeature('proxying.enabled', e.target.checked)
+                  }
+                  aria-label="feature-request-proxying-input"
+                />
+                <label htmlFor="requestProxyingFeature">
+                  Enable Request Proxying
+                </label>
+
+                <input
+                  aria-label="feature-request-proxying-text-input"
+                  disabled={!proxying.enabled}
+                  type="text"
+                  className="mt10"
+                  placeholder="https://your-api.example.com"
+                  value={proxying.domain}
+                  onChange={(e) =>
+                    setFeature('proxying.domain', e.target.value)
+                  }
+                />
               </div>
             </div>
           </section>

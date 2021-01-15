@@ -4,7 +4,11 @@
       "chaosMonkey": false,
       "cors": true,
       "authentication": false,
-      "groupedRoutes": false
+      "groupedRoutes": false,
+      "proxying": {
+        "enabled": false,
+        "domain": ""
+      }
     },
     "authentication": {
       "username": "test",

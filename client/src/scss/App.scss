@@ -74,6 +74,15 @@ main {
   flex-direction: column;
 }
 
+input[type='text'] {
+  font-size: 16px;
+  display: block;
+  border-radius: 4px;
+  border: 2px #c4c4c4 solid;
+  padding: 5px;
+  width: 100%;
+}
+
 /* Route */
 
 .no-routes {

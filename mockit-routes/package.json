@@ -16,6 +16,7 @@
     "chokidar": "^2.1.5",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "express-http-proxy": "^1.6.2",
     "fs-extra": "^7.0.1",
     "nodemon": "^1.18.11"
   },
