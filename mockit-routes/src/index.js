@@ -15,12 +15,13 @@ const data = fs.readJsonSync(
   path.resolve(__dirname, '../configuration/routes.json')
 );
 const { routes, settings: { features = {} } = {} } = data;
+const { proxying = {}, cors: corsFeature } = features;
 
 app.use(basicAuth);
 app.use(delayMiddleware);
 app.use(chaosMonkeyMiddleware);
 
-if (features.cors) {
+if (corsFeature) {
   app.use(cors());
 }
 
@@ -48,8 +49,8 @@ routes.forEach((route) => {
   }
 });
 
-if (features.proxying.enabled && features.proxying.domain) {
-  app.use(proxy(features.proxying.domain));
+if (proxying.enabled && proxying.domain) {
+  app.use(proxy(proxying.domain));
 }
 
 if (process.env.ENV !== 'test') {
