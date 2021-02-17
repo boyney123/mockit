@@ -23,7 +23,9 @@ const buildRoute = () => {
 };
 
 jest.mock('../../utils/routes-api', () => {
-  return { createNewRoute: jest.fn(), updateRoute: jest.fn() };
+  return {
+    createNewRoute: jest.fn(() => Promise.resolve()),
+    updateRoute: jest.fn(() => Promise.resolve()) };
 });
 
 describe('Route Modal', () => {
@@ -243,7 +245,7 @@ describe('Route Modal', () => {
     it('when the save button is clicked and the route is a new route a request to create a new route is made', () => {
       const route = buildRoute();
       delete route['id'];
-      const { getByLabelText } = render(<RouteModal route={route} />);
+      const { getByLabelText } = render(<RouteModal route={route} key='createNewRoute' />);
       fireEvent.click(getByLabelText('route-save'));
       expect(utils.createNewRoute).toHaveBeenCalledWith(route);
     });

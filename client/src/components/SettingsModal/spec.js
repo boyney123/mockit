@@ -4,6 +4,7 @@ import { render, fireEvent, cleanup } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 import SettingsDialog from './';
 import * as utils from '../../utils/routes-api';
+import { settings } from '../../config/routes.json';
 
 afterEach(cleanup);
 
@@ -49,7 +50,7 @@ describe('Settings Dialog', () => {
       });
 
       it('clicking on the feature enables basic authenication and updates the input value', () => {
-        const { getByLabelText } = render(<SettingsDialog />);
+        const { getByLabelText } = render(<SettingsDialog settings={settings} />);
 
         expect(getByLabelText('feature-cors-input').checked).toEqual(true);
         fireEvent.change(getByLabelText('feature-cors-input'), {

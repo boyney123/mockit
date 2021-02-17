@@ -102,6 +102,12 @@ app.post('/settings', async (req, res) => {
 
   await writeConfig(config);
   return res.sendStatus(204);
+})
+
+app.get('/routes', async (req, res) => {
+  const config = await getConfig();
+  res.json(config);
+  return res.sendStatus(200);
 });
 
 if (process.env.ENV !== 'test') {
