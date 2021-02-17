@@ -1,97 +1,123 @@
-// __tests__/fetch.test.js
-import React from 'react';
+import '@testing-library/jest-dom'
+// NOTE: jest-dom adds handy assertions to Jest and is recommended, but not required
+
+import * as React from 'react'
+import ReactDOM from 'react-dom';
 import {
-  render,
   fireEvent,
   cleanup,
+  waitFor,
   queryAllByLabelText,
+  queryByLabelText,
+  queryByTestId,
   act,
-  waitForElement
-} from 'react-testing-library';
+  getAllByLabelText,
+  getByLabelText,
+  getByTestId,
+  getByText
+} from '@testing-library/react'
+
 import * as utils from './utils/routes-api';
-import 'jest-dom/extend-expect';
+import * as routesObject from './config/routes.json';
 import App from './App';
 
-jest.mock('./utils/routes-api', () => {
-  return {
-    deleteRoute: jest.fn(() => Promise.resolve()),
-    buildRoute: jest.fn(() => {
-      return { route: '/test' };
-    }),
-    getRoutes:jest.fn(() => Promise.resolve(require("./config/routes.json")))
-  }
+let container;
+jest.mock('./utils/routes-api');
+
+afterAll(() => {
+  jest.clearAllMocks();
+})
+
+beforeEach(() => {
+  container = document.createElement('div');
+  document.body.appendChild(container);
+  utils.getRoutes.mockResolvedValue(require('./config/routes.json'));
+  utils.buildRoute.mockResolvedValue({ route: '/test' });
+  utils.deleteRoute.mockResolvedValue({});
 });
 
-afterEach(cleanup);
+afterEach(() => {
+  document.body.removeChild(container);
+  container = null;
+  cleanup();
+});
 
 describe('App', () => {
   describe('renders', () => {
-    it('the add route and settings button', () => {
-      let result;
-      act(() => {
-        result = render(<App />);
-      })
-      const { getByLabelText } = result;
+    it('the add route and settings button', async () => {
+      await act(async () => {
+        ReactDOM.render(<App />, container);
+      });
 
-      expect(getByLabelText('Add Route')).toBeVisible();
-      expect(getByLabelText('Settings')).toBeVisible();
+      expect(getByLabelText(container, 'Add Route')).toBeVisible();
+      expect(getByLabelText(container, 'Settings')).toBeVisible();
     });
 
     it('renders a list of stacked routes based on the routes in the configuration', async () => {
-      let result;
-      act(() => {
-        result = render(<App />);
-      })
-      const { container, getByLabelText } = result;
+      await act(async () => {
+        ReactDOM.render(<App />, container);
+      });
 
-      await waitForElement(() => queryAllByLabelText(container, 'Route').length > 0);
-
-      const routes = queryAllByLabelText(container, 'Route');
-      expect(routes).toHaveLength(3);
-      expect(getByLabelText('routes-stacked')).toBeVisible();
+      await waitFor(() => expect(queryAllByLabelText(container, 'Route')).toHaveLength(3));
+      await waitFor(() => expect(getByLabelText(container, 'routes-stacked')).toBeVisible());
     });
 
     it('renders a list of routes that are grouped in the grouped feature is set to true',  async () => {
-      const settings = { features: { groupedRoutes: true } };
-      let result;
-      act(() => {
-        result = render(<App settings={settings} />);
+      const customSettings = { features: { groupedRoutes: true } };
+      await act(async () => {
+        utils.getRoutes.mockResolvedValue({
+          settings: customSettings,
+          routes: routesObject.routes
+        });
+
+        ReactDOM.render(<App />, container);
       });
 
-      const { container, getByLabelText } = result;
+      await waitFor(() => queryAllByLabelText(container, 'Route').length > 0);
 
-      await waitForElement(() => queryAllByLabelText(container, 'Route').length > 0);
-
-      const routes = queryAllByLabelText(container, 'Route');
-      expect(routes).toHaveLength(3);
-      expect(getByLabelText('routes-grouped')).toBeVisible();
+      expect(queryAllByLabelText(container, 'Route')).toHaveLength(3);
+      expect(getByLabelText(container, 'routes-grouped')).toBeVisible();
     });
 
-    it('renders the no routes message when no routes have been added yet', () => {
-      const { getByLabelText } = render(<App customRoutes={[]} />);
-      expect(getByLabelText('no-routes')).toBeVisible();
+    it('renders the no routes message when no routes have been added yet', async () => {
+      await act(async () => {
+        utils.getRoutes.mockResolvedValue({
+          settings: routesObject.settings,
+          routes: []
+        });
+
+        ReactDOM.render(<App />, container);
+      });
+
+      expect(getByLabelText(container, 'no-routes')).toBeVisible();
     });
 
-    it('renders a footer on the screen with a link to the github repo', () => {
-      const { getByLabelText } = render(<App />);
-      expect(getByLabelText('Site footer')).toBeVisible();
-      expect(getByLabelText('Github Repo')).toBeVisible();
-      expect(getByLabelText('Github Repo').text).toBe('David Boyne');
+    it('renders a footer on the screen with a link to the github repo', async () => {
+      await act(async () => {
+        ReactDOM.render(<App />, container);
+      });
+
+      expect(getByLabelText(container,'Site footer')).toBeVisible();
+      expect(getByLabelText(container,'Github Repo')).toBeVisible();
+      expect(getByLabelText(container,'Github Repo').text).toBe('David Boyne');
     });
   });
 
   describe('RouteListGrouped', () => {
     describe('edit route', () => {
       it('when edit is selected on the route the modal dialog is shown with that route', async () => {
-        const settings = { features: { groupedRoutes: true } };
-        const { container, getByTestId, getByLabelText } = render(
-          <App settings={settings} />
-        );
+        const customSettings = { features: { groupedRoutes: true } };
+        await act(async () => {
+          utils.getRoutes.mockResolvedValue({
+            settings: customSettings,
+            routes: routesObject.routes
+          });
+          ReactDOM.render(<App />, container);
+        });
 
-        await waitForElement(() => queryAllByLabelText(container, 'Edit Route').length > 0);
-
+        await waitFor(() => expect(queryAllByLabelText(container, 'Edit Route')).length > 0);
         const routes = queryAllByLabelText(container, 'Route');
-        const editButton = getByLabelText('Edit Route', { element: routes[0] });
+        const editButton = getByLabelText(routes[0], 'Edit Route');
 
         fireEvent(
           editButton,
@@ -101,57 +127,48 @@ describe('App', () => {
           })
         );
 
-        await waitForElement(() => queryAllByLabelText(container, 'Route').length > 0);
+        await waitFor(() => expect(queryAllByLabelText(container, 'Route')).length > 0);
 
-        expect(getByTestId('route-modal')).toBeVisible();
+        expect(getByTestId(container, 'route-modal')).toBeVisible();
       });
     });
 
     describe('delete route', () => {
       const clickDeleteRoute = async () => {
-        const settings = { features: { groupedRoutes: true } };
-        const { getByLabelText, container, getByText } = render(
-          <App settings={settings} />
-        );
-
-        await waitForElement(() => queryAllByLabelText(container, 'Delete Route').length > 0);
-
-        const routes = queryAllByLabelText(container, 'Route');
-        const deleteButton = getByLabelText('Delete Route', {
-          element: routes[0]
+        const customSettings = { features: { groupedRoutes: true } };
+        await act(async () => {
+          utils.getRoutes.mockResolvedValue({
+            settings: customSettings,
+            routes: routesObject.routes
+          });
+          ReactDOM.render(<App />, container);
         });
 
-        fireEvent.click(deleteButton);
+        await waitFor(() => expect(queryAllByLabelText(container, 'Delete Route')).length > 0);
 
-        return { container, getByLabelText, getByText };
+        const deleteButton = getAllByLabelText(container, 'Delete Route');
+        act(() => {
+          fireEvent.click(deleteButton[0]);
+        });
       };
 
       it('when delete is selected on the route the confirmation dialog is shown on that route', async () => {
-        const settings = { features: { groupedRoutes: true } };
-        const { getByLabelText, container } = render(
-            <App settings={settings} />
-        );
+        await clickDeleteRoute();
 
-        await waitForElement(() => queryAllByLabelText(container, 'Delete Route').length > 0);
-
-        const routes = queryAllByLabelText(container, 'Route');
-        const deleteButton = getByLabelText('Delete Route', {
-          element: routes[0]
-        });
-
-        fireEvent.click(deleteButton);
-
-        await waitForElement(() => queryAllByLabelText(container, 'Confirmation Dialog').length > 0);
-        expect(getByLabelText('Confirmation Dialog')).toBeVisible();
+        await waitFor(() => expect(queryAllByLabelText(container, 'Confirmation Dialog')).toHaveLength(1));
+        expect(getByLabelText(container, 'Confirmation Dialog')).toBeVisible();
       });
 
       it('when clicking confirm on the route deletion a request is made to delete that route', async () => {
-        const { container, getByLabelText, getByText } = await clickDeleteRoute();
+        await clickDeleteRoute();
 
-        await waitForElement(() => queryAllByLabelText(container, 'Confirmation Dialog').length > 0);
-        const modal = getByLabelText('Confirmation Dialog');
+        await waitFor(() => expect(queryAllByLabelText(container, 'Confirmation Dialog')).toHaveLength(1));
 
-        fireEvent.click(getByText('Delete', { element: modal }));
+
+        await act(async () => {
+          const modal = getByLabelText(container,'Confirmation Dialog');
+          fireEvent.click(getByText(modal, 'Delete'));
+        });
 
         expect(utils.deleteRoute).toHaveBeenCalled();
       });
@@ -161,51 +178,61 @@ describe('App', () => {
   describe('RouteListStacked', () => {
     describe('edit route', () => {
       it('when edit is selected on the route the modal dialog is shown with that route', async () => {
-        const { container, getByTestId, getByLabelText } = render(<App />);
+        await act(async () => {
+          ReactDOM.render(<App />, container);
+        });
+
         const routes = queryAllByLabelText(container, 'Route');
 
-        await waitForElement(() => queryAllByLabelText(container, 'Edit Route').length > 0);
+        await waitFor(() => queryAllByLabelText(container, 'Edit Route').length > 0);
 
-        const editButton = getByLabelText('Edit Route', { element: routes[0] });
+        const editButton = getByLabelText(routes[0], 'Edit Route');
 
-        fireEvent(
-          editButton,
-          new MouseEvent('click', {
-            bubbles: true,
-            cancelable: true
-          })
-        );
+        act(() => {
+          fireEvent(
+              editButton,
+              new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true
+              })
+          );
+        })
 
-        expect(getByTestId('route-modal')).toBeVisible();
+        expect(getByTestId(container, 'route-modal')).toBeVisible();
       });
     });
 
     describe('delete route', () => {
       const clickDeleteRoute = async () => {
-        const { getByLabelText, container, getByText } = render(<App />);
-        const routes = queryAllByLabelText(container, 'Route');
-
-        await waitForElement(() => queryAllByLabelText(container, 'Delete Route').length > 0);
-        const deleteButton = getByLabelText('Delete Route', {
-          element: routes[0]
+        utils.deleteRoute.mockResolvedValue({});
+        await act(async () => {
+          ReactDOM.render(<App />, container);
         });
 
-        fireEvent.click(deleteButton);
+        await waitFor(() => {
+          expect(queryAllByLabelText(container, "Delete Route")).length > 0;
+        });
 
-        return { container, getByLabelText, getByText };
+        act(() => {
+          const deleteButtons = queryAllByLabelText(container, 'Delete Route');
+          fireEvent.click(deleteButtons[0]);
+        });
       };
 
       it('when delete is selected on the route the confirmation dialog is shown on that route', async () => {
-        const { container, getByLabelText } = await clickDeleteRoute();
-        expect(getByLabelText('Confirmation Dialog')).toBeVisible();
+        await clickDeleteRoute();
+        await waitFor(() => expect(queryByLabelText(container, 'Confirmation Dialog')).toBeInTheDocument());
+        expect(getByLabelText(container, 'Confirmation Dialog')).toBeVisible();
       });
 
       it('when clicking confirm on the route deletion a request is made to delete that route', async () => {
-        const { getByLabelText, getByText } = await clickDeleteRoute();
+        await clickDeleteRoute();
 
-        const modal = getByLabelText('Confirmation Dialog');
+        const modal = getByLabelText(container,'Confirmation Dialog');
 
-        fireEvent.click(getByText('Delete', { element: modal }));
+        await waitFor(async () => {
+          fireEvent.click(getByText(modal, 'Delete'));
+        });
 
         expect(utils.deleteRoute).toHaveBeenCalled();
       });
@@ -214,56 +241,85 @@ describe('App', () => {
 
   describe('Features', () => {
     describe('Add route', () => {
-      const showSettingsModal = () => {
-        const { getByLabelText, getByTestId, queryByTestId } = render(<App />);
-        const addButton = getByLabelText('Add Route');
-        fireEvent.click(addButton);
-        return { getByLabelText, getByTestId, queryByTestId };
+      const showSettingsModal = async () => {
+        await act(async () => {
+          utils.getRoutes.mockResolvedValue(routesObject);
+          utils.buildRoute.mockReturnValue({ route: '/test' });
+          ReactDOM.render(<App />, container);
+        });
+
+        const addButton = getByLabelText(container,'Add Route');
+        await act(async () => {
+          fireEvent.click(addButton);
+        });
       };
 
-      it('when clicking on the Add Route button the modal is shown to the user', () => {
-        const { getByTestId } = showSettingsModal();
-        expect(getByTestId('route-modal')).toBeVisible();
+      it('when clicking on the Add Route button the modal is shown to the user', async () => {
+        await showSettingsModal();
+        expect(getByTestId(container, 'route-modal')).toBeVisible();
       });
-      it('when the modal is visible and the user clicks the close button, the modal is closed', () => {
-        const { getByLabelText, queryByTestId } = showSettingsModal();
 
-        fireEvent.click(getByLabelText('close'));
-        expect(queryByTestId('route-modal')).toBeNull();
+      it('when the modal is visible and the user clicks the close button, the modal is closed', async () => {
+        await showSettingsModal();
+        await act(async () => {
+          fireEvent.click(getByLabelText(container, 'close'));
+        });
+        expect(queryByTestId(container, 'route-modal')).toBeNull();
       });
     });
 
     describe('Settings modal', () => {
-      it('when clicking on the settings button the settings modal is shown to the user', () => {
-        const { getByLabelText } = render(<App />);
-        const settingsButton = getByLabelText('Settings');
+      it('when clicking on the settings button the settings modal is shown to the user', async () => {
+        await act(async () => {
+          ReactDOM.render(<App />, container);
+        });
+        const settingsButton = getByLabelText(container, 'Settings');
         fireEvent.click(settingsButton);
-        expect(getByLabelText('Settings Modal')).toBeVisible();
+        expect(getByLabelText(container,'Settings Modal')).toBeVisible();
       });
 
-      it('when the modal is visible and the user clicks on the close button, the modal is closed', () => {
-        const { getByLabelText, queryByLabelText } = render(<App />);
-        const settingsButton = getByLabelText('Settings');
+      it('when the modal is visible and the user clicks on the close button, the modal is closed', async () => {
+        await act(async () => {
+          ReactDOM.render(<App />, container);
+        });
+
+        const settingsButton = getByLabelText(container, 'Settings');
         fireEvent.click(settingsButton);
-        fireEvent.click(getByLabelText('close'));
-        expect(queryByLabelText('Settings Modal')).toBeNull();
+        await waitFor(() => expect(getByLabelText(container,'Settings Modal')).toBeVisible());
+
+        await act(async () => {
+          fireEvent.click(getByLabelText(container, 'close'));
+        });
+
+        expect(queryByLabelText(container, 'Settings Modal')).toBeNull();
       });
     });
 
-    it('when the chaos monkey feature is enabled then the monkey is shown above the list of routes', () => {
-      const settings = { features: { chaosMonkey: true } };
+    it('when the chaos monkey feature is enabled then the monkey is shown above the list of routes', async () => {
+      const customSettings = { features: { chaosMonkey: true } };
+      await act(async () => {
+        utils.getRoutes.mockResolvedValue({
+          settings: customSettings,
+          routes: routesObject.routes
+        });
+        ReactDOM.render(<App />, container);
+      });
 
-      const { getByLabelText } = render(<App settings={settings} />);
-
-      expect(getByLabelText('Chaos Monkey Feature')).toBeVisible();
+      await waitFor(() => expect(queryAllByLabelText(container, 'Chaos Monkey Feature')).length > 0);
+      expect(getByLabelText(container, 'Chaos Monkey Feature')).toBeVisible();
     });
 
-    it('when the chaos monkey is not enabled the monkey is not shown above the list of routes', () => {
+    it('when the chaos monkey is not enabled the monkey is not shown above the list of routes', async () => {
       const settings = { features: { chaosMonkey: false } };
+      await act(async () => {
+        utils.getRoutes.mockResolvedValue({
+          settings: settings,
+          routes: routesObject.routes
+        });
+        ReactDOM.render(<App />, container);
+      });
 
-      const { queryByLabelText } = render(<App settings={settings} />);
-
-      expect(queryByLabelText('Chaos Monkey Feature')).toBeNull();
+      expect(queryByLabelText(container, 'Chaos Monkey Feature')).toBeNull();
     });
   });
 });

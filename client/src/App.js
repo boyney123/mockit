@@ -13,20 +13,20 @@ import ConfirmationDialog from './components/ConfirmationDialog';
 
 import './scss/index.scss';
 
-export default function ({ settings: propSettings, customRoutes }) {
+export default function () {
   useScrollReval([{ selector: '.hero .title, .card, .subtitle ' }]);
 
   const [selectedRoute, setSelectedRoute] = useState(null);
   const [routeToBeRemoved, setRouteToBeRemoved] = useState(null);
   const [settingsModalVisible, showSettingsModal] = useState(false);
-  const [routes, setRoutes] = useState(customRoutes || []);
-  const [settings, setSettings] = useState(propSettings || {});
+  const [routes, setRoutes] = useState([]);
+  const [settings, setSettings] = useState({});
 
   useEffect(() => {
-    if (selectedRoute === null && routeToBeRemoved === null && settingsModalVisible === false && (!propSettings || !customRoutes)) {
+    if (selectedRoute === null && routeToBeRemoved === null && settingsModalVisible === false) {
       getRoutes().then((response) => {
-        !propSettings && setSettings(response.settings);
-        !customRoutes && setRoutes(response.routes);
+        setSettings(response.settings);
+        setRoutes(response.routes);
       })
     }
   }, [selectedRoute, routeToBeRemoved, settingsModalVisible])
