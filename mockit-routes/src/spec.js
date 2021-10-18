@@ -102,6 +102,16 @@ const exampleConfig = {
       disabled: false
     },
     {
+      route: '/delayDynamicExample/:id',
+      httpMethod: 'GET',
+      statusCode: '200',
+      delay: '2000',
+      payload: {
+        test: true
+      },
+      disabled: false
+    },
+    {
       route: '/500Example',
       httpMethod: 'GET',
       statusCode: '500',
@@ -172,6 +182,12 @@ describe('Mockit Routes', () => {
     describe('delayed routes', () => {
       it('when a route has a delay configured on it, the response will come back after the delay has fulfilled', async () => {
         await request(app).get('/delayExample').expect(200, { test: true });
+      });
+    });
+
+    describe('delayed dynamic routes', () => {
+      it('when a dynamic route has a delay configured on it, the response will come back after the delay has fulfilled', async () => {
+        await request(app).get('/delayDynamicExample/101').expect(200, { test: true });
       });
     });
 
