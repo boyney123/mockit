@@ -3,7 +3,7 @@ import useScrollReval from './hooks/useScrollReveal';
 import RouteListStack from './components/RouteListStack';
 import RouteListGroup from './components/RouteListGroup';
 import Logo from './components/Logo';
-import { version } from '../package.json';
+import packageInfo from '../package.json';
 
 import {buildRoute, deleteRoute, getRoutes} from './utils/routes-api';
 
@@ -144,7 +144,7 @@ export default function () {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <strong>MockIt v{version} </strong>
+              <strong>MockIt v{packageInfo.version} </strong>
             </a>{' '}
             an OpenSource tool developed by{' '}
             <a
