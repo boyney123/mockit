@@ -1,11 +1,37 @@
-// __tests__/fetch.test.js
 import React from 'react';
-import { render, fireEvent, cleanup } from 'react-testing-library';
-import 'jest-dom/extend-expect';
+import ReactDOM from 'react-dom';
+import {
+  render,
+  act,
+  fireEvent,
+  getByLabelText,
+  cleanup,
+  getByText
+} from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import RouteModal from './';
 import * as utils from '../../utils/routes-api';
 
-afterEach(cleanup);
+let container;
+jest.mock('../../utils/routes-api');
+
+afterAll(() => {
+  jest.clearAllMocks();
+})
+
+beforeEach(() => {
+  container = document.createElement('div');
+  document.body.appendChild(container);
+
+  utils.createNewRoute.mockResolvedValue({});
+  utils.updateRoute.mockResolvedValue({});
+});
+
+afterEach(() => {
+  document.body.removeChild(container);
+  container = null;
+  cleanup();
+});
 
 const buildRoute = () => {
   return {
@@ -22,11 +48,6 @@ const buildRoute = () => {
   };
 };
 
-jest.mock('../../utils/routes-api', () => {
-  return {
-    createNewRoute: jest.fn(() => Promise.resolve()),
-    updateRoute: jest.fn(() => Promise.resolve()) };
-});
 
 describe('Route Modal', () => {
   describe('renders', () => {
@@ -54,7 +75,7 @@ describe('Route Modal', () => {
 
     it('with a dropdown list of all available http methods', () => {
       const route = buildRoute();
-      const { getByLabelText, getByValue } = render(
+      const { getByLabelText, getByText } = render(
         <RouteModal route={route} />
       );
       const dropdown = getByLabelText('route-http');
@@ -62,11 +83,11 @@ describe('Route Modal', () => {
 
       expect(dropdownOptions.length).toEqual(5);
 
-      expect(getByValue('GET', dropdownOptions)).toBeVisible();
-      expect(getByValue('POST', dropdownOptions)).toBeVisible();
-      expect(getByValue('PUT', dropdownOptions)).toBeVisible();
-      expect(getByValue('DELETE', dropdownOptions)).toBeVisible();
-      expect(getByValue('PATCH', dropdownOptions)).toBeVisible();
+      expect(getByText('GET', dropdownOptions)).toBeVisible();
+      expect(getByText('POST', dropdownOptions)).toBeVisible();
+      expect(getByText('PUT', dropdownOptions)).toBeVisible();
+      expect(getByText('DELETE', dropdownOptions)).toBeVisible();
+      expect(getByText('PATCH', dropdownOptions)).toBeVisible();
     });
 
     it('with a dropdown list with three groups', () => {
@@ -83,44 +104,47 @@ describe('Route Modal', () => {
 
     it('with a dropdown list of all available status code', () => {
       const route = buildRoute();
-      const { getByLabelText, getByValue } = render(
+      const { getByLabelText } = render(
         <RouteModal route={route} />
       );
       const dropdown = getByLabelText('route-statuscode');
-      const dropdownOptionGroups = dropdown.childNodes;
 
-      expect(getByValue('200', dropdownOptionGroups[0].children)).toBeVisible();
-      expect(getByValue('201', dropdownOptionGroups[0].children)).toBeVisible();
-      expect(getByValue('202', dropdownOptionGroups[0].children)).toBeVisible();
-      expect(getByValue('204', dropdownOptionGroups[0].children)).toBeVisible();
-      expect(getByValue('400', dropdownOptionGroups[1].children)).toBeVisible();
-      expect(getByValue('401', dropdownOptionGroups[1].children)).toBeVisible();
-      expect(getByValue('403', dropdownOptionGroups[1].children)).toBeVisible();
-      expect(getByValue('404', dropdownOptionGroups[1].children)).toBeVisible();
-      expect(getByValue('409', dropdownOptionGroups[1].children)).toBeVisible();
-      expect(getByValue('422', dropdownOptionGroups[1].children)).toBeVisible();
-      expect(getByValue('500', dropdownOptionGroups[2].children)).toBeVisible();
-      expect(getByValue('503', dropdownOptionGroups[2].children)).toBeVisible();
-      expect(getByValue('504', dropdownOptionGroups[2].children)).toBeVisible();
+      expect(getByText(dropdown, '200')).toBeVisible();
+      expect(getByText(dropdown, '201')).toBeVisible();
+      expect(getByText(dropdown, '202')).toBeVisible();
+      expect(getByText(dropdown, '204')).toBeVisible();
+      expect(getByText(dropdown, '400')).toBeVisible();
+      expect(getByText(dropdown, '401')).toBeVisible();
+      expect(getByText(dropdown, '403')).toBeVisible();
+      expect(getByText(dropdown, '404')).toBeVisible();
+      expect(getByText(dropdown, '409')).toBeVisible();
+      expect(getByText(dropdown, '422')).toBeVisible();
+      expect(getByText(dropdown, '500')).toBeVisible();
+      expect(getByText(dropdown, '503')).toBeVisible();
+      expect(getByText(dropdown, '504')).toBeVisible();
     });
 
-    it('with a dropdown list of all available delay values', () => {
+    it('with a dropdown list of all available delay values', async () => {
       const route = buildRoute();
-      const { getByLabelText, getByValue } = render(
-        <RouteModal route={route} />
-      );
-      const dropdown = getByLabelText('route-delay');
+      await act(async () => {
+        ReactDOM.render(
+            <RouteModal route={route} />,
+            container
+        );
+      });
+
+      const dropdown = getByLabelText(container, 'route-delay');
       const dropdownOptions = dropdown.children;
 
       expect(dropdownOptions.length).toEqual(7);
 
-      expect(getByValue('0', dropdownOptions)).toBeVisible();
-      expect(getByValue('250', dropdownOptions)).toBeVisible();
-      expect(getByValue('500', dropdownOptions)).toBeVisible();
-      expect(getByValue('1000', dropdownOptions)).toBeVisible();
-      expect(getByValue('1500', dropdownOptions)).toBeVisible();
-      expect(getByValue('2000', dropdownOptions)).toBeVisible();
-      expect(getByValue('5000', dropdownOptions)).toBeVisible();
+      expect(getByText(dropdown, '0')).toBeVisible();
+      expect(getByText(dropdown, '250')).toBeVisible();
+      expect(getByText(dropdown, '500')).toBeVisible();
+      expect(getByText(dropdown, '1000')).toBeVisible();
+      expect(getByText(dropdown, '1500')).toBeVisible();
+      expect(getByText(dropdown, '2000')).toBeVisible();
+      expect(getByText(dropdown, '5000')).toBeVisible();
     });
 
     it('with a link that randomly generates data', () => {
@@ -182,7 +206,7 @@ describe('Route Modal', () => {
       expect(queryByLabelText('header')).toBeNull();
     });
 
-    it('when clicking `Save Route` with empty headers on the screen they are removed before sending the data', () => {
+    it('when clicking `Save Route` with empty headers on the screen they are removed before sending the data', async () => {
       const route = buildRoute();
       route.headers.push({ id: 99, header: '', value: '' });
 
@@ -190,9 +214,9 @@ describe('Route Modal', () => {
       fireEvent.click(getByLabelText('route-save'));
 
       const expectedResult = Object.assign({}, route);
-      expectedResult.routes = expectedResult.headers.pop();
+      expectedResult.headers.pop();
 
-      expect(utils.updateRoute).toHaveBeenCalledWith(route);
+      expect(utils.updateRoute).toHaveBeenCalledWith(expectedResult);
     });
   });
 

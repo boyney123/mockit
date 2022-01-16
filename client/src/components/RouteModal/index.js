@@ -7,7 +7,7 @@ import {
   createNewRoute
 } from '../../utils/routes-api';
 import faker from 'faker';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 
 const HTTP_METHOD_LIST = [
   HttpMethods.GET,

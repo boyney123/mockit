@@ -29,7 +29,7 @@ const SettingsModal = function ({
     try {
       updateSettings(settings).then(() => onClose());
     } catch (error) {
-      console.log('Error');
+      console.log('Error', error);
     }
   };
 

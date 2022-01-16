@@ -1,7 +1,6 @@
-// __tests__/fetch.test.js
 import React from 'react';
-import { render, fireEvent, cleanup } from 'react-testing-library';
-import 'jest-dom/extend-expect';
+import { render, fireEvent, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import SettingsDialog from './';
 import * as utils from '../../utils/routes-api';
 import { settings } from '../../config/routes.json';
@@ -105,6 +104,7 @@ describe('Settings Dialog', () => {
 
   describe('saving settings', () => {
     it('clicking save settings makes a request to update the users settings', () => {
+      utils.updateSettings.mockReturnValue(Promise.resolve());
       const { getByLabelText } = render(<SettingsDialog />);
       fireEvent.click(getByLabelText('save'));
       expect(utils.updateSettings).toHaveBeenCalled();
