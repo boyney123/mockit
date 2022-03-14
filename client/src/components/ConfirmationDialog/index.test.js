@@ -1,7 +1,6 @@
-// __tests__/fetch.test.js
 import React from 'react';
-import { render, fireEvent, cleanup } from 'react-testing-library';
-import 'jest-dom/extend-expect';
+import { render, fireEvent, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import ConfirmationDialog from './';
 
 afterEach(cleanup);

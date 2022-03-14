@@ -7,7 +7,7 @@ import {
   createNewRoute
 } from '../../utils/routes-api';
 import faker from 'faker';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 
 const HTTP_METHOD_LIST = [
   HttpMethods.GET,
@@ -74,7 +74,7 @@ const Modal = function (props) {
     updateHeaders(filteredHeaders);
   };
 
-  const saveChanges = async () => {
+  const saveChanges = () => {
     try {
       const cleanedHeaders = headers.filter(
         ({ header, value }) => header !== '' && value !== ''
@@ -91,7 +91,7 @@ const Modal = function (props) {
         headers: cleanedHeaders
       };
 
-      isNewRoute ? await createNewRoute(data) : await updateRouteRequest(data);
+      (isNewRoute ? createNewRoute(data) : updateRouteRequest(data)).then(() => onClose());
     } catch (error) {
       console.log('Error', error);
     }
@@ -236,6 +236,7 @@ const Modal = function (props) {
                     data={header}
                     onBlur={setHeader}
                     onRemove={removeHeader}
+                    key={header + '-' + index}
                   />
                 );
               })}

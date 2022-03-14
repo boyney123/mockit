@@ -1,7 +1,6 @@
-// __tests__/fetch.test.js
 import React from 'react';
-import { render, fireEvent, cleanup } from 'react-testing-library';
-import 'jest-dom/extend-expect';
+import { render, fireEvent, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import RouteListStack from './';
 
 afterEach(cleanup);
@@ -38,18 +37,18 @@ describe('RouteListStack', () => {
   describe('props', () => {
     it('when the user clicks on the edit button on the rendered route the given `onRouteEdit` callback is triggered', () => {
       const spy = jest.fn();
-      const { getByLabelText } = render(
+      const { getAllByLabelText } = render(
         <RouteListStack routes={buildRoutes()} onRouteEdit={spy} />
       );
-      fireEvent.click(getByLabelText('Edit Route'));
+      fireEvent.click(getAllByLabelText('Edit Route')[0]);
       expect(spy).toHaveBeenCalled();
     });
     it('when the user clicks on the delete button on the rendered route the given `onRouteDelete` callback is triggered', () => {
       const spy = jest.fn();
-      const { getByLabelText } = render(
+      const { getAllByLabelText } = render(
         <RouteListStack routes={buildRoutes()} onRouteDelete={spy} />
       );
-      fireEvent.click(getByLabelText('Delete Route'));
+      fireEvent.click(getAllByLabelText('Delete Route')[0]);
       expect(spy).toHaveBeenCalled();
     });
   });
