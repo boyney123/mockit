@@ -5,6 +5,7 @@ WORKDIR /usr/src/mockit-client
 COPY package.json .
 COPY package-lock.json .
 
+RUN apk add --no-cache python2 g++ make
 RUN npm ci
 
 COPY . ./
